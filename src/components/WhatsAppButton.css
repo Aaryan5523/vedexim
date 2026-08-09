@@ -1,0 +1,215 @@
+/* =========================================
+   VED EXIM — WHATSAPP BUTTON
+========================================= */
+
+.whatsapp-button {
+  position: fixed;
+
+  right: 28px;
+  bottom: 28px;
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #171614;
+
+  color: #f4f1eb;
+
+  text-decoration: none;
+
+  z-index: 9998;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.18);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.08);
+
+  box-shadow:
+    0 16px 45px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.whatsapp-icon {
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.whatsapp-icon svg {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+}
+
+
+/* =========================================
+   POPUP
+========================================= */
+
+.whatsapp-tooltip {
+  position: absolute;
+
+  right: 72px;
+  bottom: 50%;
+
+  transform:
+    translateY(50%)
+    translateX(10px);
+
+  width: max-content;
+
+  padding: 13px 18px;
+
+  background: #171614;
+
+  color: #f4f1eb;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 10px;
+
+  letter-spacing: 0.5px;
+
+  border-radius: 4px;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.35s ease,
+    visibility 0.3s ease;
+}
+
+
+/* Small arrow */
+
+.whatsapp-tooltip::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  right: -6px;
+
+  width: 12px;
+  height: 12px;
+
+  background: #171614;
+
+  transform:
+    translateY(-50%)
+    rotate(45deg);
+}
+
+
+/* =========================================
+   SHOW POPUP
+========================================= */
+
+.whatsapp-button:hover .whatsapp-tooltip {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform:
+    translateY(50%)
+    translateX(0);
+}
+
+
+/* =========================================
+   PULSE
+========================================= */
+
+.whatsapp-button::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -5px;
+
+  border: 1px solid rgba(23, 22, 20, 0.35);
+
+  border-radius: 50%;
+
+  animation:
+    whatsappPulse 2.5s ease-out infinite;
+}
+
+@keyframes whatsappPulse {
+
+  0% {
+    transform: scale(0.9);
+
+    opacity: 0.8;
+  }
+
+  70% {
+    transform: scale(1.25);
+
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.25);
+
+    opacity: 0;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .whatsapp-button {
+    right: 18px;
+    bottom: 18px;
+
+    width: 52px;
+    height: 52px;
+  }
+
+  .whatsapp-icon {
+    width: 23px;
+    height: 23px;
+  }
+
+  .whatsapp-tooltip {
+    right: 64px;
+
+    padding: 11px 14px;
+
+    font-size: 9px;
+  }
+
+}

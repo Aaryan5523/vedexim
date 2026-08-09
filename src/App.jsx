@@ -7,6 +7,7 @@ import WhyUs from "./sections/WhyUs";
 import Process from "./sections/Process";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
         <Contact />
 
         <Footer />
+
+        <WhatsAppButton />
       </main>
     </>
   );
