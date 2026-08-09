@@ -1,0 +1,512 @@
+/* =========================================
+   VED EXIM — PREMIUM NAVBAR
+========================================= */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 82px;
+
+  padding: 0 clamp(20px, 4vw, 60px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  z-index: 9999;
+
+  background: transparent;
+
+  transition:
+    background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s ease,
+    height 0.5s ease;
+}
+
+
+/* =========================================
+   SCROLLED NAVBAR
+========================================= */
+
+.navbar.navbar-scrolled {
+  height: 72px;
+
+  background: rgba(243, 240, 234, 0.97);
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.08);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+
+/* =========================================
+   COMPANY LOGO
+========================================= */
+
+.navbar-logo {
+  position: relative;
+
+  z-index: 10003;
+
+  width: 150px;
+  height: 55px;
+
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+
+  transition:
+    width 0.45s ease,
+    height 0.45s ease,
+    opacity 0.3s ease;
+}
+
+.navbar-logo img {
+  display: block;
+
+  width: 150px;
+  height: 55px;
+
+  object-fit: contain;
+  object-position: left center;
+
+  transition:
+    transform 0.45s ease;
+}
+
+.navbar-logo:hover {
+  opacity: 0.85;
+}
+
+
+/* Slightly smaller after scrolling */
+
+.navbar-scrolled .navbar-logo {
+  width: 125px;
+  height: 48px;
+}
+
+.navbar-scrolled .navbar-logo img {
+  width: 125px;
+  height: 48px;
+}
+
+
+/* =========================================
+   MENU BUTTON
+========================================= */
+
+.menu-button {
+  position: relative;
+
+  z-index: 10004;
+
+  width: 52px;
+  height: 52px;
+
+  padding: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  transition:
+    background 0.45s ease,
+    border-color 0.45s ease,
+    transform 0.3s ease;
+}
+
+.menu-button:hover {
+  transform: scale(1.05);
+}
+
+
+/* Scrolled button */
+
+.navbar-scrolled .menu-button {
+  background: #171614;
+
+  border-color: #171614;
+}
+
+
+/* =========================================
+   HAMBURGER LINES
+========================================= */
+
+.menu-button span {
+  width: 17px;
+  height: 1px;
+
+  display: block;
+
+  background: white;
+
+  transition:
+    transform 0.45s cubic-bezier(0.77, 0, 0.175, 1),
+    background 0.3s ease;
+}
+
+
+/* =========================================
+   FULL SCREEN MENU
+========================================= */
+
+.menu-panel {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+
+  padding:
+    clamp(110px, 14vh, 150px)
+    clamp(25px, 8vw, 120px)
+    40px;
+
+  background: #171614;
+
+  color: #f4f1eb;
+
+  z-index: 10000;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  transform: translateX(100%);
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    transform 0.8s cubic-bezier(0.77, 0, 0.175, 1),
+    visibility 0s linear 0.8s;
+}
+
+.menu-panel.menu-open {
+  transform: translateX(0);
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transition:
+    transform 0.8s cubic-bezier(0.77, 0, 0.175, 1),
+    visibility 0s linear 0s;
+}
+
+
+/* =========================================
+   NAVIGATION LABEL
+========================================= */
+
+.menu-heading {
+  font-family: Arial, sans-serif;
+
+  font-size: 8px;
+
+  letter-spacing: 4px;
+
+  color: #77716a;
+
+  opacity: 0;
+
+  transform: translateY(20px);
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.7s ease;
+}
+
+.menu-panel.menu-open .menu-heading {
+  opacity: 1;
+
+  transform: translateY(0);
+
+  transition-delay: 0.3s;
+}
+
+
+/* =========================================
+   MENU LINKS
+========================================= */
+
+.menu-nav {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 5px;
+}
+
+.menu-nav a {
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 18px;
+
+  width: fit-content;
+
+  color: #f4f1eb;
+
+  text-decoration: none;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(32px, 4vw, 58px);
+
+  font-weight: 400;
+
+  line-height: 1.05;
+
+  letter-spacing: -1px;
+
+  opacity: 0;
+
+  transform: translateY(35px);
+
+  transition:
+    color 0.3s ease,
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.6s ease;
+}
+
+
+/* =========================================
+   STAGGERED LINKS
+========================================= */
+
+.menu-panel.menu-open .menu-nav a:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.18s;
+}
+
+.menu-panel.menu-open .menu-nav a:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.24s;
+}
+
+.menu-panel.menu-open .menu-nav a:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.30s;
+}
+
+.menu-panel.menu-open .menu-nav a:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.36s;
+}
+
+.menu-panel.menu-open .menu-nav a:nth-child(5) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.42s;
+}
+
+.menu-panel.menu-open .menu-nav a:nth-child(6) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.48s;
+}
+
+.menu-panel.menu-open .menu-nav a:nth-child(7) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.54s;
+}
+
+
+/* =========================================
+   MENU NUMBERS
+========================================= */
+
+.menu-nav a span {
+  font-family: Arial, sans-serif;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  color: #706a63;
+
+  transition: color 0.3s ease;
+}
+
+.menu-nav a:hover {
+  color: #aaa39a;
+
+  transform: translateX(10px) !important;
+}
+
+.menu-nav a:hover span {
+  color: #aaa39a;
+}
+
+
+/* =========================================
+   MENU FOOTER
+========================================= */
+
+.menu-footer {
+  padding-top: 18px;
+
+  border-top: 1px solid #35322f;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 7px;
+
+  letter-spacing: 3px;
+
+  color: #706a63;
+
+  opacity: 0;
+
+  transform: translateY(15px);
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.6s ease;
+}
+
+.menu-panel.menu-open .menu-footer {
+  opacity: 1;
+
+  transform: translateY(0);
+
+  transition-delay: 0.55s;
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+
+.menu-button.menu-active {
+  background: #f4f1eb;
+
+  border-color: #f4f1eb;
+}
+
+.menu-button.menu-active span {
+  background: #171614;
+}
+
+.menu-button.menu-active span:first-child {
+  transform:
+    translateY(3.5px)
+    rotate(45deg);
+}
+
+.menu-button.menu-active span:last-child {
+  transform:
+    translateY(-3.5px)
+    rotate(-45deg);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .navbar {
+    height: 70px;
+
+    padding: 0 18px;
+  }
+
+  .navbar.navbar-scrolled {
+    height: 64px;
+  }
+
+  .navbar-logo {
+    width: 120px;
+    height: 45px;
+  }
+
+  .navbar-logo img {
+    width: 120px;
+    height: 45px;
+  }
+
+  .navbar-scrolled .navbar-logo {
+    width: 108px;
+    height: 42px;
+  }
+
+  .navbar-scrolled .navbar-logo img {
+    width: 108px;
+    height: 42px;
+  }
+
+  .menu-button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .menu-panel {
+    padding:
+      100px
+      24px
+      28px;
+  }
+
+  .menu-nav {
+    gap: 4px;
+  }
+
+  .menu-nav a {
+    font-size: clamp(30px, 9vw, 42px);
+
+    gap: 12px;
+
+    letter-spacing: -0.5px;
+  }
+
+  .menu-nav a span {
+    font-size: 7px;
+  }
+
+  .menu-footer {
+    font-size: 6px;
+
+    letter-spacing: 2px;
+  }
+}

@@ -1,0 +1,446 @@
+/* =========================================
+   VED EXIM — PROCESS
+========================================= */
+
+.process-section {
+  position: relative;
+
+  width: 100%;
+
+  padding: 150px 8vw 100px;
+
+  background: #e8e3da;
+
+  color: #171614;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  transform: translateY(60px);
+
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.process-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.process-header {
+  display: grid;
+
+  grid-template-columns: 1fr 0.55fr;
+
+  gap: 80px;
+
+  align-items: end;
+
+  margin-bottom: 100px;
+}
+
+.process-label {
+  margin: 0 0 25px;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 4px;
+
+  color: #817a71;
+}
+
+.process-header h2 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(55px, 6vw, 92px);
+
+  font-weight: 400;
+
+  line-height: 0.9;
+
+  letter-spacing: -4px;
+}
+
+.process-header h2 em {
+  font-style: italic;
+}
+
+.process-intro {
+  max-width: 400px;
+
+  margin: 0 0 5px;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 12px;
+
+  line-height: 1.8;
+
+  color: #6f6961;
+}
+
+
+/* =========================================
+   PROCESS GRID
+========================================= */
+
+.process-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  border-top: 1px solid #c9c2b8;
+
+  border-bottom: 1px solid #c9c2b8;
+}
+
+
+/* =========================================
+   PROCESS CARD
+========================================= */
+
+.process-card {
+  position: relative;
+
+  min-height: 360px;
+
+  padding: 25px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  border-right: 1px solid #c9c2b8;
+
+  opacity: 0;
+
+  transform: translateY(40px);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.4s ease;
+}
+
+.process-card:last-child {
+  border-right: none;
+}
+
+.process-section.is-visible
+.process-card:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.15s;
+}
+
+.process-section.is-visible
+.process-card:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+
+.process-section.is-visible
+.process-card:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.45s;
+}
+
+.process-section.is-visible
+.process-card:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.6s;
+}
+
+
+/* =========================================
+   CARD HOVER
+========================================= */
+
+.process-card:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+
+/* =========================================
+   TOP
+========================================= */
+
+.process-card-top {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+}
+
+.process-number {
+  font-family: Arial, sans-serif;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  color: #817a71;
+}
+
+.process-line {
+  width: 45px;
+
+  height: 1px;
+
+  background: #bcb5ab;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.process-card-content {
+  max-width: 240px;
+}
+
+.process-card h3 {
+  margin: 0 0 18px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 36px;
+
+  font-weight: 400;
+}
+
+.process-card p {
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 11px;
+
+  line-height: 1.8;
+
+  color: #6f6961;
+}
+
+
+/* =========================================
+   ARROW
+========================================= */
+
+.process-arrow {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #bcb5ab;
+
+  border-radius: 50%;
+
+  font-size: 15px;
+
+  transition:
+    transform 0.4s ease,
+    background 0.4s ease;
+}
+
+.process-card:hover .process-arrow {
+  transform: rotate(45deg);
+
+  background: #171614;
+
+  color: white;
+
+  border-color: #171614;
+}
+
+
+/* =========================================
+   STATEMENT
+========================================= */
+
+.process-statement {
+  padding-top: 90px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr 1fr;
+
+  align-items: end;
+}
+
+.process-statement span {
+  font-family: Arial, sans-serif;
+
+  font-size: 7px;
+
+  letter-spacing: 3px;
+
+  color: #817a71;
+}
+
+.process-statement span:last-child {
+  text-align: right;
+}
+
+.process-statement h3 {
+  margin: 0;
+
+  text-align: center;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(30px, 3.2vw, 50px);
+
+  font-weight: 400;
+
+  line-height: 0.95;
+}
+
+.process-statement h3 em {
+  font-style: italic;
+
+  color: #777067;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .process-section {
+    padding: 110px 6vw 75px;
+  }
+
+  .process-header {
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+
+    margin-bottom: 60px;
+  }
+
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .process-card:nth-child(2) {
+    border-right: none;
+  }
+
+  .process-card:nth-child(-n + 2) {
+    border-bottom: 1px solid #c9c2b8;
+  }
+
+  .process-statement {
+    padding-top: 60px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .process-section {
+    padding: 90px 22px 55px;
+  }
+
+  .process-header {
+    margin-bottom: 55px;
+  }
+
+  .process-header h2 {
+    font-size: 50px;
+
+    letter-spacing: -2.5px;
+  }
+
+  .process-intro {
+    font-size: 10px;
+
+    max-width: 330px;
+  }
+
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .process-card {
+    min-height: 280px;
+
+    padding: 22px;
+
+    border-right: none;
+
+    border-bottom: 1px solid #c9c2b8;
+  }
+
+  .process-card:last-child {
+    border-bottom: none;
+  }
+
+  .process-card h3 {
+    font-size: 32px;
+  }
+
+  .process-card p {
+    font-size: 10px;
+  }
+
+  .process-statement {
+    padding-top: 55px;
+
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+
+    text-align: center;
+  }
+
+  .process-statement span,
+  .process-statement span:last-child {
+    text-align: center;
+  }
+
+  .process-statement h3 {
+    order: -1;
+
+    font-size: 34px;
+  }
+
+}

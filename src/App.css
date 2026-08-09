@@ -1,0 +1,700 @@
+/* =========================================
+   ABOUT SECTION
+========================================= */
+
+/* =========================================
+   SMOOTH SECTION REVEALS
+========================================= */
+
+.about-section {
+  opacity: 0;
+  transform: translateY(60px);
+
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   ABOUT IMAGE REVEAL
+========================================= */
+
+.about-image {
+  overflow: hidden;
+
+  clip-path: inset(0 0 100% 0);
+
+  transition:
+    clip-path 1.3s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.about-section.is-visible .about-image {
+  clip-path: inset(0 0 0 0);
+}
+
+
+/* =========================================
+   ABOUT CONTENT REVEAL
+========================================= */
+
+.about-content {
+  opacity: 0;
+  transform: translateY(40px);
+
+  transition:
+    opacity 0.9s ease 0.25s,
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.25s;
+}
+
+.about-section.is-visible .about-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   TEXT STAGGER
+========================================= */
+
+.about-content .section-label {
+  opacity: 0;
+  transform: translateY(15px);
+
+  transition:
+    opacity 0.6s ease 0.35s,
+    transform 0.7s ease 0.35s;
+}
+
+.about-content h2 {
+  opacity: 0;
+  transform: translateY(25px);
+
+  transition:
+    opacity 0.9s ease 0.45s,
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.45s;
+}
+
+.about-content .about-text {
+  opacity: 0;
+  transform: translateY(20px);
+
+  transition:
+    opacity 0.8s ease 0.65s,
+    transform 0.8s ease 0.65s;
+}
+
+.about-section.is-visible .section-label,
+.about-section.is-visible h2,
+.about-section.is-visible .about-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+.about-stats {
+  opacity: 0;
+  transform: translateY(20px);
+
+  transition:
+    opacity 0.8s ease 0.8s,
+    transform 0.8s ease 0.8s;
+}
+
+.about-section.is-visible .about-stats {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   LINK
+========================================= */
+
+.about-link {
+  opacity: 0;
+  transform: translateY(15px);
+
+  transition:
+    opacity 0.7s ease 1s,
+    transform 0.7s ease 1s,
+    gap 0.35s ease;
+}
+
+.about-section.is-visible .about-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   ABOUT LINK
+========================================= */
+
+.about-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding-bottom: 8px;
+
+  border-bottom: 1px solid #171614;
+
+  color: #171614;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  transition:
+    gap 0.35s ease,
+    opacity 0.3s ease;
+}
+
+.about-link span {
+  font-size: 15px;
+}
+
+.about-link:hover {
+  gap: 30px;
+
+  opacity: 0.6;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .about-section {
+    padding: 100px 6vw;
+
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 50px;
+  }
+
+  .about-image-inner {
+    height: 600px;
+  }
+
+  .about-content h2 {
+    font-size: clamp(48px, 7vw, 70px);
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .about-section {
+    min-height: auto;
+
+    padding: 90px 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 55px;
+
+    align-items: stretch;
+  }
+
+  .about-image-inner {
+    height: 430px;
+  }
+
+  .about-content h2 {
+    font-size: 52px;
+
+    letter-spacing: -2.5px;
+
+    margin-bottom: 25px;
+  }
+
+  .about-text {
+    font-size: 11px;
+
+    line-height: 1.7;
+  }
+
+  .about-stats {
+    margin-top: 35px;
+    margin-bottom: 30px;
+  }
+
+}
+
+
+
+
+/* =========================================
+   FULL SCREEN HERO
+========================================= */
+
+.hero {
+  position: relative;
+
+  width: 100%;
+  max-width: none;
+
+  height: 100vh;
+  height: 100dvh;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  background: #25221e;
+
+  color: #fff;
+}
+
+
+/* =========================================
+   HERO IMAGE
+========================================= */
+
+.hero-background img {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center center;
+
+  display: block;
+
+  opacity: 0;
+
+  transform: scale(1.04);
+
+  transition:
+    opacity 1.5s ease-in-out,
+    transform 7s ease;
+}
+
+.hero-background img.active {
+  opacity: 1;
+
+  transform: scale(1);
+}
+
+.hero-background img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center center;
+
+  animation: heroImageReveal 1.5s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+
+/* =========================================
+   IMAGE ANIMATION
+========================================= */
+
+@keyframes heroImageReveal {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.hero-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 2;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(15, 13, 11, 0.62),
+      rgba(15, 13, 11, 0.10)
+    ),
+    linear-gradient(
+      0deg,
+      rgba(10, 9, 8, 0.65),
+      transparent 60%
+    );
+}
+
+
+/* =========================================
+   HERO CONTENT
+========================================= */
+
+.hero-content {
+  position: absolute;
+
+  left: clamp(25px, 8vw, 120px);
+  bottom: clamp(90px, 15vh, 150px);
+
+  width: min(650px, calc(100% - 50px));
+
+  z-index: 5;
+}
+
+
+/* =========================================
+   EYEBROW
+========================================= */
+
+.hero-eyebrow {
+  margin: 0 0 20px;
+
+  font-family: Arial, sans-serif;
+
+  font-size: clamp(7px, 0.65vw, 10px);
+
+  letter-spacing: clamp(2px, 0.3vw, 4px);
+
+  color: rgba(255, 255, 255, 0.78);
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.hero-content h1 {
+  margin: 0 0 25px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(52px, 7.5vw, 120px);
+
+  font-weight: 400;
+
+  line-height: 0.88;
+
+  letter-spacing: clamp(-5px, -0.3vw, -2px);
+}
+
+.hero-content h1 em {
+  font-style: italic;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.hero-description {
+  width: min(430px, 100%);
+
+  margin: 0 0 30px;
+
+  font-family: Arial, sans-serif;
+
+  font-size: clamp(10px, 0.8vw, 14px);
+
+  line-height: 1.75;
+
+  color: rgba(255, 255, 255, 0.8);
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.hero-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 22px;
+
+  padding: 14px 19px;
+
+  color: #171614;
+
+  background: #f4f1eb;
+
+  text-decoration: none;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease;
+}
+
+.hero-button span {
+  font-size: 15px;
+}
+
+.hero-button:hover {
+  transform: translateY(-3px);
+
+  background: #fff;
+}
+
+
+/* =========================================
+   HERO FOOTER
+========================================= */
+
+.hero-footer {
+  position: absolute;
+
+  left: clamp(20px, 3vw, 45px);
+  right: clamp(20px, 3vw, 45px);
+  bottom: clamp(18px, 3vh, 30px);
+
+  z-index: 6;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  font-family: Arial, sans-serif;
+
+  font-size: clamp(6px, 0.55vw, 8px);
+
+  letter-spacing: 3px;
+
+  color: rgba(255, 255, 255, 0.75);
+}
+
+
+/* =========================================
+   SCROLL
+========================================= */
+
+.hero-scroll {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+.scroll-line {
+  width: 65px;
+
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.6);
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .hero-background img {
+    object-position: center center;
+  }
+
+  .hero-content {
+    left: 6vw;
+
+    width: min(600px, 88%);
+  }
+
+  .hero-content h1 {
+    font-size: clamp(50px, 9vw, 80px);
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .hero {
+    height: 100vh;
+    height: 100dvh;
+
+    min-height: 0;
+  }
+
+  .hero-background img {
+    object-position: 58% center;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(10, 9, 8, 0.18),
+        rgba(10, 9, 8, 0.70)
+      );
+  }
+
+  .hero-content {
+    left: 22px;
+    bottom: 100px;
+
+    width: calc(100% - 44px);
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 15px;
+
+    font-size: 7px;
+
+    letter-spacing: 2.5px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(48px, 14vw, 65px);
+
+    line-height: 0.9;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 20px;
+  }
+
+  .hero-description {
+    max-width: 330px;
+
+    font-size: 10px;
+
+    line-height: 1.65;
+
+    margin-bottom: 22px;
+  }
+
+  .hero-button {
+    padding: 13px 16px;
+
+    font-size: 8px;
+  }
+
+  .hero-footer {
+    left: 18px;
+    right: 18px;
+
+    bottom: 18px;
+
+    font-size: 6px;
+
+    letter-spacing: 2px;
+  }
+
+  .hero-scroll {
+    display: none;
+  }
+}
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 380px) {
+
+  .hero-content {
+    bottom: 90px;
+  }
+
+  .hero-content h1 {
+    font-size: 44px;
+  }
+
+  .hero-description {
+    font-size: 9px;
+  }
+}
+
+
+/* =========================================
+   LANDSCAPE MOBILE
+========================================= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+
+  .hero-content {
+    bottom: 65px;
+
+    width: 75%;
+  }
+
+  .hero-content h1 {
+    font-size: 42px;
+
+    margin-bottom: 10px;
+  }
+
+  .hero-description {
+    display: none;
+  }
+
+  .hero-button {
+    padding: 9px 14px;
+  }
+
+  .hero-footer {
+    bottom: 12px;
+  }
+}
