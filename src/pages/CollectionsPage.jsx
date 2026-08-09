@@ -9,8 +9,7 @@ const collections = [
     subtitle: "TIMELESS ELEGANCE",
     description:
       "Elegant marble-inspired surfaces with natural movement, refined veining and a sophisticated architectural character.",
-    image:
-      "/products/marble/marble-01.png",
+    image: "/images/products/marble/marble-01.png",
   },
   {
     number: "02",
@@ -18,8 +17,7 @@ const collections = [
     subtitle: "NATURAL CHARACTER",
     description:
       "Earth-inspired ceramic surfaces created to bring warmth, texture and a sense of permanence to contemporary interiors.",
-    image:
-      "/products/stone/stone-01.png",
+    image: "/images/products/stone/stone-01.png",
   },
   {
     number: "03",
@@ -27,8 +25,7 @@ const collections = [
     subtitle: "CONTEMPORARY RHYTHM",
     description:
       "Distinctive terrazzo-inspired patterns that add visual rhythm, texture and personality to modern spaces.",
-    image:
-      "/products/terrazzo/terrazzo-01.png",
+    image: "/images/products/terrazzo/terrazzo-01.png",
   },
   {
     number: "04",
@@ -36,8 +33,7 @@ const collections = [
     subtitle: "ARCHITECTURAL MINIMALISM",
     description:
       "Quiet concrete-inspired surfaces designed for understated, modern and architectural environments.",
-    image:
-      "/products/concrete/concrete-01.png",
+    image: "/images/products/concrete/concrete-01.png",
   },
 ];
 
@@ -59,7 +55,11 @@ function CollectionsPage() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = selectedImage ? "hidden" : "";
+    if (selectedImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
     return () => {
       document.body.style.overflow = "";
@@ -67,204 +67,210 @@ function CollectionsPage() {
   }, [selectedImage]);
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleEscape = (event) => {
       if (event.key === "Escape") {
         setSelectedImage(null);
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleEscape);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", handleEscape);
     };
   }, []);
 
   return (
-    <main
-      className="collections-page"
-      ref={pageRef}
-    >
+    <>
+      <main
+        className="collections-page"
+        ref={pageRef}
+      >
+        {/* HERO */}
 
-      {/* =========================================
-          PAGE HERO
-      ========================================= */}
+        <section className="collections-page-hero">
 
-      <section className="collections-page-hero">
+          <button
+            type="button"
+            className="collections-hero-image"
+            onClick={() => setSelectedImage(collections[0])}
+            aria-label="Open Marble collection image"
+          >
+            <img
+              src={collections[0].image}
+              alt="VED EXIM ceramic surface"
+            />
 
-        <div className="collections-page-hero-content">
+            <div className="collections-hero-image-overlay" />
+          </button>
 
-          <p className="collections-page-label">
-            VED EXIM · COLLECTIONS
-          </p>
+          <div className="collections-page-hero-content">
 
-          <h1>
-            Surfaces
-            <br />
-            <em>with character.</em>
-          </h1>
+            <p className="collections-page-label">
+              VED EXIM · COLLECTIONS
+            </p>
 
-          <p className="collections-page-description">
-            A curated world of ceramic surfaces created
-            to bring material depth, refined detail and
-            timeless character to contemporary spaces.
-          </p>
+            <h1>
+              Surfaces
+              <br />
+              <em>with character.</em>
+            </h1>
 
-        </div>
+            <p className="collections-page-description">
+              A curated world of ceramic surfaces created
+              to bring material depth, refined detail and
+              timeless character to contemporary spaces.
+            </p>
 
-        <div className="collections-page-hero-meta">
-          <span>
-            04 COLLECTIONS
-          </span>
+          </div>
 
-          <span>
-            SCROLL TO EXPLORE ↓
-          </span>
-        </div>
+          <div className="collections-page-hero-meta">
+            <span>04 COLLECTIONS</span>
+            <span>SCROLL TO EXPLORE ↓</span>
+          </div>
 
-      </section>
-
-
-      {/* =========================================
-          COLLECTIONS
-      ========================================= */}
-
-      <section className="collections-page-list">
-
-        <div className="collections-page-intro">
-
-          <p>
-            EXPLORE THE COLLECTION
-          </p>
-
-          <span>
-            Each collection has its own material language,
-            designed to work beautifully across residential,
-            hospitality and commercial environments.
-          </span>
-
-        </div>
+        </section>
 
 
-        <div className="collections-page-grid">
+        {/* COLLECTIONS */}
 
-          {collections.map((collection, index) => (
-            <article
-              className={`collection-page-card collection-page-card-${index + 1}`}
-              key={collection.number}
-            >
+        <section className="collections-page-list">
 
-              {/* IMAGE */}
+          <div className="collections-page-intro">
 
-              <button
-                type="button"
-                className="collection-image-button"
-                onClick={() => setSelectedImage(collection)}
-                aria-label={`View ${collection.name} collection image`}
+            <p>
+              EXPLORE THE COLLECTION
+            </p>
+
+            <span>
+              Each collection has its own material language,
+              designed to work beautifully across residential,
+              hospitality and commercial environments.
+            </span>
+
+          </div>
+
+
+          <div className="collections-page-grid">
+
+            {collections.map((collection, index) => (
+
+              <article
+                className={`collection-page-card collection-page-card-${index + 1}`}
+                key={collection.number}
               >
 
-                <div className="collection-page-image">
+                {/* CLICKABLE IMAGE */}
 
-                  <img
-                    src={collection.image}
-                    alt={`${collection.name} ceramic collection`}
-                    loading={index === 0 ? "eager" : "lazy"}
-                  />
+                <button
+                  type="button"
+                  className="collection-image-button"
+                  onClick={() => setSelectedImage(collection)}
+                  aria-label={`Open ${collection.name} image`}
+                >
 
-                  <div className="collection-page-image-overlay"></div>
+                  <div className="collection-page-image">
 
-                </div>
+                    <img
+                      src={collection.image}
+                      alt={`${collection.name} ceramic collection`}
+                      loading={index === 0 ? "eager" : "lazy"}
+                    />
 
-              </button>
-
-
-              {/* CONTENT */}
-
-              <div className="collection-page-content">
-
-                <div className="collection-page-top">
-
-                  <span className="collection-page-number">
-                    {collection.number}
-                  </span>
-
-                  <span className="collection-page-subtitle">
-                    {collection.subtitle}
-                  </span>
-
-                </div>
-
-
-                <div className="collection-page-bottom">
-
-                  <div>
-
-                    <h2>
-                      {collection.name}
-                    </h2>
-
-                    <p>
-                      {collection.description}
-                    </p>
+                    <div className="collection-page-image-overlay" />
 
                   </div>
 
-                  <Link
-                    to="/#contact"
-                    className="collection-page-arrow"
-                  >
-                    ↗
-                  </Link>
+                </button>
+
+
+                {/* CARD CONTENT */}
+
+                <div className="collection-page-content">
+
+                  <div className="collection-page-top">
+
+                    <span className="collection-page-number">
+                      {collection.number}
+                    </span>
+
+                    <span className="collection-page-subtitle">
+                      {collection.subtitle}
+                    </span>
+
+                  </div>
+
+
+                  <div className="collection-page-bottom">
+
+                    <div>
+
+                      <h2>
+                        {collection.name}
+                      </h2>
+
+                      <p>
+                        {collection.description}
+                      </p>
+
+                    </div>
+
+                    <Link
+                      to="/#contact"
+                      className="collection-page-arrow"
+                    >
+                      ↗
+                    </Link>
+
+                  </div>
 
                 </div>
 
-              </div>
+              </article>
 
-            </article>
-          ))}
+            ))}
 
-        </div>
+          </div>
 
-      </section>
-
-
-      {/* =========================================
-          CTA
-      ========================================= */}
-
-      <section className="collections-page-cta">
-
-        <p className="collections-page-label">
-          FIND YOUR SURFACE
-        </p>
-
-        <h2>
-          Have a project
-          <br />
-          <em>in mind?</em>
-        </h2>
-
-        <p>
-          Tell us what you're creating and we'll help
-          you discover the right VED EXIM collection.
-        </p>
-
-        <Link
-          to="/#contact"
-          className="collections-page-cta-button"
-        >
-          START A CONVERSATION
-          <span>↗</span>
-        </Link>
-
-      </section>
+        </section>
 
 
-      {/* =========================================
-          IMAGE LIGHTBOX
-      ========================================= */}
+        {/* CTA */}
+
+        <section className="collections-page-cta">
+
+          <p className="collections-page-label">
+            FIND YOUR SURFACE
+          </p>
+
+          <h2>
+            Have a project
+            <br />
+            <em>in mind?</em>
+          </h2>
+
+          <p>
+            Tell us what you're creating and we'll help
+            you discover the right VED EXIM collection.
+          </p>
+
+          <Link
+            to="/#contact"
+            className="collections-page-cta-button"
+          >
+            START A CONVERSATION
+            <span>↗</span>
+          </Link>
+
+        </section>
+
+      </main>
+
+
+      {/* IMAGE POPUP */}
 
       {selectedImage && (
+
         <div
           className="collection-lightbox"
           onClick={() => setSelectedImage(null)}
@@ -287,7 +293,7 @@ function CollectionsPage() {
 
             <img
               src={selectedImage.image}
-              alt={`${selectedImage.name} ceramic collection`}
+              alt={selectedImage.name}
             />
 
             <div className="collection-lightbox-caption">
@@ -309,9 +315,10 @@ function CollectionsPage() {
           </div>
 
         </div>
+
       )}
 
-    </main>
+    </>
   );
 }
 
