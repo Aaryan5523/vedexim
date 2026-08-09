@@ -1,5 +1,5 @@
 /* =========================================
-   VED EXIM — FOOTER
+   VED EXIM — PREMIUM FOOTER
 ========================================= */
 
 .footer {
@@ -7,9 +7,9 @@
 
   width: 100%;
 
-  padding: 100px 8vw 25px;
+  padding: 100px 8vw 30px;
 
-  background: #0f0e0d;
+  background: #171614;
 
   color: #f4f1eb;
 
@@ -18,13 +18,13 @@
 
 
 /* =========================================
-   TOP
+   FOOTER TOP
 ========================================= */
 
 .footer-top {
   display: grid;
 
-  grid-template-columns: 1.2fr 0.7fr 0.7fr;
+  grid-template-columns: 1.4fr 0.7fr 0.8fr;
 
   gap: 80px;
 
@@ -36,49 +36,43 @@
    BRAND
 ========================================= */
 
-.footer-brand a {
+.footer-brand {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+
+.footer-brand > a {
   display: inline-flex;
 
-  align-items: baseline;
-
-  gap: 8px;
-
-  color: #f4f1eb;
-
-  text-decoration: none;
+  width: 150px;
 }
 
-.footer-brand a span {
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+.footer-logo {
+  display: block;
 
-  font-size: 38px;
+  width: 150px;
+  height: auto;
 
-  letter-spacing: 5px;
+  max-height: 60px;
 
-  font-weight: 400;
-}
+  object-fit: contain;
 
-.footer-brand a small {
-  font-family: Arial, sans-serif;
-
-  font-size: 8px;
-
-  letter-spacing: 3px;
+  object-position: left center;
 }
 
 .footer-brand p {
-  margin: 25px 0 0;
+  margin: 28px 0 0;
 
   font-family: Arial, sans-serif;
 
-  font-size: 11px;
+  font-size: 10px;
 
-  line-height: 1.7;
+  line-height: 1.8;
 
-  color: #817b73;
+  color: #817a71;
 }
 
 
@@ -87,7 +81,7 @@
 ========================================= */
 
 .footer-label {
-  margin: 0 0 22px;
+  margin: 0 0 25px;
 
   font-family: Arial, sans-serif;
 
@@ -112,25 +106,52 @@
 }
 
 .footer-navigation a {
+  position: relative;
+
   margin-bottom: 10px;
 
-  color: #bdb7ae;
+  color: #aaa39a;
 
-  font-family: Arial, sans-serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  font-size: 10px;
+  font-size: 17px;
 
-  line-height: 1.4;
+  line-height: 1.15;
 
   transition:
     color 0.3s ease,
     transform 0.3s ease;
 }
 
+.footer-navigation a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -3px;
+
+  width: 0;
+
+  height: 1px;
+
+  background: #f4f1eb;
+
+  transition:
+    width 0.35s ease;
+}
+
 .footer-navigation a:hover {
-  color: white;
+  color: #f4f1eb;
 
   transform: translateX(5px);
+}
+
+.footer-navigation a:hover::after {
+  width: 100%;
 }
 
 
@@ -149,21 +170,25 @@
 .footer-contact > a {
   margin-bottom: 10px;
 
-  color: #bdb7ae;
+  color: #aaa39a;
 
-  font-family: Arial, sans-serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  font-size: 10px;
+  font-size: 17px;
 
-  transition: color 0.3s ease;
+  transition:
+    color 0.3s ease;
 }
 
 .footer-contact > a:hover {
-  color: white;
+  color: #f4f1eb;
 }
 
 .footer-location {
-  margin: 25px 0 0;
+  margin: 8px 0 0;
 
   font-family: Arial, sans-serif;
 
@@ -171,66 +196,142 @@
 
   letter-spacing: 2px;
 
-  text-transform: uppercase;
-
   color: #706a63;
 }
 
 
 /* =========================================
-   LARGE BRAND
+   SOCIALS
+========================================= */
+
+.footer-socials {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px 18px;
+
+  margin-top: 28px;
+}
+
+.footer-socials a {
+  position: relative;
+
+  color: #817a71;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 8px;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.footer-socials a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -4px;
+
+  width: 0;
+
+  height: 1px;
+
+  background: #f4f1eb;
+
+  transition:
+    width 0.35s ease;
+}
+
+.footer-socials a:hover {
+  color: #f4f1eb;
+
+  transform: translateY(-2px);
+}
+
+.footer-socials a:hover::after {
+  width: 100%;
+}
+
+
+/* =========================================
+   LARGE VED EXIM
 ========================================= */
 
 .footer-large-logo {
   width: 100%;
 
-  margin: 0;
+  margin-top: 20px;
+
+  padding-top: 30px;
+
+  border-top: 1px solid #35322f;
 
   font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+    Arial,
+    Helvetica,
+    sans-serif;
 
-  font-size: clamp(80px, 17vw, 270px);
+  font-size: clamp(80px, 16vw, 270px);
 
-  font-weight: 400;
+  font-weight: 700;
 
   line-height: 0.72;
 
-  letter-spacing: -10px;
-
-  color: #211f1d;
+  letter-spacing: -0.08em;
 
   white-space: nowrap;
 
+  color: #292724;
+
   user-select: none;
+
+  transition:
+    color 0.5s ease;
+}
+
+.footer-large-logo:hover {
+  color: #35312d;
 }
 
 
 /* =========================================
-   BOTTOM
+   FOOTER BOTTOM
 ========================================= */
 
 .footer-bottom {
-  margin-top: 55px;
+  margin-top: 45px;
 
   padding-top: 20px;
 
-  border-top: 1px solid #292725;
+  border-top: 1px solid #35322f;
 
-  display: flex;
+  display: grid;
+
+  grid-template-columns: 1fr 1fr 1fr;
 
   align-items: center;
 
-  justify-content: space-between;
+  gap: 20px;
 
   font-family: Arial, sans-serif;
 
   font-size: 7px;
 
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
 
-  color: #68625b;
+  color: #706a63;
+}
+
+.footer-bottom span:nth-child(2) {
+  text-align: center;
 }
 
 
@@ -239,29 +340,31 @@
 ========================================= */
 
 .footer-top-button {
-  padding: 0;
+  justify-self: end;
 
-  border: none;
-
-  background: transparent;
-
-  color: #8c857d;
-
-  cursor: pointer;
-
-  display: flex;
+  display: inline-flex;
 
   align-items: center;
 
   gap: 10px;
 
+  padding: 0;
+
+  background: transparent;
+
+  color: #aaa39a;
+
   font-family: Arial, sans-serif;
 
   font-size: 7px;
 
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
 
-  transition: color 0.3s ease;
+  cursor: pointer;
+
+  transition:
+    color 0.3s ease,
+    gap 0.3s ease;
 }
 
 .footer-top-button span {
@@ -272,11 +375,13 @@
 }
 
 .footer-top-button:hover {
-  color: white;
+  color: #f4f1eb;
+
+  gap: 15px;
 }
 
 .footer-top-button:hover span {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
 }
 
 
@@ -287,16 +392,15 @@
 @media (max-width: 900px) {
 
   .footer {
-    padding: 80px 6vw 25px;
+    padding: 90px 6vw 28px;
   }
 
   .footer-top {
-    grid-template-columns:
-      1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 
-    gap: 60px;
+    gap: 65px;
 
-    padding-bottom: 70px;
+    padding-bottom: 75px;
   }
 
   .footer-brand {
@@ -304,9 +408,7 @@
   }
 
   .footer-large-logo {
-    font-size: 17vw;
-
-    letter-spacing: -6px;
+    font-size: clamp(70px, 15vw, 150px);
   }
 
 }
@@ -319,52 +421,84 @@
 @media (max-width: 650px) {
 
   .footer {
-    padding: 75px 22px 22px;
+    padding: 75px 22px 25px;
   }
 
   .footer-top {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
 
-    gap: 45px 30px;
+    gap: 55px;
 
     padding-bottom: 60px;
   }
 
   .footer-brand {
-    grid-column: 1 / -1;
+    grid-column: auto;
   }
 
-  .footer-brand a span {
-    font-size: 31px;
+  .footer-brand > a {
+    width: 120px;
+  }
 
-    letter-spacing: 4px;
+  .footer-logo {
+    width: 120px;
+
+    max-height: 48px;
   }
 
   .footer-brand p {
-    font-size: 10px;
+    margin-top: 20px;
+
+    font-size: 9px;
+  }
+
+  .footer-label {
+    margin-bottom: 20px;
+
+    font-size: 7px;
+
+    letter-spacing: 2.5px;
   }
 
   .footer-navigation a,
   .footer-contact > a {
-    font-size: 9px;
+    font-size: 16px;
+
+    margin-bottom: 9px;
+  }
+
+  .footer-socials {
+    margin-top: 22px;
+
+    gap: 10px 14px;
+  }
+
+  .footer-socials a {
+    font-size: 7px;
   }
 
   .footer-large-logo {
+    margin-top: 10px;
+
+    padding-top: 25px;
+
     font-size: 21vw;
 
-    letter-spacing: -4px;
-
     line-height: 0.75;
+
+    letter-spacing: -0.09em;
   }
 
   .footer-bottom {
-    margin-top: 40px;
-
-    display: grid;
+    margin-top: 35px;
 
     grid-template-columns: 1fr 1fr;
 
-    gap: 20px;
+    gap: 18px;
+
+    font-size: 6px;
+
+    letter-spacing: 2px;
 
     line-height: 1.5;
   }
@@ -376,9 +510,9 @@
   .footer-top-button {
     grid-column: 1 / -1;
 
-    justify-self: center;
+    justify-self: start;
 
-    margin-top: 10px;
+    font-size: 6px;
   }
 
 }

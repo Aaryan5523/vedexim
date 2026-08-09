@@ -4,24 +4,39 @@ import "./Products.css";
 const products = [
   {
     number: "01",
-    name: "Marble Collection",
-    category: "Premium Porcelain",
+    name: "Calacatta",
+    category: "MARBLE COLLECTION",
+    description:
+      "A refined marble-inspired surface with elegant veining and a timeless character.",
     image:
-      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1400&q=85",
   },
   {
     number: "02",
-    name: "Stone Collection",
-    category: "Natural Surface",
+    name: "Travertine",
+    category: "STONE COLLECTION",
+    description:
+      "Warm natural tones and subtle texture designed for sophisticated interiors.",
     image:
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85",
   },
   {
     number: "03",
-    name: "Urban Collection",
-    category: "Contemporary Tiles",
+    name: "Onyx",
+    category: "PREMIUM COLLECTION",
+    description:
+      "A dramatic surface inspired by the depth, movement and luminosity of natural stone.",
     image:
-      "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=85",
+  },
+  {
+    number: "04",
+    name: "Limestone",
+    category: "STONE COLLECTION",
+    description:
+      "A quiet architectural finish created for modern and minimal spaces.",
+    image:
+      "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1400&q=85",
   },
 ];
 
@@ -36,12 +51,12 @@ function Products() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          section.classList.add("is-visible");
+          section.classList.add("products-visible");
           observer.disconnect();
         }
       },
       {
-        threshold: 0.12,
+        threshold: 0.1,
       }
     );
 
@@ -61,21 +76,23 @@ function Products() {
       <div className="products-header">
 
         <div>
+
           <p className="products-label">
             FEATURED PRODUCTS
           </p>
 
-          <h2>
-            Selected
+          <h2 className="products-title">
+            Designed for
             <br />
-            <em>surfaces.</em>
+            <em>beautiful spaces.</em>
           </h2>
+
         </div>
 
         <p className="products-intro">
-          A considered selection of surfaces designed
-          to bring elegance, durability and character
-          to modern spaces.
+          Discover selected surfaces from the VED EXIM
+          collection, created to combine refined aesthetics,
+          dependable quality and contemporary design.
         </p>
 
       </div>
@@ -83,10 +100,11 @@ function Products() {
 
       {/* PRODUCTS */}
 
-      <div className="products-list">
+      <div className="products-grid">
 
-        {products.map((product) => (
-          <article
+        {products.map((product, index) => (
+          <a
+            href="#contact"
             className="product-card"
             key={product.number}
           >
@@ -95,50 +113,72 @@ function Products() {
 
               <img
                 src={product.image}
-                alt={product.name}
+                alt={`${product.name} ceramic surface`}
+                loading={index < 2 ? "eager" : "lazy"}
               />
 
-              <span className="product-number">
-                {product.number}
-              </span>
-
-              <button
-                type="button"
-                className="product-view"
-              >
-                ↗
-              </button>
+              <div className="product-image-overlay"></div>
 
             </div>
 
 
-            <div className="product-info">
+            <div className="product-content">
 
-              <div>
-                <h3>{product.name}</h3>
+              <div className="product-top">
 
-                <p>{product.category}</p>
+                <span className="product-number">
+                  {product.number}
+                </span>
+
+                <span className="product-category">
+                  {product.category}
+                </span>
+
               </div>
 
-              <span className="product-index">
-                {product.number}
-              </span>
+
+              <div className="product-bottom">
+
+                <div>
+
+                  <h3>
+                    {product.name}
+                  </h3>
+
+                  <p>
+                    {product.description}
+                  </p>
+
+                </div>
+
+                <span className="product-arrow">
+                  ↗
+                </span>
+
+              </div>
 
             </div>
 
-          </article>
+          </a>
         ))}
 
       </div>
 
 
-      {/* VIEW ALL */}
+      {/* FOOTER */}
 
       <div className="products-footer">
 
+        <span>
+          VED EXIM
+        </span>
+
+        <span>
+          CURATED SURFACES
+        </span>
+
         <a href="#contact">
-          View Complete Collection
-          <span>↗</span>
+          VIEW ALL PRODUCTS ↗
         </a>
 
       </div>

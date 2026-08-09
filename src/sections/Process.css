@@ -1,5 +1,5 @@
 /* =========================================
-   VED EXIM — PROCESS
+   VED EXIM — OUR PROCESS
 ========================================= */
 
 .process-section {
@@ -7,26 +7,13 @@
 
   width: 100%;
 
-  padding: 150px 8vw 100px;
+  padding: 150px 8vw 55px;
 
-  background: #e8e3da;
+  background: #f3f0ea;
 
   color: #171614;
 
   overflow: hidden;
-
-  opacity: 0;
-
-  transform: translateY(60px);
-
-  transition:
-    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.process-section.is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 
@@ -37,7 +24,7 @@
 .process-header {
   display: grid;
 
-  grid-template-columns: 1fr 0.55fr;
+  grid-template-columns: 1fr 0.65fr;
 
   gap: 80px;
 
@@ -47,18 +34,18 @@
 }
 
 .process-label {
-  margin: 0 0 25px;
+  margin-bottom: 25px;
 
   font-family: Arial, sans-serif;
 
-  font-size: 9px;
+  font-size: 8px;
 
   letter-spacing: 4px;
 
   color: #817a71;
 }
 
-.process-header h2 {
+.process-title {
   margin: 0;
 
   font-family:
@@ -66,31 +53,33 @@
     "Times New Roman",
     serif;
 
-  font-size: clamp(55px, 6vw, 92px);
+  font-size: clamp(55px, 6vw, 90px);
 
   font-weight: 400;
 
-  line-height: 0.9;
+  line-height: 0.88;
 
   letter-spacing: -4px;
 }
 
-.process-header h2 em {
+.process-title em {
+  color: #777067;
+
   font-style: italic;
 }
 
 .process-intro {
   max-width: 400px;
 
-  margin: 0 0 5px;
+  margin: 0 0 4px;
 
   font-family: Arial, sans-serif;
 
-  font-size: 12px;
+  font-size: 11px;
 
-  line-height: 1.8;
+  line-height: 1.9;
 
-  color: #6f6961;
+  color: #716b63;
 }
 
 
@@ -101,33 +90,24 @@
 .process-grid {
   display: grid;
 
-  grid-template-columns:
-    repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 
-  border-top: 1px solid #c9c2b8;
+  border-top: 1px solid #cec8bf;
 
-  border-bottom: 1px solid #c9c2b8;
+  border-bottom: 1px solid #cec8bf;
 }
 
 
 /* =========================================
-   PROCESS CARD
+   PROCESS ITEM
 ========================================= */
 
-.process-card {
-  position: relative;
+.process-item {
+  min-height: 330px;
 
-  min-height: 360px;
+  padding: 28px 28px 35px 0;
 
-  padding: 25px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: space-between;
-
-  border-right: 1px solid #c9c2b8;
+  border-right: 1px solid #cec8bf;
 
   opacity: 0;
 
@@ -135,49 +115,52 @@
 
   transition:
     opacity 0.8s ease,
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    background 0.4s ease;
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.process-card:last-child {
+.process-item:not(:first-child) {
+  padding-left: 28px;
+}
+
+.process-item:last-child {
   border-right: none;
-}
-
-.process-section.is-visible
-.process-card:nth-child(1) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.15s;
-}
-
-.process-section.is-visible
-.process-card:nth-child(2) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.3s;
-}
-
-.process-section.is-visible
-.process-card:nth-child(3) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.45s;
-}
-
-.process-section.is-visible
-.process-card:nth-child(4) {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.6s;
 }
 
 
 /* =========================================
-   CARD HOVER
+   REVEAL
 ========================================= */
 
-.process-card:hover {
-  background: rgba(255, 255, 255, 0.22);
+.process-visible .process-item:nth-child(1) {
+  opacity: 1;
+
+  transform: translateY(0);
+
+  transition-delay: 0.05s;
+}
+
+.process-visible .process-item:nth-child(2) {
+  opacity: 1;
+
+  transform: translateY(0);
+
+  transition-delay: 0.15s;
+}
+
+.process-visible .process-item:nth-child(3) {
+  opacity: 1;
+
+  transform: translateY(0);
+
+  transition-delay: 0.25s;
+}
+
+.process-visible .process-item:nth-child(4) {
+  opacity: 1;
+
+  transform: translateY(0);
+
+  transition-delay: 0.35s;
 }
 
 
@@ -185,15 +168,19 @@
    TOP
 ========================================= */
 
-.process-card-top {
+.process-item-top {
   display: flex;
 
   align-items: center;
 
-  gap: 18px;
+  gap: 15px;
+
+  margin-bottom: 85px;
 }
 
 .process-number {
+  flex-shrink: 0;
+
   font-family: Arial, sans-serif;
 
   font-size: 8px;
@@ -204,23 +191,31 @@
 }
 
 .process-line {
-  width: 45px;
+  width: 100%;
 
   height: 1px;
 
-  background: #bcb5ab;
+  background: #cec8bf;
+
+  transform-origin: left;
+
+  transition:
+    transform 0.5s ease,
+    background 0.5s ease;
+}
+
+.process-item:hover .process-line {
+  background: #171614;
+
+  transform: scaleX(0.65);
 }
 
 
 /* =========================================
-   CONTENT
+   TITLE
 ========================================= */
 
-.process-card-content {
-  max-width: 240px;
-}
-
-.process-card h3 {
+.process-item h3 {
   margin: 0 0 18px;
 
   font-family:
@@ -228,74 +223,58 @@
     "Times New Roman",
     serif;
 
-  font-size: 36px;
+  font-size: 38px;
 
   font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: -1.5px;
+
+  transition:
+    transform 0.4s ease,
+    color 0.4s ease;
 }
 
-.process-card p {
+.process-item:hover h3 {
+  transform: translateX(7px);
+
+  color: #716b63;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.process-item p {
+  max-width: 230px;
+
   margin: 0;
 
   font-family: Arial, sans-serif;
 
-  font-size: 11px;
+  font-size: 13px;
 
   line-height: 1.8;
 
-  color: #6f6961;
+  color: #817a71;
 }
 
 
 /* =========================================
-   ARROW
+   BOTTOM
 ========================================= */
 
-.process-arrow {
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid #bcb5ab;
-
-  border-radius: 50%;
-
-  font-size: 15px;
-
-  transition:
-    transform 0.4s ease,
-    background 0.4s ease;
-}
-
-.process-card:hover .process-arrow {
-  transform: rotate(45deg);
-
-  background: #171614;
-
-  color: white;
-
-  border-color: #171614;
-}
-
-
-/* =========================================
-   STATEMENT
-========================================= */
-
-.process-statement {
-  padding-top: 90px;
+.process-bottom {
+  margin-top: 75px;
 
   display: grid;
 
   grid-template-columns: 1fr 1fr 1fr;
 
-  align-items: end;
-}
+  align-items: center;
 
-.process-statement span {
   font-family: Arial, sans-serif;
 
   font-size: 7px;
@@ -305,31 +284,12 @@
   color: #817a71;
 }
 
-.process-statement span:last-child {
-  text-align: right;
-}
-
-.process-statement h3 {
-  margin: 0;
-
+.process-bottom span:nth-child(2) {
   text-align: center;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: clamp(30px, 3.2vw, 50px);
-
-  font-weight: 400;
-
-  line-height: 0.95;
 }
 
-.process-statement h3 em {
-  font-style: italic;
-
-  color: #777067;
+.process-bottom span:last-child {
+  text-align: right;
 }
 
 
@@ -340,31 +300,36 @@
 @media (max-width: 900px) {
 
   .process-section {
-    padding: 110px 6vw 75px;
+    padding: 110px 6vw 45px;
   }
 
   .process-header {
     grid-template-columns: 1fr;
 
-    gap: 30px;
+    gap: 35px;
 
-    margin-bottom: 60px;
+    margin-bottom: 65px;
+  }
+
+  .process-intro {
+    max-width: 600px;
   }
 
   .process-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .process-card:nth-child(2) {
+  .process-item {
+    min-height: 290px;
+  }
+
+  .process-item:nth-child(2) {
     border-right: none;
   }
 
-  .process-card:nth-child(-n + 2) {
-    border-bottom: 1px solid #c9c2b8;
-  }
-
-  .process-statement {
-    padding-top: 60px;
+  .process-item:nth-child(3),
+  .process-item:nth-child(4) {
+    border-top: 1px solid #cec8bf;
   }
 
 }
@@ -377,15 +342,27 @@
 @media (max-width: 650px) {
 
   .process-section {
-    padding: 90px 22px 55px;
+    padding: 90px 22px 30px;
   }
 
   .process-header {
-    margin-bottom: 55px;
+    margin-bottom: 50px;
+
+    gap: 25px;
   }
 
-  .process-header h2 {
+  .process-label {
+    margin-bottom: 18px;
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+  }
+
+  .process-title {
     font-size: 50px;
+
+    line-height: 0.92;
 
     letter-spacing: -2.5px;
   }
@@ -393,54 +370,78 @@
   .process-intro {
     font-size: 10px;
 
-    max-width: 330px;
+    line-height: 1.75;
   }
+
+
+  /* Single column */
 
   .process-grid {
     grid-template-columns: 1fr;
   }
 
-  .process-card {
-    min-height: 280px;
+  .process-item,
+  .process-item:not(:first-child) {
+    min-height: auto;
 
-    padding: 22px;
+    padding:
+      25px
+      0
+      30px;
 
     border-right: none;
 
-    border-bottom: 1px solid #c9c2b8;
+    border-bottom: 1px solid #cec8bf;
   }
 
-  .process-card:last-child {
+  .process-item:last-child {
     border-bottom: none;
   }
 
-  .process-card h3 {
-    font-size: 32px;
+  .process-item:nth-child(3),
+  .process-item:nth-child(4) {
+    border-top: none;
   }
 
-  .process-card p {
-    font-size: 10px;
+  .process-item-top {
+    margin-bottom: 45px;
   }
 
-  .process-statement {
-    padding-top: 55px;
-
-    grid-template-columns: 1fr;
-
-    gap: 25px;
-
-    text-align: center;
-  }
-
-  .process-statement span,
-  .process-statement span:last-child {
-    text-align: center;
-  }
-
-  .process-statement h3 {
-    order: -1;
-
+  .process-item h3 {
     font-size: 34px;
+
+    letter-spacing: -1px;
+  }
+
+  .process-item p {
+    max-width: 310px;
+
+    font-size: 9px;
+
+    line-height: 1.75;
+  }
+
+
+  /* Bottom */
+
+  .process-bottom {
+    margin-top: 50px;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+
+    line-height: 1.5;
+  }
+
+  .process-bottom span:nth-child(2) {
+    text-align: right;
+  }
+
+  .process-bottom span:last-child {
+    grid-column: 1 / -1;
+
+    text-align: left;
   }
 
 }

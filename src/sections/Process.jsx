@@ -1,26 +1,30 @@
 import { useEffect, useRef } from "react";
 import "./Process.css";
 
-const processSteps = [
+const steps = [
   {
     number: "01",
-    title: "Selection",
-    text: "Every collection begins with carefully selected materials, refined textures and considered finishes.",
+    title: "Discover",
+    description:
+      "We understand your project, design direction and surface requirements before recommending the right solutions.",
   },
   {
     number: "02",
-    title: "Precision",
-    text: "Quality control and attention to detail ensure consistency across every surface and collection.",
+    title: "Select",
+    description:
+      "Explore carefully selected ceramic surfaces, textures, finishes and formats suited to your space.",
   },
   {
     number: "03",
-    title: "Refinement",
-    text: "Modern techniques transform carefully selected materials into sophisticated ceramic surfaces.",
+    title: "Refine",
+    description:
+      "Compare materials and details with our team to create a cohesive and considered surface palette.",
   },
   {
     number: "04",
-    title: "Delivery",
-    text: "Reliable service brings the finished collection from our selection to your project.",
+    title: "Deliver",
+    description:
+      "From selection to final delivery, we focus on dependable service and a smooth experience.",
   },
 ];
 
@@ -35,12 +39,12 @@ function Process() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          section.classList.add("is-visible");
+          section.classList.add("process-visible");
           observer.disconnect();
         }
       },
       {
-        threshold: 0.15,
+        threshold: 0.12,
       }
     );
 
@@ -60,21 +64,23 @@ function Process() {
       <div className="process-header">
 
         <div>
+
           <p className="process-label">
             OUR PROCESS
           </p>
 
-          <h2>
-            From material
+          <h2 className="process-title">
+            From idea
             <br />
-            <em>to masterpiece.</em>
+            <em>to space.</em>
           </h2>
+
         </div>
 
         <p className="process-intro">
-          A considered process where material,
-          craftsmanship and quality come together
-          to create surfaces made for modern spaces.
+          A considered approach to helping you discover,
+          select and bring the right surfaces into your
+          project.
         </p>
 
       </div>
@@ -84,12 +90,13 @@ function Process() {
 
       <div className="process-grid">
 
-        {processSteps.map((step) => (
-          <article
-            className="process-card"
+        {steps.map((step) => (
+          <div
+            className="process-item"
             key={step.number}
           >
-            <div className="process-card-top">
+
+            <div className="process-item-top">
 
               <span className="process-number">
                 {step.number}
@@ -99,43 +106,34 @@ function Process() {
 
             </div>
 
-            <div className="process-card-content">
+            <h3>
+              {step.title}
+            </h3>
 
-              <h3>
-                {step.title}
-              </h3>
+            <p>
+              {step.description}
+            </p>
 
-              <p>
-                {step.text}
-              </p>
-
-            </div>
-
-            <span className="process-arrow">
-              ↗
-            </span>
-          </article>
+          </div>
         ))}
 
       </div>
 
 
-      {/* BOTTOM STATEMENT */}
+      {/* BOTTOM */}
 
-      <div className="process-statement">
+      <div className="process-bottom">
 
         <span>
           VED EXIM
         </span>
 
-        <h3>
-          Quality in
-          <br />
-          <em>every detail.</em>
-        </h3>
+        <span>
+          A SIMPLE APPROACH
+        </span>
 
         <span>
-          CERAMICS / SURFACES
+          01 — 04
         </span>
 
       </div>

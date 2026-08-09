@@ -5,30 +5,34 @@ const collections = [
   {
     number: "01",
     title: "Marble",
-    subtitle: "Timeless elegance",
+    description:
+      "Refined surfaces inspired by the natural movement and depth of marble.",
     image:
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=85",
   },
   {
     number: "02",
     title: "Stone",
-    subtitle: "Natural expression",
+    description:
+      "Earth-inspired textures created for warm and sophisticated interiors.",
     image:
-      "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=85",
   },
   {
     number: "03",
-    title: "Concrete",
-    subtitle: "Modern character",
+    title: "Terrazzo",
+    description:
+      "Contemporary patterns that bring rhythm, texture and personality to spaces.",
     image:
-      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1600&q=85",
   },
   {
     number: "04",
-    title: "Wood",
-    subtitle: "Warm textures",
+    title: "Concrete",
+    description:
+      "Minimal architectural surfaces for modern and understated environments.",
     image:
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=85",
   },
 ];
 
@@ -43,7 +47,7 @@ function Collections() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          section.classList.add("is-visible");
+          section.classList.add("collections-visible");
           observer.disconnect();
         }
       },
@@ -72,17 +76,18 @@ function Collections() {
             OUR COLLECTIONS
           </p>
 
-          <h2>
-            Designed for
+          <h2 className="collections-title">
+            Surfaces with
             <br />
-            <em>distinctive spaces.</em>
+            <em>character.</em>
           </h2>
         </div>
 
         <p className="collections-intro">
-          Explore surfaces created to bring depth,
-          texture and character to contemporary
-          architecture.
+          Explore a curated selection of ceramic
+          surfaces designed to bring material,
+          texture and timeless character to
+          contemporary spaces.
         </p>
 
       </div>
@@ -92,10 +97,10 @@ function Collections() {
 
       <div className="collections-grid">
 
-        {collections.map((collection) => (
+        {collections.map((collection, index) => (
           <a
-            href="#products"
-            className="collection-card"
+            href="#contact"
+            className={`collection-card collection-card-${index + 1}`}
             key={collection.number}
           >
 
@@ -104,37 +109,63 @@ function Collections() {
               <img
                 src={collection.image}
                 alt={`${collection.title} ceramic collection`}
+                loading={index === 0 ? "eager" : "lazy"}
               />
 
               <div className="collection-overlay"></div>
 
-              <span className="collection-number">
-                {collection.number}
-              </span>
-
-              <span className="collection-arrow">
-                ↗
-              </span>
-
             </div>
 
 
-            <div className="collection-info">
+            <div className="collection-content">
 
-              <div>
-                <h3>{collection.title}</h3>
+              <div className="collection-top">
 
-                <p>{collection.subtitle}</p>
+                <span className="collection-number">
+                  {collection.number}
+                </span>
+
+                <span className="collection-arrow">
+                  ↗
+                </span>
+
               </div>
 
-              <span>
-                EXPLORE
-              </span>
+              <div className="collection-bottom">
+
+                <h3>
+                  {collection.title}
+                </h3>
+
+                <p>
+                  {collection.description}
+                </p>
+
+              </div>
 
             </div>
 
           </a>
         ))}
+
+      </div>
+
+
+      {/* FOOTER LINE */}
+
+      <div className="collections-footer">
+
+        <span>
+          VED EXIM
+        </span>
+
+        <span>
+          EXPLORE THE MATERIAL
+        </span>
+
+        <span>
+          04 COLLECTIONS
+        </span>
 
       </div>
 

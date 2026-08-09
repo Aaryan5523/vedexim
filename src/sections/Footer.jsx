@@ -8,18 +8,35 @@ function Footer() {
     });
   };
 
+  const closeMenuAndNavigate = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <footer className="footer">
 
-      {/* TOP */}
+      {/* =========================================
+          FOOTER TOP
+      ========================================= */}
 
       <div className="footer-top">
 
+        {/* BRAND */}
+
         <div className="footer-brand">
 
-          <a href="#home" onClick={scrollToTop}>
-            <span>VED</span>
-            <small>EXIM</small>
+          <a
+            href="#home"
+            onClick={closeMenuAndNavigate}
+          >
+            <img
+              src="/images/logo/vedexim.png"
+              alt="VED EXIM"
+              className="footer-logo"
+            />
           </a>
 
           <p>
@@ -31,22 +48,46 @@ function Footer() {
         </div>
 
 
+        {/* NAVIGATION */}
+
         <div className="footer-navigation">
 
           <p className="footer-label">
             NAVIGATION
           </p>
 
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#collections">Collections</a>
-          <a href="#products">Products</a>
-          <a href="#why-us">Why VED EXIM</a>
-          <a href="#process">Our Process</a>
-          <a href="#contact">Contact</a>
+          <a href="#home">
+            Home
+          </a>
+
+          <a href="#about">
+            About
+          </a>
+
+          <a href="#collections">
+            Collections
+          </a>
+
+          <a href="#products">
+            Products
+          </a>
+
+          <a href="#why-us">
+            Why VED EXIM
+          </a>
+
+          <a href="#process">
+            Our Process
+          </a>
+
+          <a href="#contact">
+            Contact
+          </a>
 
         </div>
 
+
+        {/* CONTACT */}
 
         <div className="footer-contact">
 
@@ -66,19 +107,58 @@ function Footer() {
             India
           </p>
 
+
+          {/* SOCIALS */}
+
+          <div className="footer-socials">
+
+            <a
+              href="#"
+              aria-label="Instagram"
+            >
+              Instagram
+            </a>
+
+            <a
+              href="#"
+              aria-label="Facebook"
+            >
+              Facebook
+            </a>
+
+            <a
+              href="#"
+              aria-label="LinkedIn"
+            >
+              LinkedIn
+            </a>
+
+            <a
+              href="#"
+              aria-label="YouTube"
+            >
+              YouTube
+            </a>
+
+          </div>
+
         </div>
 
       </div>
 
 
-      {/* LARGE BRAND */}
+      {/* =========================================
+          LARGE BRAND
+      ========================================= */}
 
       <div className="footer-large-logo">
         VED EXIM
       </div>
 
 
-      {/* BOTTOM */}
+      {/* =========================================
+          BOTTOM
+      ========================================= */}
 
       <div className="footer-bottom">
 

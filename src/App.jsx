@@ -1,39 +1,37 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
-import Hero from "./sections/Hero";
-import About from "./sections/About";
-import Collections from "./sections/Collections";
-import Products from "./sections/Products";
-import WhyUs from "./sections/WhyUs";
-import Process from "./sections/Process";
-import Contact from "./sections/Contact";
-import Footer from "./sections/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
+import Footer from "./sections/Footer";
+
+import Home from "./pages/Home";
+import CollectionsPage from "./pages/CollectionsPage";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
+
       <Navbar />
 
-      <main>
-        <Hero />
+      <Routes>
 
-        <About />
+        <Route
+          path="/"
+          element={<Home />}
+        />
 
-        <Collections />
+        <Route
+          path="/collections"
+          element={<CollectionsPage />}
+        />
 
-        <Products />
+      </Routes>
 
-        <WhyUs />
+      <WhatsAppButton />
 
-        <Process />
+      <Footer />
 
-        <Contact />
-
-        <Footer />
-
-        <WhatsAppButton />
-      </main>
-    </>
+    </BrowserRouter>
   );
 }
 

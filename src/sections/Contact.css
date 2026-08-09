@@ -271,6 +271,17 @@
   transform: rotate(45deg);
 }
 
+.contact-submit:active {
+  transform: scale(0.99);
+}
+
+.contact-submit span,
+.contact-submit strong {
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
 
 /* =========================================
    BOTTOM

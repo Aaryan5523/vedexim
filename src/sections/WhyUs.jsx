@@ -1,26 +1,26 @@
 import { useEffect, useRef } from "react";
 import "./WhyUs.css";
 
-const reasons = [
+const strengths = [
   {
     number: "01",
-    title: "Quality",
-    text: "Carefully selected ceramic surfaces with a focus on durability, finish and consistency.",
+    title: "Design",
+    text: "Thoughtfully selected surfaces that bring refined aesthetics and contemporary character to every space.",
   },
   {
     number: "02",
-    title: "Design",
-    text: "Contemporary collections created to complement modern architecture and interiors.",
+    title: "Quality",
+    text: "Reliable ceramic solutions selected with attention to finish, consistency and long-term performance.",
   },
   {
     number: "03",
-    title: "Precision",
-    text: "Attention to detail across every surface, texture, tone and finish.",
+    title: "Selection",
+    text: "A curated range of marble, stone, terrazzo and architectural surfaces for diverse design requirements.",
   },
   {
     number: "04",
-    title: "Reliability",
-    text: "A dependable approach built around professional service and long-term relationships.",
+    title: "Service",
+    text: "A responsive team focused on understanding your requirements and helping you choose with confidence.",
   },
 ];
 
@@ -35,12 +35,12 @@ function WhyUs() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          section.classList.add("is-visible");
+          section.classList.add("why-visible");
           observer.disconnect();
         }
       },
       {
-        threshold: 0.15,
+        threshold: 0.12,
       }
     );
 
@@ -55,64 +55,63 @@ function WhyUs() {
       id="why-us"
       ref={sectionRef}
     >
-
       {/* HEADER */}
 
       <div className="why-header">
 
         <div>
+
           <p className="why-label">
             WHY VED EXIM
           </p>
 
-          <h2>
-            Built on quality.
+          <h2 className="why-title">
+            More than
             <br />
-            <em>Defined by detail.</em>
+            <em>just surfaces.</em>
           </h2>
+
         </div>
 
         <p className="why-intro">
-          We believe exceptional spaces begin with
-          exceptional surfaces. Every collection is
-          selected with purpose, precision and a
-          commitment to lasting quality.
+          We believe great surfaces are more than
+          materials. They shape atmosphere, define
+          character and become part of the way a
+          space is experienced.
         </p>
 
       </div>
 
 
-      {/* REASONS */}
+      {/* STRENGTHS */}
 
       <div className="why-grid">
 
-        {reasons.map((reason) => (
-          <article
-            className="why-card"
-            key={reason.number}
+        {strengths.map((strength) => (
+          <div
+            className="why-item"
+            key={strength.number}
           >
 
-            <span className="why-number">
-              {reason.number}
-            </span>
+            <div className="why-item-top">
 
-            <div className="why-card-content">
+              <span className="why-number">
+                {strength.number}
+              </span>
 
-              <h3>
-                {reason.title}
-              </h3>
-
-              <p>
-                {reason.text}
-              </p>
+              <span className="why-line"></span>
 
             </div>
 
-            <span className="why-arrow">
-              ↗
-            </span>
+            <h3>
+              {strength.title}
+            </h3>
 
-          </article>
+            <p>
+              {strength.text}
+            </p>
+
+          </div>
         ))}
 
       </div>
@@ -127,13 +126,12 @@ function WhyUs() {
         </span>
 
         <p>
-          Every surface is selected
-          <br />
-          <em>with purpose.</em>
+          Creating surfaces that make
+          <em> spaces memorable.</em>
         </p>
 
         <span>
-          CERAMICS / 2026
+          EST. INDIA
         </span>
 
       </div>
