@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
@@ -6,55 +7,66 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-  const handleScroll = () => {
-    setScrolled(window.scrollY > 40);
-  };
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
 
-  window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-  handleScroll();
+    handleScroll();
 
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-useEffect(() => {
-  document.body.classList.toggle("menu-open", menuOpen);
+  useEffect(() => {
+    document.body.classList.toggle("menu-open", menuOpen);
 
-  return () => {
-    document.body.classList.remove("menu-open");
-  };
-}, [menuOpen]);
+    return () => {
+      document.body.classList.remove("menu-open");
+    };
+  }, [menuOpen]);
 
   const closeMenu = () => {
     setMenuOpen(false);
   };
 
   return (
-    <header className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
+    <header
+      className={`navbar ${
+        scrolled ? "navbar-scrolled" : ""
+      }`}
+    >
 
       {/* LEFT LOGO */}
 
-      <a
-  href="#home"
-  className="navbar-logo"
-  onClick={closeMenu}
->
-  <img
-    src="/images/logo/vedexim.png"
-    alt="VED EXIM"
-  />
-</a>
+      <Link
+        to="/"
+        className="navbar-logo"
+        onClick={closeMenu}
+      >
+        <img
+          src="/images/logo/vedexim.png"
+          alt="VED EXIM"
+        />
+      </Link>
 
 
       {/* MENU BUTTON */}
 
       <button
         type="button"
-        className={`menu-button ${menuOpen ? "menu-active" : ""}`}
+        className={`menu-button ${
+          menuOpen ? "menu-active" : ""
+        }`}
         onClick={() => setMenuOpen((prev) => !prev)}
-        aria-label="Open navigation menu"
+        aria-label={
+          menuOpen
+            ? "Close navigation menu"
+            : "Open navigation menu"
+        }
+        aria-expanded={menuOpen}
       >
         <span></span>
         <span></span>
@@ -63,50 +75,99 @@ useEffect(() => {
 
       {/* MENU PANEL */}
 
-      <div className={`menu-panel ${menuOpen ? "menu-open" : ""}`}>
+      <div
+        className={`menu-panel ${
+          menuOpen ? "menu-open" : ""
+        }`}
+      >
 
         <div className="menu-heading">
           NAVIGATION
         </div>
 
+
         <nav className="menu-nav">
 
-          <a href="#home" onClick={closeMenu}>
+          {/* HOME */}
+
+          <Link
+            to="/"
+            onClick={closeMenu}
+          >
             <span>01</span>
             Home
-          </a>
+          </Link>
 
-          <a href="#about" onClick={closeMenu}>
+
+          {/* ABOUT */}
+
+          <Link
+            to="/#about"
+            onClick={closeMenu}
+          >
             <span>02</span>
             About
-          </a>
+          </Link>
 
-          <a href="#collections" onClick={closeMenu}>
+
+          {/* COLLECTIONS PAGE */}
+
+          <Link
+            to="/collections"
+            onClick={closeMenu}
+          >
             <span>03</span>
             Collections
-          </a>
+          </Link>
 
-          <a href="#products" onClick={closeMenu}>
+
+          {/* PRODUCTS */}
+
+          <Link
+            to="/#products"
+            onClick={closeMenu}
+          >
             <span>04</span>
             Products
-          </a>
+          </Link>
 
-          <a href="#why-us" onClick={closeMenu}>
+
+          {/* WHY VED EXIM */}
+
+          <Link
+            to="/#why-us"
+            onClick={closeMenu}
+          >
             <span>05</span>
             Why VED EXIM
-          </a>
+          </Link>
 
-          <a href="#process" onClick={closeMenu}>
+
+          {/* PROCESS */}
+
+          <Link
+            to="/#process"
+            onClick={closeMenu}
+          >
             <span>06</span>
             Our Process
-          </a>
+          </Link>
 
-          <a href="#contact" onClick={closeMenu}>
+
+          {/* CONTACT */}
+
+          <Link
+            to="/#contact"
+            onClick={closeMenu}
+          >
             <span>07</span>
             Contact
-          </a>
+          </Link>
 
         </nav>
+
+
+        {/* MENU FOOTER */}
 
         <div className="menu-footer">
           CERAMICS · SURFACES · SANITARYWARE
