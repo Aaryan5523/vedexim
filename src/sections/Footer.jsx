@@ -72,10 +72,6 @@ function Footer() {
             Products
           </a>
 
-          <a href="#why-us">
-            Why VED EXIM
-          </a>
-
           <a href="#process">
             Our Process
           </a>
@@ -95,8 +91,8 @@ function Footer() {
             GET IN TOUCH
           </p>
 
-          <a href="mailto:info@vedexim.com">
-            info@vedexim.com
+          <a href="mailto:vedeximmorbi@gmail.com">
+            vedeximmorbi@gmail.com
           </a>
 
           <a href="tel:+919999999999">
@@ -108,53 +104,67 @@ function Footer() {
           </p>
 
 
-          {/* SOCIALS */}
+          {/* SOCIAL MEDIA */}
 
-          <div className="footer-socials">
+<div className="footer-social">
 
-            <a
-              href="#"
-              aria-label="Instagram"
-            >
-              Instagram
-            </a>
+  <a
+    href="https://instagram.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Instagram"
+  >
+    <span className="social-icon">◎</span>
+    <span>Instagram</span>
+  </a>
 
-            <a
-              href="#"
-              aria-label="Facebook"
-            >
-              Facebook
-            </a>
+  <a
+    href="https://facebook.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Facebook"
+  >
+    <span className="social-icon">f</span>
+    <span>Facebook</span>
+  </a>
 
-            <a
-              href="#"
-              aria-label="LinkedIn"
-            >
-              LinkedIn
-            </a>
+  <a
+    href="https://youtube.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="YouTube"
+  >
+    <span className="social-icon">▶</span>
+    <span>YouTube</span>
+  </a>
 
-            <a
-              href="#"
-              aria-label="YouTube"
-            >
-              YouTube
-            </a>
+  <a
+    href="https://linkedin.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="LinkedIn"
+  >
+    <span className="social-icon">in</span>
+    <span>LinkedIn</span>
+  </a>
 
-          </div>
+  <a
+    href="https://twitter.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Twitter"
+  >
+    <span className="social-icon">𝕏</span>
+    <span>Twitter</span>
+  </a>
+
+</div>
+
+
 
         </div>
 
       </div>
-
-
-      {/* =========================================
-          LARGE BRAND
-      ========================================= */}
-
-      <div className="footer-large-logo">
-        VED EXIM
-      </div>
-
 
       {/* =========================================
           BOTTOM

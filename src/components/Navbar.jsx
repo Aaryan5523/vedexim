@@ -81,10 +81,6 @@ function Navbar() {
         }`}
       >
 
-        <div className="menu-heading">
-          NAVIGATION
-        </div>
-
 
         <nav className="menu-nav">
 
@@ -102,7 +98,7 @@ function Navbar() {
           {/* ABOUT */}
 
           <Link
-            to="/#about"
+            to="/about"
             onClick={closeMenu}
           >
             <span>02</span>
@@ -124,7 +120,7 @@ function Navbar() {
           {/* PRODUCTS */}
 
           <Link
-            to="/#products"
+            to="/products"
             onClick={closeMenu}
           >
             <span>04</span>
@@ -132,24 +128,13 @@ function Navbar() {
           </Link>
 
 
-          {/* WHY VED EXIM */}
-
-          <Link
-            to="/#why-us"
-            onClick={closeMenu}
-          >
-            <span>05</span>
-            Why VED EXIM
-          </Link>
-
-
           {/* PROCESS */}
 
           <Link
-            to="/#process"
+            to="/process"
             onClick={closeMenu}
           >
-            <span>06</span>
+            <span>05</span>
             Our Process
           </Link>
 
@@ -157,10 +142,10 @@ function Navbar() {
           {/* CONTACT */}
 
           <Link
-            to="/#contact"
+            to="/contact"
             onClick={closeMenu}
           >
-            <span>07</span>
+            <span>06</span>
             Contact
           </Link>
 

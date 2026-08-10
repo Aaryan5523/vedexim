@@ -17,8 +17,8 @@
 
   border-radius: 50%;
 
+  /* DEFAULT — BLACK */
   background: #171614;
-
   color: #f4f1eb;
 
   text-decoration: none;
@@ -29,9 +29,44 @@
     0 12px 35px rgba(0, 0, 0, 0.18);
 
   transition:
+    background 0.45s ease,
+    color 0.45s ease,
     transform 0.35s ease,
     box-shadow 0.35s ease;
 }
+
+
+/* =========================================
+   DARK SCREEN
+   WHITE WHATSAPP BUTTON
+========================================= */
+
+.whatsapp-button.dark-mode {
+  background: #f4f1eb;
+  color: #171614;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.28);
+}
+
+
+/* =========================================
+   LIGHT SCREEN
+   BLACK WHATSAPP BUTTON
+========================================= */
+
+.whatsapp-button.light-mode {
+  background: #171614;
+  color: #f4f1eb;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
 
 .whatsapp-button:hover {
   transform: scale(1.08);
@@ -52,6 +87,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  position: relative;
+
+  z-index: 2;
 }
 
 .whatsapp-icon svg {
@@ -59,6 +98,10 @@
   height: 100%;
 
   display: block;
+
+  transition:
+    color 0.45s ease,
+    fill 0.45s ease;
 }
 
 
@@ -80,8 +123,9 @@
 
   padding: 13px 18px;
 
-  background: #171614;
+  /* DEFAULT BLACK */
 
+  background: #171614;
   color: #f4f1eb;
 
   font-family: Arial, sans-serif;
@@ -95,7 +139,6 @@
   white-space: nowrap;
 
   opacity: 0;
-
   visibility: hidden;
 
   pointer-events: none;
@@ -103,11 +146,25 @@
   transition:
     opacity 0.3s ease,
     transform 0.35s ease,
-    visibility 0.3s ease;
+    visibility 0.3s ease,
+    background 0.45s ease,
+    color 0.45s ease;
 }
 
 
-/* Small arrow */
+/* =========================================
+   TOOLTIP ON DARK SECTION
+========================================= */
+
+.whatsapp-button.dark-mode .whatsapp-tooltip {
+  background: #f4f1eb;
+  color: #171614;
+}
+
+
+/* =========================================
+   TOOLTIP ARROW
+========================================= */
 
 .whatsapp-tooltip::after {
   content: "";
@@ -125,6 +182,14 @@
   transform:
     translateY(-50%)
     rotate(45deg);
+
+  transition:
+    background 0.45s ease;
+}
+
+.whatsapp-button.dark-mode
+.whatsapp-tooltip::after {
+  background: #f4f1eb;
 }
 
 
@@ -154,13 +219,43 @@
 
   inset: -5px;
 
-  border: 1px solid rgba(23, 22, 20, 0.35);
+  border: 1px solid
+    rgba(23, 22, 20, 0.35);
 
   border-radius: 50%;
 
   animation:
-    whatsappPulse 2.5s ease-out infinite;
+    whatsappPulse
+    2.5s
+    ease-out
+    infinite;
+
+  pointer-events: none;
+
+  transition:
+    border-color 0.45s ease;
 }
+
+
+/* White pulse on dark sections */
+
+.whatsapp-button.dark-mode::before {
+  border-color:
+    rgba(244, 241, 235, 0.55);
+}
+
+
+/* Black pulse on light sections */
+
+.whatsapp-button.light-mode::before {
+  border-color:
+    rgba(23, 22, 20, 0.35);
+}
+
+
+/* =========================================
+   PULSE ANIMATION
+========================================= */
 
 @keyframes whatsappPulse {
 
