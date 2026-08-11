@@ -510,3 +510,1390 @@
     letter-spacing: 2px;
   }
 }
+
+/* =====================================================
+   VED EXIM — FULL PREMIUM CINEMATIC MENU
+===================================================== */
+
+.menu-panel {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform:
+    scale(1.06);
+
+  transform-origin:
+    center center;
+
+  filter:
+    blur(10px);
+
+  clip-path:
+    inset(0 0 100% 0);
+
+  transition:
+    opacity 0.45s ease,
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.8s ease,
+    clip-path 1s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 1s;
+}
+
+
+/* =====================================================
+   OPEN MENU
+===================================================== */
+
+.menu-panel.menu-open {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transform:
+    scale(1);
+
+  filter:
+    blur(0);
+
+  clip-path:
+    inset(0 0 0 0);
+
+  transition:
+    opacity 0.35s ease,
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.8s ease,
+    clip-path 1s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 0s;
+}
+
+
+/* =====================================================
+   PREMIUM LIGHT SWEEP
+===================================================== */
+
+.menu-panel::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.035) 45%,
+      transparent 55%
+    );
+
+  transform:
+    translateX(-100%);
+
+  transition:
+    transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.menu-panel.menu-open::before {
+  transform:
+    translateX(100%);
+
+  transition-delay:
+    0.35s;
+}
+
+
+/* =====================================================
+   MENU HEADING
+===================================================== */
+
+.menu-heading {
+  opacity: 0;
+
+  transform:
+    translateY(25px);
+
+  filter:
+    blur(5px);
+
+  transition:
+    opacity 0.6s ease,
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.7s ease;
+}
+
+
+.menu-panel.menu-open .menu-heading {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  filter:
+    blur(0);
+
+  transition-delay:
+    0.25s;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.menu-nav {
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* =====================================================
+   NAVIGATION LINKS
+===================================================== */
+
+.menu-nav a {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  opacity: 0;
+
+  transform:
+    translateY(45px);
+
+  filter:
+    blur(6px);
+
+  transition:
+    opacity 0.65s ease,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.7s ease,
+    letter-spacing 0.5s ease;
+}
+
+
+/* =====================================================
+   OPEN LINK ANIMATION
+===================================================== */
+
+.menu-panel.menu-open .menu-nav a {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  filter:
+    blur(0);
+}
+
+
+/* =====================================================
+   PREMIUM STAGGER
+===================================================== */
+
+.menu-panel.menu-open .menu-nav a:nth-child(1) {
+  transition-delay:
+    0.25s;
+}
+
+.menu-panel.menu-open .menu-nav a:nth-child(2) {
+  transition-delay:
+    0.32s;
+}
+
+.menu-panel.menu-open .menu-nav a:nth-child(3) {
+  transition-delay:
+    0.39s;
+}
+
+.menu-panel.menu-open .menu-nav a:nth-child(4) {
+  transition-delay:
+    0.46s;
+}
+
+.menu-panel.menu-open .menu-nav a:nth-child(5) {
+  transition-delay:
+    0.53s;
+}
+
+.menu-panel.menu-open .menu-nav a:nth-child(6) {
+  transition-delay:
+    0.60s;
+}
+
+.menu-panel.menu-open .menu-nav a:nth-child(7) {
+  transition-delay:
+    0.67s;
+}
+
+
+/* =====================================================
+   NUMBER
+===================================================== */
+
+.menu-nav a span {
+  display: inline-block;
+
+  min-width: 28px;
+
+  opacity: 0.35;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.menu-nav a:hover span {
+  opacity: 1;
+
+  transform:
+    translateX(-5px);
+}
+
+
+/* =====================================================
+   LINK HOVER
+===================================================== */
+
+.menu-nav a:hover {
+  letter-spacing: 2px;
+
+  transform:
+    translateX(12px);
+}
+
+
+/* =====================================================
+   PREMIUM UNDERLINE
+===================================================== */
+
+.menu-nav a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 48px;
+
+  bottom: -7px;
+
+  width: 0;
+
+  height: 1px;
+
+  background:
+    currentColor;
+
+  opacity: 0.5;
+
+  transition:
+    width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.menu-nav a:hover::after {
+  width: 55px;
+}
+
+
+/* =====================================================
+   MENU FOOTER
+===================================================== */
+
+.menu-footer {
+  position: relative;
+
+  z-index: 2;
+
+  opacity: 0;
+
+  transform:
+    translateY(25px);
+
+  filter:
+    blur(4px);
+
+  transition:
+    opacity 0.6s ease,
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.7s ease;
+}
+
+
+.menu-panel.menu-open .menu-footer {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  filter:
+    blur(0);
+
+  transition-delay:
+    0.78s;
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-button {
+  position: relative;
+
+  z-index: 10000;
+
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s ease;
+}
+
+
+.menu-button:hover {
+  transform:
+    scale(1.06);
+}
+
+
+/* =====================================================
+   HAMBURGER LINES
+===================================================== */
+
+.menu-button span {
+  display: block;
+
+  transform-origin:
+    center center;
+
+  transition:
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    width 0.4s ease,
+    opacity 0.3s ease;
+}
+
+
+/* =====================================================
+   HAMBURGER → X
+===================================================== */
+
+.menu-button.menu-active span:first-child {
+  transform:
+    translateY(4px)
+    rotate(45deg);
+}
+
+
+.menu-button.menu-active span:last-child {
+  transform:
+    translateY(-4px)
+    rotate(-45deg);
+}
+
+
+/* =====================================================
+   CLOSE ANIMATION
+===================================================== */
+
+.menu-panel:not(.menu-open) .menu-nav a {
+  transition:
+    opacity 0.3s ease,
+    transform 0.45s cubic-bezier(0.7, 0, 0.84, 0),
+    filter 0.3s ease;
+}
+
+
+/* =====================================================
+   BODY LOCK
+===================================================== */
+
+body.menu-open {
+  overflow: hidden;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+
+  .menu-panel {
+    transform:
+      scale(1.03);
+
+    filter:
+      blur(7px);
+
+    clip-path:
+      inset(0 0 100% 0);
+  }
+
+
+  .menu-panel.menu-open {
+    transform:
+      scale(1);
+
+    filter:
+      blur(0);
+
+    clip-path:
+      inset(0 0 0 0);
+  }
+
+
+  .menu-nav a {
+    gap: 12px;
+
+    transform:
+      translateY(30px);
+
+    filter:
+      blur(4px);
+  }
+
+
+  .menu-nav a:hover {
+    transform:
+      translateX(5px);
+  }
+
+
+  .menu-nav a::after {
+    left: 35px;
+  }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .menu-panel,
+  .menu-panel *,
+  .menu-button,
+  .menu-button span {
+    animation: none !important;
+
+    transition: none !important;
+  }
+
+}
+
+
+/* =====================================================
+   VED EXIM — PRODUCT COLLECTION SUBMENU
+   Added for Navbar Products → Collections
+===================================================== */
+
+/* Product button behaves exactly like the main menu links */
+
+.menu-nav-product {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  gap: 20px;
+
+  width: fit-content;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #f4f1eb;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(32px, 4vw, 58px);
+
+  font-weight: 400;
+
+  line-height: 1.05;
+
+  letter-spacing: -1px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  opacity: 0;
+
+  transform: translateY(45px);
+
+  filter: blur(6px);
+
+  transition:
+    opacity 0.65s ease,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.7s ease,
+    letter-spacing 0.5s ease,
+    color 0.3s ease;
+}
+
+.menu-panel.menu-open .menu-nav-product {
+  opacity: 1;
+
+  transform: translateY(0);
+
+  filter: blur(0);
+
+  transition-delay: 0.46s;
+}
+
+.menu-nav-product:hover {
+  color: #aaa39a;
+
+  letter-spacing: 2px;
+
+  transform: translateX(12px);
+}
+
+.menu-nav-product::after {
+  content: "";
+
+  position: absolute;
+
+  left: 48px;
+
+  bottom: -7px;
+
+  width: 0;
+
+  height: 1px;
+
+  background: currentColor;
+
+  opacity: 0.5;
+
+  transition:
+    width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-nav-product:hover::after {
+  width: 55px;
+}
+
+.menu-nav-product > span {
+  display: inline-block;
+
+  min-width: 28px;
+
+  opacity: 0.35;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 400;
+
+  letter-spacing: 2px;
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-nav-product:hover > span {
+  opacity: 1;
+
+  transform: translateX(-5px);
+}
+
+
+/* =====================================================
+   SUBMENU VIEW
+===================================================== */
+
+.menu-view {
+  position: relative;
+
+  z-index: 3;
+
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  animation:
+    menuViewIn 0.75s cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+@keyframes menuViewIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(55px)
+      scale(0.985);
+
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(0)
+      scale(1);
+
+    filter: blur(0);
+  }
+}
+
+
+/* =====================================================
+   SUBMENU HEADER / BACK
+===================================================== */
+
+.menu-submenu-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  margin-bottom: 30px;
+
+  color: #f4f1eb;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 500;
+
+  letter-spacing: 5px;
+
+  text-transform: uppercase;
+
+  opacity: 0;
+
+  transform: translateY(20px);
+
+  animation:
+    submenuHeaderIn 0.7s
+    0.12s cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+}
+
+@keyframes submenuHeaderIn {
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+.menu-back-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #f4f1eb;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 20px;
+
+  font-weight: 300;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  opacity: 0.5;
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-back-button:hover {
+  opacity: 1;
+
+  transform: translateX(-6px);
+}
+
+
+/* =====================================================
+   OUR COLLECTION LIST
+===================================================== */
+
+.menu-collection-list,
+.menu-size-list {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 18px;
+
+  margin-top: auto;
+
+  margin-bottom: auto;
+
+  padding: 20px 0;
+}
+
+.menu-collection-item,
+.menu-size-item {
+  position: relative;
+
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 16px;
+
+  width: fit-content;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #f4f1eb;
+
+  text-decoration: none;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  cursor: pointer;
+
+  opacity: 0;
+
+  transform: translateX(35px);
+
+  filter: blur(5px);
+
+  animation:
+    submenuItemIn 0.7s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+
+  transition:
+    color 0.35s ease,
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-collection-item:nth-child(1),
+.menu-size-item:nth-child(1) {
+  animation-delay: 0.20s;
+}
+
+.menu-collection-item:nth-child(2),
+.menu-size-item:nth-child(2) {
+  animation-delay: 0.29s;
+}
+
+.menu-collection-item:nth-child(3),
+.menu-size-item:nth-child(3) {
+  animation-delay: 0.38s;
+}
+
+.menu-collection-item:nth-child(4),
+.menu-size-item:nth-child(4) {
+  animation-delay: 0.47s;
+}
+
+@keyframes submenuItemIn {
+  to {
+    opacity: 1;
+
+    transform: translateX(0);
+
+    filter: blur(0);
+  }
+}
+
+.menu-item-number {
+  min-width: 28px;
+
+  color: #706a63;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 400;
+
+  letter-spacing: 1.5px;
+
+  transition:
+    color 0.35s ease,
+    transform 0.45s ease;
+}
+
+.menu-item-name {
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: clamp(38px, 5vw, 72px);
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  letter-spacing: 0.2px;
+
+  transition:
+    letter-spacing 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.35s ease;
+}
+
+.menu-size-item .menu-item-name {
+  font-size: clamp(34px, 4.5vw, 62px);
+}
+
+.menu-collection-item:hover,
+.menu-size-item:hover {
+  color: #aaa39a;
+
+  transform: translateX(12px);
+}
+
+.menu-collection-item:hover .menu-item-number,
+.menu-size-item:hover .menu-item-number {
+  color: #aaa39a;
+
+  transform: translateX(-4px);
+}
+
+.menu-collection-item:hover .menu-item-name,
+.menu-size-item:hover .menu-item-name {
+  letter-spacing: 2px;
+}
+
+
+/* =====================================================
+   SUBMENU BACKGROUND WORDMARK
+===================================================== */
+
+.menu-view-collections::before,
+.menu-view-sizes::before {
+  content: "VED EXIM";
+
+  position: absolute;
+
+  z-index: -1;
+
+  left: 2%;
+
+  top: 50%;
+
+  transform:
+    translateY(-50%)
+    rotate(0deg);
+
+  color: rgba(255, 255, 255, 0.025);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: clamp(120px, 24vw, 360px);
+
+  font-weight: 700;
+
+  line-height: 0.8;
+
+  letter-spacing: -12px;
+
+  pointer-events: none;
+
+  white-space: nowrap;
+
+  user-select: none;
+}
+
+
+/* =====================================================
+   SUBMENU FOOTER
+===================================================== */
+
+.menu-view .menu-footer {
+  flex-shrink: 0;
+
+  width: 100%;
+}
+
+
+/* =====================================================
+   MOBILE SUBMENU
+===================================================== */
+
+@media (max-width: 650px) {
+
+  .menu-nav-product {
+    gap: 12px;
+
+    font-size: clamp(30px, 9vw, 42px);
+
+    letter-spacing: -0.5px;
+  }
+
+  .menu-nav-product > span {
+    min-width: 22px;
+
+    font-size: 7px;
+  }
+
+  .menu-nav-product::after {
+    left: 35px;
+
+    bottom: -5px;
+  }
+
+  .menu-collection-list,
+  .menu-size-list {
+    gap: 20px;
+
+    padding: 10px 0;
+  }
+
+  .menu-collection-item,
+  .menu-size-item {
+    gap: 10px;
+
+    transform: translateX(25px);
+  }
+
+  .menu-item-number {
+    min-width: 22px;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+  }
+
+  .menu-item-name {
+    font-size: clamp(31px, 8.8vw, 42px);
+
+    line-height: 1.05;
+
+    letter-spacing: 0;
+  }
+
+  .menu-size-item .menu-item-name {
+    font-size: clamp(29px, 8vw, 40px);
+  }
+
+  .menu-submenu-header {
+    gap: 10px;
+
+    margin-bottom: 18px;
+
+    font-size: 8px;
+
+    letter-spacing: 3.5px;
+  }
+
+  .menu-back-button {
+    width: 28px;
+    height: 28px;
+
+    font-size: 18px;
+  }
+
+  .menu-view-collections::before,
+  .menu-view-sizes::before {
+    left: -5%;
+
+    font-size: 105px;
+
+    letter-spacing: -7px;
+  }
+
+  .menu-collection-item:hover,
+  .menu-size-item:hover {
+    transform: translateX(5px);
+  }
+
+  .menu-collection-item:hover .menu-item-name,
+  .menu-size-item:hover .menu-item-name {
+    letter-spacing: 0.5px;
+  }
+}
+
+
+/* =====================================================
+   REDUCED MOTION — SUBMENU
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .menu-view,
+  .menu-submenu-header,
+  .menu-collection-item,
+  .menu-size-item,
+  .menu-nav-product {
+    animation: none !important;
+
+    transition: none !important;
+
+    opacity: 1 !important;
+
+    transform: none !important;
+
+    filter: none !important;
+  }
+}
+
+
+/* =====================================================
+   VED EXIM — PREMIUM BACK WORD ANIMATION
+   BACK appears letter-by-letter on hover
+===================================================== */
+
+.menu-back-button {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 10px;
+
+  width: auto;
+  min-width: 32px;
+  height: 32px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #f4f1eb;
+
+  cursor: pointer;
+
+  overflow: visible;
+
+  opacity: 0.55;
+
+  transform: translateX(0);
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* =====================================================
+   ARROW
+===================================================== */
+
+.menu-back-arrow {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  width: 22px;
+  height: 22px;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 20px;
+
+  font-weight: 300;
+
+  line-height: 1;
+
+  transform: translateX(0);
+
+  transition:
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* =====================================================
+   BACK WORD CONTAINER
+===================================================== */
+
+.menu-back-text {
+  display: inline-flex;
+
+  align-items: center;
+
+  width: 0;
+
+  max-width: 0;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+
+  transition:
+    width 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    max-width 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s ease;
+}
+
+
+/* =====================================================
+   INDIVIDUAL LETTER
+===================================================== */
+
+.menu-back-text span {
+  display: inline-block;
+
+  flex: 0 0 auto;
+
+  opacity: 0;
+
+  transform:
+    translateY(12px)
+    rotateX(-70deg);
+
+  transform-origin: center bottom;
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* =====================================================
+   HOVER — OPEN
+===================================================== */
+
+.menu-back-button:hover {
+  opacity: 1;
+
+  transform: translateX(-3px);
+}
+
+
+.menu-back-button:hover
+.menu-back-arrow {
+  transform: translateX(-4px);
+}
+
+
+.menu-back-button:hover
+.menu-back-text {
+  width: 45px;
+
+  max-width: 45px;
+
+  opacity: 1;
+}
+
+
+/* =====================================================
+   LETTER-BY-LETTER OPEN
+===================================================== */
+
+.menu-back-button:hover
+.menu-back-text span:nth-child(1) {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    rotateX(0);
+
+  transition-delay: 0.02s;
+}
+
+
+.menu-back-button:hover
+.menu-back-text span:nth-child(2) {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    rotateX(0);
+
+  transition-delay: 0.09s;
+}
+
+
+.menu-back-button:hover
+.menu-back-text span:nth-child(3) {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    rotateX(0);
+
+  transition-delay: 0.16s;
+}
+
+
+.menu-back-button:hover
+.menu-back-text span:nth-child(4) {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    rotateX(0);
+
+  transition-delay: 0.23s;
+}
+
+
+/* =====================================================
+   LETTER-BY-LETTER CLOSE
+===================================================== */
+
+.menu-back-button:not(:hover)
+.menu-back-text span:nth-child(4) {
+  transition-delay: 0.02s;
+}
+
+
+.menu-back-button:not(:hover)
+.menu-back-text span:nth-child(3) {
+  transition-delay: 0.08s;
+}
+
+
+.menu-back-button:not(:hover)
+.menu-back-text span:nth-child(2) {
+  transition-delay: 0.14s;
+}
+
+
+.menu-back-button:not(:hover)
+.menu-back-text span:nth-child(1) {
+  transition-delay: 0.20s;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+
+  .menu-back-button {
+    min-width: 28px;
+
+    height: 28px;
+
+    gap: 7px;
+  }
+
+
+  .menu-back-arrow {
+    width: 20px;
+
+    height: 20px;
+
+    font-size: 18px;
+  }
+
+
+  .menu-back-text {
+    font-size: 8px;
+
+    letter-spacing: 2.5px;
+  }
+
+
+  .menu-back-button:hover
+  .menu-back-text {
+    width: 39px;
+
+    max-width: 39px;
+  }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .menu-back-button,
+  .menu-back-arrow,
+  .menu-back-text,
+  .menu-back-text span {
+    transition: none !important;
+  }
+
+}

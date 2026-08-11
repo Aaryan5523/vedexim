@@ -5,31 +5,65 @@ import "./Navbar.css";
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuView, setMenuView] = useState("main");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener(
+      "scroll",
+      handleScroll
+    );
 
     handleScroll();
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
     };
   }, []);
 
   useEffect(() => {
-    document.body.classList.toggle("menu-open", menuOpen);
+    document.body.classList.toggle(
+      "menu-open",
+      menuOpen
+    );
 
     return () => {
-      document.body.classList.remove("menu-open");
+      document.body.classList.remove(
+        "menu-open"
+      );
     };
   }, [menuOpen]);
 
   const closeMenu = () => {
     setMenuOpen(false);
+    setMenuView("main");
+  };
+
+  const openProductsMenu = () => {
+    setMenuView("collections");
+  };
+
+  const openWallTiles = () => {
+    setMenuView("wall");
+  };
+
+  const openFloorTiles = () => {
+    setMenuView("floor");
+  };
+
+  const goBack = () => {
+    if (menuView === "wall" || menuView === "floor") {
+      setMenuView("collections");
+      return;
+    }
+
+    setMenuView("main");
   };
 
   return (
@@ -39,7 +73,9 @@ function Navbar() {
       }`}
     >
 
-      {/* LEFT LOGO */}
+      {/* =================================================
+          LEFT LOGO
+      ================================================= */}
 
       <Link
         to="/"
@@ -53,14 +89,26 @@ function Navbar() {
       </Link>
 
 
-      {/* MENU BUTTON */}
+      {/* =================================================
+          MENU BUTTON
+      ================================================= */}
 
       <button
         type="button"
         className={`menu-button ${
           menuOpen ? "menu-active" : ""
         }`}
-        onClick={() => setMenuOpen((prev) => !prev)}
+        onClick={() => {
+          setMenuOpen((prev) => {
+            const next = !prev;
+
+            if (!next) {
+              setMenuView("main");
+            }
+
+            return next;
+          });
+        }}
         aria-label={
           menuOpen
             ? "Close navigation menu"
@@ -73,7 +121,9 @@ function Navbar() {
       </button>
 
 
-      {/* MENU PANEL */}
+      {/* =================================================
+          MENU PANEL
+      ================================================= */}
 
       <div
         className={`menu-panel ${
@@ -81,82 +131,382 @@ function Navbar() {
         }`}
       >
 
+        {/* =================================================
+            MAIN MENU
+        ================================================= */}
 
-        <nav className="menu-nav">
-
-          {/* HOME */}
-
-          <Link
-            to="/"
-            onClick={closeMenu}
+        {menuView === "main" && (
+          <div
+            className="menu-view menu-view-main"
           >
-            <span>01</span>
-            Home
-          </Link>
+
+            <nav className="menu-nav">
+
+              {/* HOME */}
+
+              <Link
+                to="/"
+                onClick={closeMenu}
+              >
+                <span>01</span>
+                Home
+              </Link>
 
 
-          {/* ABOUT */}
+              {/* ABOUT */}
 
-          <Link
-            to="/about"
-            onClick={closeMenu}
+              <Link
+                to="/about"
+                onClick={closeMenu}
+              >
+                <span>02</span>
+                About
+              </Link>
+
+
+              {/* COLLECTIONS */}
+
+              <Link
+                to="/collections"
+                onClick={closeMenu}
+              >
+                <span>03</span>
+                Collections
+              </Link>
+
+
+              {/* PRODUCTS */}
+
+              <button
+                type="button"
+                className="menu-nav-product"
+                onClick={openProductsMenu}
+              >
+                <span>04</span>
+                Products
+              </button>
+
+
+              {/* PROCESS */}
+
+              <Link
+                to="/process"
+                onClick={closeMenu}
+              >
+                <span>05</span>
+                Our Process
+              </Link>
+
+
+              {/* CONTACT */}
+
+              <Link
+                to="/contact"
+                onClick={closeMenu}
+              >
+                <span>06</span>
+                Contact
+              </Link>
+
+            </nav>
+
+
+            <div className="menu-footer">
+              CERAMICS · SURFACES · SANITARYWARE
+            </div>
+
+          </div>
+        )}
+
+
+        {/* =================================================
+            OUR COLLECTION
+        ================================================= */}
+
+        {menuView === "collections" && (
+          <div
+            className="menu-view menu-view-collections"
           >
-            <span>02</span>
-            About
-          </Link>
+
+            <div
+              className="menu-submenu-header"
+            >
+              <button
+                type="button"
+                className="menu-back-button"
+                onClick={goBack}
+                aria-label="Back to main menu"
+              >
+                <span className="menu-back-arrow">
+                  ←
+                </span>
+
+                <span className="menu-back-text">
+                  <span>B</span>
+                  <span>A</span>
+                  <span>C</span>
+                  <span>K</span>
+                </span>
+              </button>
+            </div>
 
 
-          {/* COLLECTIONS PAGE */}
+            <div className="menu-collection-list">
 
-          <Link
-            to="/collections"
-            onClick={closeMenu}
+              <button
+                type="button"
+                className="menu-collection-item"
+                onClick={openWallTiles}
+              >
+                <span className="menu-item-number">
+                  01.
+                </span>
+
+                <span className="menu-item-name">
+                  Wall Tiles
+                </span>
+              </button>
+
+
+              <button
+                type="button"
+                className="menu-collection-item"
+                onClick={openFloorTiles}
+              >
+                <span className="menu-item-number">
+                  02.
+                </span>
+
+                <span className="menu-item-name">
+                  Floor Tiles
+                </span>
+              </button>
+
+
+              <Link
+                to="/products?category=PARKING%20TILES"
+                className="menu-collection-item"
+                onClick={closeMenu}
+              >
+                <span className="menu-item-number">
+                  03.
+                </span>
+
+                <span className="menu-item-name">
+                  Parking Tiles
+                </span>
+              </Link>
+
+
+              <Link
+                to="/products?category=SANITARY%20WARE"
+                className="menu-collection-item"
+                onClick={closeMenu}
+              >
+                <span className="menu-item-number">
+                  04.
+                </span>
+
+                <span className="menu-item-name">
+                  Sanitary Ware
+                </span>
+              </Link>
+
+            </div>
+
+
+            <div className="menu-footer">
+              CERAMICS · SURFACES · SANITARYWARE
+            </div>
+
+          </div>
+        )}
+
+
+        {/* =================================================
+            WALL TILES
+        ================================================= */}
+
+        {menuView === "wall" && (
+          <div
+            className="menu-view menu-view-sizes"
           >
-            <span>03</span>
-            Collections
-          </Link>
+
+            <div
+              className="menu-submenu-header"
+            >
+              <button
+                type="button"
+                className="menu-back-button"
+                onClick={goBack}
+                aria-label="Back to collections"
+              >
+                <span className="menu-back-arrow">
+                  ←
+                </span>
+
+                <span className="menu-back-text">
+                  <span>B</span>
+                  <span>A</span>
+                  <span>C</span>
+                  <span>K</span>
+                </span>
+              </button>
+
+              <span>
+                WALL TILES
+              </span>
+            </div>
 
 
-          {/* PRODUCTS */}
+            <div className="menu-size-list">
 
-          <Link
-            to="/products"
-            onClick={closeMenu}
+              <Link
+                to="/products?category=WALL%20TILES&size=300%20X%20450%20MM"
+                className="menu-size-item"
+                onClick={closeMenu}
+              >
+                <span className="menu-item-number">
+                  01.
+                </span>
+
+                <span className="menu-item-name">
+                  300 × 450 MM
+                </span>
+              </Link>
+
+
+              <Link
+                to="/products?category=WALL%20TILES&size=300%20X%20300%20MM"
+                className="menu-size-item"
+                onClick={closeMenu}
+              >
+                <span className="menu-item-number">
+                  02.
+                </span>
+
+                <span className="menu-item-name">
+                  300 × 300 MM
+                </span>
+              </Link>
+
+
+              <Link
+                to="/products?category=WALL%20TILES&size=300%20X%20600%20MM"
+                className="menu-size-item"
+                onClick={closeMenu}
+              >
+                <span className="menu-item-number">
+                  03.
+                </span>
+
+                <span className="menu-item-name">
+                  300 × 600 MM
+                </span>
+              </Link>
+
+            </div>
+
+
+            <div className="menu-footer">
+              WALL TILES · CERAMIC SURFACES
+            </div>
+
+          </div>
+        )}
+
+
+        {/* =================================================
+            FLOOR TILES
+        ================================================= */}
+
+        {menuView === "floor" && (
+          <div
+            className="menu-view menu-view-sizes"
           >
-            <span>04</span>
-            Products
-          </Link>
+
+            <div
+              className="menu-submenu-header"
+            >
+              <button
+                type="button"
+                className="menu-back-button"
+                onClick={goBack}
+                aria-label="Back to collections"
+              >
+                <span className="menu-back-arrow">
+                  ←
+                </span>
+
+                <span className="menu-back-text">
+                  <span>B</span>
+                  <span>A</span>
+                  <span>C</span>
+                  <span>K</span>
+                </span>
+              </button>
+
+              <span>
+                FLOOR TILES
+              </span>
+            </div>
 
 
-          {/* PROCESS */}
+            <div className="menu-size-list">
 
-          <Link
-            to="/process"
-            onClick={closeMenu}
-          >
-            <span>05</span>
-            Our Process
-          </Link>
+              <Link
+                to="/products?category=FLOOR%20TILES&size=600%20X%20600%20MM"
+                className="menu-size-item"
+                onClick={closeMenu}
+              >
+                <span className="menu-item-number">
+                  01.
+                </span>
 
-
-          {/* CONTACT */}
-
-          <Link
-            to="/contact"
-            onClick={closeMenu}
-          >
-            <span>06</span>
-            Contact
-          </Link>
-
-        </nav>
+                <span className="menu-item-name">
+                  600 × 600 MM
+                </span>
+              </Link>
 
 
-        {/* MENU FOOTER */}
+              <Link
+                to="/products?category=FLOOR%20TILES&size=600%20X%201200%20MM"
+                className="menu-size-item"
+                onClick={closeMenu}
+              >
+                <span className="menu-item-number">
+                  02.
+                </span>
 
-        <div className="menu-footer">
-          CERAMICS · SURFACES · SANITARYWARE
-        </div>
+                <span className="menu-item-name">
+                  600 × 1200 MM
+                </span>
+              </Link>
+
+
+              <Link
+                to="/products?category=FLOOR%20TILES&size=800%20X%201600%20MM"
+                className="menu-size-item"
+                onClick={closeMenu}
+              >
+                <span className="menu-item-number">
+                  03.
+                </span>
+
+                <span className="menu-item-name">
+                  800 × 1600 MM
+                </span>
+              </Link>
+
+            </div>
+
+
+            <div className="menu-footer">
+              FLOOR TILES · CERAMIC SURFACES
+            </div>
+
+          </div>
+        )}
 
       </div>
 

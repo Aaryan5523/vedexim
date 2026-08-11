@@ -177,7 +177,7 @@ function Products() {
           CURATED SURFACES
         </span>
 
-        <a href="#contact">
+        <a href="/products" className="products-footer-link">
           VIEW ALL PRODUCTS ↗
         </a>
 

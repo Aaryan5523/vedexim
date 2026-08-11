@@ -420,7 +420,7 @@ function AboutPage() {
           </Link>
 
           <Link
-            to="/#contact"
+            to="/contact"
             className="about-cta-link"
           >
             START A CONVERSATION

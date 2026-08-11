@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./CollectionsPage.css";
+
 
 const collections = [
   {
@@ -37,48 +38,35 @@ const collections = [
   },
 ];
 
+
 function CollectionsPage() {
   const pageRef = useRef(null);
-
-  const [selectedImage, setSelectedImage] = useState(null);
+/* ===================================================
+     PAGE ENTRANCE
+  =================================================== */
 
   useEffect(() => {
     const page = pageRef.current;
 
-    if (!page) return;
-
-    const timer = setTimeout(() => {
-      page.classList.add("collections-page-visible");
-    }, 80);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (selectedImage) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+    if (!page) {
+      return;
     }
 
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [selectedImage]);
-
-  useEffect(() => {
-    const handleEscape = (event) => {
-      if (event.key === "Escape") {
-        setSelectedImage(null);
-      }
-    };
-
-    window.addEventListener("keydown", handleEscape);
+    const timer = setTimeout(() => {
+      page.classList.add(
+        "collections-page-visible"
+      );
+    }, 80);
 
     return () => {
-      window.removeEventListener("keydown", handleEscape);
+      clearTimeout(timer);
     };
   }, []);
+
+
+  /* ===================================================
+     RENDER
+  =================================================== */
 
   return (
     <>
@@ -86,29 +74,53 @@ function CollectionsPage() {
         className="collections-page"
         ref={pageRef}
       >
-        {/* HERO */}
+
+
+        {/* =================================================
+            HERO — CERAMIC VIDEO
+        ================================================= */}
 
         <section className="collections-page-hero">
 
-          <button
-            type="button"
-            className="collections-hero-image"
-            onClick={() => setSelectedImage(collections[0])}
-            aria-label="Open Marble collection image"
+
+          {/* BACKGROUND VIDEO */}
+
+          <video
+            className="collections-hero-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/images/products/products-hero-poster.jpg"
           >
-            <img
-              src={collections[0].image}
-              alt="VED EXIM ceramic surface"
+            <source
+              src="/videos/ceramic-hero-02.mp4"
+              type="video/mp4"
             />
 
-            <div className="collections-hero-image-overlay" />
-          </button>
+            Your browser does not support
+            the video element.
+          </video>
 
-          <div className="collections-page-hero-content">
+
+          {/* VIDEO OVERLAY */}
+
+          <div
+            className="collections-hero-video-overlay"
+          />
+
+
+          {/* HERO CONTENT */}
+
+          <div
+            className="collections-page-hero-content"
+          >
 
             <p className="collections-page-label">
               VED EXIM · COLLECTIONS
             </p>
+
 
             <h1>
               Surfaces
@@ -116,25 +128,64 @@ function CollectionsPage() {
               <em>with character.</em>
             </h1>
 
+
             <p className="collections-page-description">
-              A curated world of ceramic surfaces created
-              to bring material depth, refined detail and
-              timeless character to contemporary spaces.
+              A curated world of ceramic surfaces
+              created to bring material depth,
+              refined detail and timeless character
+              to contemporary spaces.
             </p>
+
+
+            <a
+              href="#collections"
+              className="collections-hero-button"
+            >
+              EXPLORE COLLECTIONS
+
+              <span>
+                ↓
+              </span>
+            </a>
 
           </div>
 
-          <div className="collections-page-hero-meta">
-            <span>04 COLLECTIONS</span>
-            <span>SCROLL TO EXPLORE ↓</span>
+
+          {/* HERO META */}
+
+          <div
+            className="collections-page-hero-meta"
+          >
+
+            <span>
+              04 COLLECTIONS
+            </span>
+
+
+            <span>
+              CERAMIC · SURFACES · DESIGN
+            </span>
+
+
+            <span>
+              SCROLL TO EXPLORE ↓
+            </span>
+
           </div>
 
         </section>
 
 
-        {/* COLLECTIONS */}
 
-        <section className="collections-page-list">
+        {/* =================================================
+            COLLECTIONS
+        ================================================= */}
+
+        <section
+          id="collections"
+          className="collections-page-list"
+        >
+
 
           <div className="collections-page-intro">
 
@@ -142,106 +193,161 @@ function CollectionsPage() {
               EXPLORE THE COLLECTION
             </p>
 
+
             <span>
-              Each collection has its own material language,
-              designed to work beautifully across residential,
-              hospitality and commercial environments.
+              Each collection has its own material
+              language, designed to work beautifully
+              across residential, hospitality and
+              commercial environments.
             </span>
 
           </div>
 
 
+
           <div className="collections-page-grid">
 
-            {collections.map((collection, index) => (
+            {collections.map(
+              (collection, index) => (
 
-              <article
-                className={`collection-page-card collection-page-card-${index + 1}`}
-                key={collection.number}
-              >
-
-                {/* CLICKABLE IMAGE */}
-
-                <button
-                  type="button"
-                  className="collection-image-button"
-                  onClick={() => setSelectedImage(collection)}
-                  aria-label={`Open ${collection.name} image`}
+                <article
+                  className={
+                    `collection-page-card collection-page-card-${index + 1}`
+                  }
+                  key={collection.number}
                 >
 
-                  <div className="collection-page-image">
 
-                    <img
-                      src={collection.image}
-                      alt={`${collection.name} ceramic collection`}
-                      loading={index === 0 ? "eager" : "lazy"}
-                    />
+                  {/* CLICKABLE IMAGE */}
 
-                    <div className="collection-page-image-overlay" />
+                  <Link
+                  to={`/products?series=${encodeURIComponent(
+                    collection.name.toUpperCase()
+                  )}`}
+                  className="collection-image-button"
+                  aria-label={
+                    `View ${collection.name} products`
+                  }
+                >
 
-                  </div>
+                    <div
+                      className="collection-page-image"
+                    >
 
-                </button>
-
-
-                {/* CARD CONTENT */}
-
-                <div className="collection-page-content">
-
-                  <div className="collection-page-top">
-
-                    <span className="collection-page-number">
-                      {collection.number}
-                    </span>
-
-                    <span className="collection-page-subtitle">
-                      {collection.subtitle}
-                    </span>
-
-                  </div>
+                      <img
+                        src={collection.image}
+                        alt={
+                          `${collection.name} ceramic collection`
+                        }
+                        loading={
+                          index === 0
+                            ? "eager"
+                            : "lazy"
+                        }
+                      />
 
 
-                  <div className="collection-page-bottom">
-
-                    <div>
-
-                      <h2>
-                        {collection.name}
-                      </h2>
-
-                      <p>
-                        {collection.description}
-                      </p>
+                      <div
+                        className=
+                          "collection-page-image-overlay"
+                      />
 
                     </div>
 
-                    <Link
-                      to="/#contact"
-                      className="collection-page-arrow"
+                  </Link>
+
+
+
+                  {/* CARD CONTENT */}
+
+                  <div
+                    className=
+                      "collection-page-content"
+                  >
+
+                    <div
+                      className=
+                        "collection-page-top"
                     >
-                      ↗
-                    </Link>
+
+                      <span
+                        className=
+                          "collection-page-number"
+                      >
+                        {collection.number}
+                      </span>
+
+
+                      <span
+                        className=
+                          "collection-page-subtitle"
+                      >
+                        {collection.subtitle}
+                      </span>
+
+                    </div>
+
+
+
+                    <div
+                      className=
+                        "collection-page-bottom"
+                    >
+
+                      <div>
+
+                        <h2>
+                          {collection.name}
+                        </h2>
+
+
+                        <p>
+                          {collection.description}
+                        </p>
+
+                      </div>
+
+
+                      <Link
+                        to={`/products?series=${encodeURIComponent(
+                          collection.name.toUpperCase()
+                        )}`}
+                        className=
+                          "collection-page-arrow"
+                        aria-label={
+                          `View ${collection.name} products`
+                        }
+                      >
+                        ↗
+                      </Link>
+
+                    </div>
 
                   </div>
 
-                </div>
+                </article>
 
-              </article>
-
-            ))}
+              )
+            )}
 
           </div>
 
         </section>
 
 
-        {/* CTA */}
 
-        <section className="collections-page-cta">
+        {/* =================================================
+            CTA
+        ================================================= */}
+
+        <section
+          className="collections-page-cta"
+        >
 
           <p className="collections-page-label">
             FIND YOUR SURFACE
           </p>
+
 
           <h2>
             Have a project
@@ -249,17 +355,25 @@ function CollectionsPage() {
             <em>in mind?</em>
           </h2>
 
+
           <p>
-            Tell us what you're creating and we'll help
-            you discover the right VED EXIM collection.
+            Tell us what you're creating and
+            we'll help you discover the right
+            VED EXIM collection.
           </p>
 
+
           <Link
-            to="/#contact"
-            className="collections-page-cta-button"
+            to="/contact"
+            className=
+              "collections-page-cta-button"
           >
             START A CONVERSATION
-            <span>↗</span>
+
+            <span>
+              ↗
+            </span>
+
           </Link>
 
         </section>
@@ -267,59 +381,10 @@ function CollectionsPage() {
       </main>
 
 
-      {/* IMAGE POPUP */}
-
-      {selectedImage && (
-
-        <div
-          className="collection-lightbox"
-          onClick={() => setSelectedImage(null)}
-        >
-
-          <button
-            type="button"
-            className="collection-lightbox-close"
-            onClick={() => setSelectedImage(null)}
-            aria-label="Close image"
-          >
-            ×
-          </button>
-
-
-          <div
-            className="collection-lightbox-content"
-            onClick={(event) => event.stopPropagation()}
-          >
-
-            <img
-              src={selectedImage.image}
-              alt={selectedImage.name}
-            />
-
-            <div className="collection-lightbox-caption">
-
-              <span>
-                {selectedImage.number}
-              </span>
-
-              <strong>
-                {selectedImage.name}
-              </strong>
-
-              <span>
-                {selectedImage.subtitle}
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      )}
 
     </>
   );
 }
+
 
 export default CollectionsPage;

@@ -56,27 +56,27 @@ function Footer() {
             NAVIGATION
           </p>
 
-          <a href="#home">
+          <a href="/home">
             Home
           </a>
 
-          <a href="#about">
+          <a href="/about">
             About
           </a>
 
-          <a href="#collections">
+          <a href="/collections">
             Collections
           </a>
 
-          <a href="#products">
+          <a href="/products">
             Products
           </a>
 
-          <a href="#process">
+          <a href="/process">
             Our Process
           </a>
 
-          <a href="#contact">
+          <a href="/contact">
             Contact
           </a>
 
@@ -95,8 +95,8 @@ function Footer() {
             vedeximmorbi@gmail.com
           </a>
 
-          <a href="tel:+919999999999">
-            +91 99999 99999
+          <a href="tel:+919909026328">
+            +91 99090 26328
           </a>
 
           <p className="footer-location">

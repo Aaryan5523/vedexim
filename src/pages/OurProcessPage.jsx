@@ -625,7 +625,7 @@ function OurProcessPage() {
             <span>↗</span>
           </Link>
 
-          <Link to="/#contact">
+          <Link to="/contact">
             START AN ENQUIRY
             <span>↗</span>
           </Link>

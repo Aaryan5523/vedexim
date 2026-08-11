@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./WhatsAppButton.css";
 
 function WhatsAppButton() {
-  const phoneNumber = "916353992729";
+  const phoneNumber = "919909026328";
 
   const message = encodeURIComponent(
     "Hello Ved Exim, I would like to know more about your ceramic products."
@@ -200,4 +200,4 @@ function WhatsAppButton() {
   );
 }
 
-export default WhatsAppButton;
+export default WhatsAppButton;  

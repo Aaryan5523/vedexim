@@ -164,7 +164,7 @@ function Collections() {
         </span>
 
         <span>
-          04 COLLECTIONS
+           COLLECTIONS
         </span>
 
       </div>
