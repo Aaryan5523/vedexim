@@ -22,15 +22,6 @@ const products = [
   },
   {
     number: "03",
-    name: "Onyx",
-    category: "PREMIUM COLLECTION",
-    description:
-      "A dramatic surface inspired by the depth, movement and luminosity of natural stone.",
-    image:
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=85",
-  },
-  {
-    number: "04",
     name: "Limestone",
     category: "STONE COLLECTION",
     description:
@@ -38,6 +29,16 @@ const products = [
     image:
       "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1400&q=85",
   },
+  {
+    number: "04",
+    name: "Concrete",
+    category: "CONCRETE COLLECTION",
+    description:
+      "A minimal architectural surface with a subtle texture and a modern aesthetic.",
+    image:
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85",
+  },
+
 ];
 
 function Products() {

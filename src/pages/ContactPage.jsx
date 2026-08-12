@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 import "./ContactPage.css";
 
 function ContactPage() {
   const pageRef = useRef(null);
 
-  const [submitted, setSubmitted] = useState(false);
+  const [showInquiryPopup, setShowInquiryPopup] = useState(false);
+  const [sendingInquiry, setSendingInquiry] = useState(false);
+  const [inquirySent, setInquirySent] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -70,28 +73,63 @@ function ContactPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const subject = encodeURIComponent(
-      `VED EXIM Inquiry — ${formData.name}`
-    );
+    setInquirySent(false);
+    setShowInquiryPopup(true);
+  };
 
-    const body = encodeURIComponent(`
-Name: ${formData.name}
-Company: ${formData.company}
-Email: ${formData.email}
-Phone: ${formData.phone}
+  const sendInquiry = async () => {
+    setSendingInquiry(true);
 
-Project Type: ${formData.project}
-Requirement: ${formData.requirement}
-Quantity / Area: ${formData.quantity}
+    try {
+      await emailjs.send(
+        "YOUR_EMAILJS_SERVICE_ID",
+        "YOUR_EMAILJS_TEMPLATE_ID",
+        {
+          to_email: "vedeximmorbi@gmail.com",
+          from_name: formData.name,
+          from_email: formData.email,
+          company: formData.company,
+          phone: formData.phone,
+          project: formData.project,
+          requirement: formData.requirement,
+          quantity: formData.quantity,
+          message: formData.message,
+        },
+        "YOUR_EMAILJS_PUBLIC_KEY"
+      );
 
-Message:
-${formData.message}
-    `);
+      setInquirySent(true);
+      setSendingInquiry(false);
+    } catch (error) {
+      console.error("Inquiry email failed:", error);
+      setSendingInquiry(false);
+      alert(
+        "We could not send the inquiry right now. Please try again."
+      );
+    }
+  };
 
-    window.location.href =
-      `mailto:vedeximmorbi@gmail.com?subject=${subject}&body=${body}`;
+  const closeInquiryPopup = () => {
+    if (sendingInquiry) return;
 
-    setSubmitted(true);
+    setShowInquiryPopup(false);
+    setInquirySent(false);
+  };
+
+  const finishInquiry = () => {
+    setShowInquiryPopup(false);
+    setInquirySent(false);
+
+    setFormData({
+      name: "",
+      company: "",
+      email: "",
+      phone: "",
+      project: "",
+      requirement: "",
+      quantity: "",
+      message: "",
+    });
   };
 
   const whatsappNumber = "916353992729";
@@ -348,26 +386,7 @@ ${formData.message}
 
           <div className="contact-form-container contact-reveal">
 
-            {submitted && (
-              <div className="contact-success">
 
-                <span>
-                  ✓
-                </span>
-
-                <div>
-                  <strong>
-                    Inquiry prepared.
-                  </strong>
-
-                  <p>
-                    Your email application has been
-                    opened with the enquiry details.
-                  </p>
-                </div>
-
-              </div>
-            )}
 
 
             <form
@@ -898,6 +917,118 @@ ${formData.message}
         </div>
 
       </section>
+
+
+      {/* =================================================
+          INQUIRY CONFIRMATION POPUP
+      ================================================= */}
+
+      {showInquiryPopup && (
+        <div
+          className="inquiry-popup-overlay"
+          onClick={closeInquiryPopup}
+        >
+          <div
+            className="inquiry-popup"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="inquiry-popup-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            {!sendingInquiry && (
+              <button
+                type="button"
+                className="inquiry-popup-close"
+                onClick={closeInquiryPopup}
+                aria-label="Close inquiry popup"
+              >
+                ×
+              </button>
+            )}
+
+            {!inquirySent ? (
+              <>
+                <span className="inquiry-popup-eyebrow">
+                  VED EXIM · INQUIRY
+                </span>
+
+                <div className="inquiry-popup-icon">
+                  ?
+                </div>
+
+                <h2 id="inquiry-popup-title">
+                  Ready to send
+                  <br />
+                  <em>your enquiry?</em>
+                </h2>
+
+                <p>
+                  Your enquiry will be sent directly to
+                  the VED EXIM email address. Your mail
+                  application will not open.
+                </p>
+
+                <div className="inquiry-popup-actions">
+                  <button
+                    type="button"
+                    className="inquiry-popup-cancel"
+                    onClick={closeInquiryPopup}
+                    disabled={sendingInquiry}
+                  >
+                    CANCEL
+                  </button>
+
+                  <button
+                    type="button"
+                    className="inquiry-popup-send"
+                    onClick={sendInquiry}
+                    disabled={sendingInquiry}
+                  >
+                    {sendingInquiry
+                      ? "SENDING..."
+                      : "SEND INQUIRY"}
+
+                    {!sendingInquiry && (
+                      <span>↗</span>
+                    )}
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <span className="inquiry-popup-eyebrow">
+                  VED EXIM · SUCCESS
+                </span>
+
+                <div className="inquiry-popup-icon inquiry-popup-icon-success">
+                  ✓
+                </div>
+
+                <h2 id="inquiry-popup-title">
+                  Inquiry
+                  <br />
+                  <em>sent successfully.</em>
+                </h2>
+
+                <p>
+                  Thank you for contacting VED EXIM.
+                  Our team will review your requirement
+                  and get back to you.
+                </p>
+
+                <button
+                  type="button"
+                  className="inquiry-popup-send inquiry-popup-done"
+                  onClick={finishInquiry}
+                >
+                  DONE
+                  <span>↗</span>
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
     </main>
   );

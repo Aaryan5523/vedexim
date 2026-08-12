@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import "./Contact.css";
 
 function Contact() {
   const sectionRef = useRef(null);
+
   const [showAlert, setShowAlert] = useState(false);
+  const [sendingInquiry, setSendingInquiry] = useState(false);
+  const [inquirySent, setInquirySent] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -30,13 +34,62 @@ function Contact() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    event.target.reset();
-
+    setInquirySent(false);
     setShowAlert(true);
+  };
 
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 3500);
+  const sendInquiry = async () => {
+    const form = document.querySelector(".contact-form");
+
+    if (!form) return;
+
+    setSendingInquiry(true);
+
+    const formData = new FormData(form);
+
+    try {
+      await emailjs.send(
+        "YOUR_EMAILJS_SERVICE_ID",
+        "YOUR_EMAILJS_TEMPLATE_ID",
+        {
+          to_email: "vedeximmorbi@gmail.com",
+          from_name: formData.get("name"),
+          from_email: formData.get("email"),
+          phone: formData.get("phone"),
+          message: formData.get("message"),
+        },
+        "YOUR_EMAILJS_PUBLIC_KEY"
+      );
+
+      setInquirySent(true);
+      setSendingInquiry(false);
+    } catch (error) {
+      console.error("Inquiry email failed:", error);
+
+      setSendingInquiry(false);
+
+      alert(
+        "We could not send your inquiry right now. Please try again."
+      );
+    }
+  };
+
+  const closeAlert = () => {
+    if (sendingInquiry) return;
+
+    setShowAlert(false);
+    setInquirySent(false);
+  };
+
+  const finishInquiry = () => {
+    const form = document.querySelector(".contact-form");
+
+    if (form) {
+      form.reset();
+    }
+
+    setShowAlert(false);
+    setInquirySent(false);
   };
 
   return (
@@ -69,12 +122,12 @@ function Contact() {
 
           <div className="contact-details">
 
-            <a href="mailto:info@vedexim.com">
-              info@vedexim.com
+            <a href="mailto:vedeximmorbi@gmail.com">
+              vedeximmorbi@gmail.com
             </a>
 
-            <a href="tel:+919999999999">
-              +91 99999 99999
+            <a href="tel:+919909026328">
+              +91 99090 26328
             </a>
 
           </div>
@@ -198,37 +251,137 @@ function Contact() {
       </section>
 
 
-      {/* SUCCESS ALERT */}
+      {/* INQUIRY POPUP */}
 
       {showAlert && (
-        <div className="inquiry-alert">
+        <div
+          className="inquiry-alert inquiry-alert-overlay"
+          onClick={closeAlert}
+        >
 
-          <div className="inquiry-alert-box">
+          <div
+            className="inquiry-alert-box inquiry-popup-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="contact-inquiry-title"
+            onClick={(event) =>
+              event.stopPropagation()
+            }
+          >
 
-            <div className="inquiry-check">
-              ✓
-            </div>
+            {!sendingInquiry && (
+              <button
+                type="button"
+                className="inquiry-alert-close"
+                onClick={closeAlert}
+                aria-label="Close inquiry popup"
+              >
+                ×
+              </button>
+            )}
 
-            <div>
-              <p className="inquiry-alert-title">
-                Inquiry Sent
-              </p>
 
-              <p className="inquiry-alert-text">
-                Thank you for contacting Ved Exim.
-                <br />
-                We will get back to you soon.
-              </p>
-            </div>
+            {!inquirySent ? (
+              <>
 
-            <button
-              type="button"
-              className="inquiry-alert-close"
-              onClick={() => setShowAlert(false)}
-              aria-label="Close"
-            >
-              ×
-            </button>
+                <span className="inquiry-popup-eyebrow">
+                  VED EXIM · INQUIRY
+                </span>
+
+                <div className="inquiry-check inquiry-question">
+                  ?
+                </div>
+
+                <div>
+
+                  <p
+                    id="contact-inquiry-title"
+                    className="inquiry-alert-title inquiry-popup-heading"
+                  >
+                    Ready to send
+                    <br />
+                    <em>your enquiry?</em>
+                  </p>
+
+                  <p className="inquiry-alert-text">
+                    Your enquiry will be sent directly to
+                    VED EXIM. Your mail application will
+                    not open.
+                  </p>
+
+                </div>
+
+
+                <div className="inquiry-popup-actions">
+
+                  <button
+                    type="button"
+                    className="inquiry-popup-cancel"
+                    onClick={closeAlert}
+                    disabled={sendingInquiry}
+                  >
+                    CANCEL
+                  </button>
+
+                  <button
+                    type="button"
+                    className="inquiry-popup-send"
+                    onClick={sendInquiry}
+                    disabled={sendingInquiry}
+                  >
+                    {sendingInquiry
+                      ? "SENDING..."
+                      : "SEND INQUIRY"}
+
+                    {!sendingInquiry && (
+                      <span>↗</span>
+                    )}
+                  </button>
+
+                </div>
+
+              </>
+            ) : (
+              <>
+
+                <span className="inquiry-popup-eyebrow">
+                  VED EXIM · SUCCESS
+                </span>
+
+                <div className="inquiry-check inquiry-success">
+                  ✓
+                </div>
+
+                <div>
+
+                  <p
+                    id="contact-inquiry-title"
+                    className="inquiry-alert-title inquiry-popup-heading"
+                  >
+                    Inquiry sent
+                    <br />
+                    <em>successfully.</em>
+                  </p>
+
+                  <p className="inquiry-alert-text">
+                    Thank you for contacting VED EXIM.
+                    Our team will get back to you soon.
+                  </p>
+
+                </div>
+
+
+                <button
+                  type="button"
+                  className="inquiry-popup-send inquiry-popup-done"
+                  onClick={finishInquiry}
+                >
+                  DONE
+                  <span>↗</span>
+                </button>
+
+              </>
+            )}
 
           </div>
 

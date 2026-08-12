@@ -208,6 +208,26 @@ function Navbar() {
                 Contact
               </Link>
 
+              {/* DOWNLOAD CATALOGUE */}
+
+              <a
+                href="/catalogue.pdf"
+                download="VED-EXIM-Catalogue.pdf"
+                className="menu-catalogue-link"
+                onClick={closeMenu}
+              >
+                <span>07</span>
+
+                <div className="menu-catalogue-content">
+                  <strong>Download Catalogue</strong>
+
+                  <small>
+                    PDF CATALOGUE
+                    <b>↓</b>
+                  </small>
+                </div>
+              </a>
+
             </nav>
 
 

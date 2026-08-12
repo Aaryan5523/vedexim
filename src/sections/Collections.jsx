@@ -99,7 +99,7 @@ function Collections() {
 
         {collections.map((collection, index) => (
           <a
-            href="#contact"
+            href="/collections"
             className={`collection-card collection-card-${index + 1}`}
             key={collection.number}
           >

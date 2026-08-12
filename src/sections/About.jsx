@@ -98,7 +98,7 @@ function About() {
 
 
         <a
-          href="#collections"
+          href="/collections"
           className="about-link"
         >
           Discover VED EXIM
