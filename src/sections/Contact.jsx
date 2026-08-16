@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import "./Contact.css";
+import SplitHeading from "../components/SplitHeading";
 
 function Contact() {
   const sectionRef = useRef(null);
@@ -108,11 +109,18 @@ function Contact() {
             GET IN TOUCH
           </p>
 
-          <h2>
-            Let's create
-            <br />
-            <em>something remarkable.</em>
-          </h2>
+          <SplitHeading
+            tag="h2"
+            lines={[
+              { text: "Let's create" },
+              { text: "something ", italic: true },
+              { text: "remarkable.", italic: true },
+            ]}
+            visibleClass="is-visible"
+            baseDelay={100}
+            charDelay={36}
+            lineGap={70}
+          />
 
           <p className="contact-description">
             Tell us about your project, requirements or

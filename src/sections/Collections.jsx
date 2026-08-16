@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import "./Collections.css";
+import SplitHeading from "../components/SplitHeading";
 
 const collections = [
   {
@@ -76,11 +77,18 @@ function Collections() {
             OUR COLLECTIONS
           </p>
 
-          <h2 className="collections-title">
-            Surfaces with
-            <br />
-            <em>character.</em>
-          </h2>
+          <SplitHeading
+            tag="h2"
+            lines={[
+              { text: "Surfaces with" },
+              { text: "character.", italic: true },
+            ]}
+            className="collections-title"
+            visibleClass="collections-visible"
+            baseDelay={100}
+            charDelay={40}
+            lineGap={90}
+          />
         </div>
 
         <p className="collections-intro">

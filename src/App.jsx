@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Footer from "./sections/Footer";
+import SmoothScroll from "./components/SmoothScroll";
 
 import Home from "./pages/Home";
 import CollectionsPage from "./pages/CollectionsPage";
@@ -14,6 +15,8 @@ import ContactPage from "./pages/ContactPage";
 function App() {
   return (
     <BrowserRouter>
+
+      <SmoothScroll />
 
       <Navbar />
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import "./WhyUs.css";
+import SplitHeading from "../components/SplitHeading";
 
 const strengths = [
   {
@@ -65,11 +66,18 @@ function WhyUs() {
             WHY VED EXIM
           </p>
 
-          <h2 className="why-title">
-            More than
-            <br />
-            <em>just surfaces.</em>
-          </h2>
+          <SplitHeading
+            tag="h2"
+            lines={[
+              { text: "More than" },
+              { text: "just surfaces.", italic: true },
+            ]}
+            className="why-title"
+            visibleClass="why-visible"
+            baseDelay={100}
+            charDelay={40}
+            lineGap={80}
+          />
 
         </div>
 

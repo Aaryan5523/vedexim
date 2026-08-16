@@ -138,3 +138,48 @@ img {
   }
 
 }
+
+
+/* =========================================
+   SPLIT HEADING & LETTER REVEAL ANIMATION
+========================================= */
+
+.split-heading {
+  margin: 0;
+  display: block;
+}
+
+.hero-h1-line {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: inherit;
+}
+
+.hero-h1-italic {
+  font-style: italic;
+}
+
+.hero-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(105%) rotate(3deg);
+  will-change: transform, opacity;
+}
+
+/* In hero or when activated via scroll observer */
+.hero .hero-char,
+.hero-char.hero-char--active {
+  animation: charRise 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes charRise {
+  0% {
+    opacity: 0;
+    transform: translateY(105%) rotate(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}

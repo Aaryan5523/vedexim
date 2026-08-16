@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import "./Process.css";
+import SplitHeading from "../components/SplitHeading";
 
 const steps = [
   {
@@ -69,11 +70,18 @@ function Process() {
             OUR PROCESS
           </p>
 
-          <h2 className="process-title">
-            From idea
-            <br />
-            <em>to space.</em>
-          </h2>
+          <SplitHeading
+            tag="h2"
+            lines={[
+              { text: "From idea" },
+              { text: "to space.", italic: true },
+            ]}
+            className="process-title"
+            visibleClass="process-visible"
+            baseDelay={100}
+            charDelay={40}
+            lineGap={80}
+          />
 
         </div>
 

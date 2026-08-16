@@ -279,66 +279,116 @@
 
 
 /* =========================================
-   HERO IMAGE
+   HERO PHOTO SLIDER
 ========================================= */
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
 
 .hero-background img {
   position: absolute;
-
   inset: 0;
-
   width: 100%;
   height: 100%;
-
   object-fit: cover;
   object-position: center center;
-
   display: block;
-
   opacity: 0;
-
-  transform: scale(1.04);
-
+  transform: scale(1.08);
   transition:
     opacity 1.5s ease-in-out,
-    transform 7s ease;
+    transform 6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 
 .hero-background img.active {
   opacity: 1;
-
   transform: scale(1);
-}
-
-.hero-background img {
-  width: 100%;
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-
-  object-position: center center;
-
-  animation: heroImageReveal 1.5s
-    cubic-bezier(0.16, 1, 0.3, 1)
-    both;
+  z-index: 1;
 }
 
 
 /* =========================================
-   IMAGE ANIMATION
+   HERO TEXT ANIMATIONS
 ========================================= */
 
-@keyframes heroImageReveal {
-  from {
-    opacity: 0;
-    transform: scale(1.06);
-  }
+/* ── Eyebrow: slide in from left ── */
+.hero-anim-eyebrow {
+  opacity: 0;
+  transform: translateX(-22px);
 
+  animation:
+    heroEyebrowIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+@keyframes heroEyebrowIn {
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translateX(0);
+  }
+}
+
+
+/* ── H1 line wrapper — clips overflow so chars emerge from below ── */
+.hero-h1-line {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: inherit;
+}
+
+.hero-h1-italic {
+  font-style: italic;
+}
+
+
+/* ── Each character: pops up from below ── */
+.hero-char {
+  display: inline-block;
+
+  opacity: 0;
+  transform: translateY(105%) rotate(4deg);
+
+  animation:
+    charRise 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes charRise {
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+
+/* ── Description: fade + slide up ── */
+.hero-anim-desc {
+  opacity: 0;
+  transform: translateY(20px);
+
+  animation:
+    heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.65s forwards;
+}
+
+
+/* ── Button: fade in ── */
+.hero-anim-btn {
+  opacity: 0;
+
+  animation:
+    heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.85s forwards;
+}
+
+@keyframes heroFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

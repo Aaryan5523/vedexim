@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import "./About.css";
+import SplitHeading from "../components/SplitHeading";
 
 function About() {
   const sectionRef = useRef(null);
@@ -58,11 +59,17 @@ function About() {
           ABOUT VED EXIM
         </p>
 
-        <h2>
-          Surfaces
-          <br />
-          <em>with character.</em>
-        </h2>
+        <SplitHeading
+          tag="h2"
+          lines={[
+            { text: "Surfaces" },
+            { text: "with character.", italic: true },
+          ]}
+          visibleClass="is-visible"
+          baseDelay={120}
+          charDelay={42}
+          lineGap={80}
+        />
 
         <p className="about-text">
           VED EXIM brings together refined ceramic surfaces,

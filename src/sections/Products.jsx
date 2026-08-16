@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import "./Products.css";
+import SplitHeading from "../components/SplitHeading";
 
 const products = [
   {
@@ -8,8 +10,7 @@ const products = [
     category: "MARBLE COLLECTION",
     description:
       "A refined marble-inspired surface with elegant veining and a timeless character.",
-    image:
-      "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1400&q=85",
+    image: "/images/products/marble/marble-01.png",
   },
   {
     number: "02",
@@ -17,17 +18,15 @@ const products = [
     category: "STONE COLLECTION",
     description:
       "Warm natural tones and subtle texture designed for sophisticated interiors.",
-    image:
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85",
+    image: "/images/products/stone/stone-01.png",
   },
   {
     number: "03",
-    name: "Limestone",
-    category: "STONE COLLECTION",
+    name: "Terrazzo",
+    category: "TERRAZZO COLLECTION",
     description:
-      "A quiet architectural finish created for modern and minimal spaces.",
-    image:
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1400&q=85",
+      "A playful yet refined composite finish for contemporary and eclectic spaces.",
+    image: "https://images.unsplash.com/photo-1615971677499-5467cbab01c0?auto=format&fit=crop&w=1400&q=90",
   },
   {
     number: "04",
@@ -35,11 +34,15 @@ const products = [
     category: "CONCRETE COLLECTION",
     description:
       "A minimal architectural surface with a subtle texture and a modern aesthetic.",
-    image:
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85",
+    image: "/images/products/concrete/concrete-01.png",
   },
-
 ];
+
+function getProductWhatsAppUrl(product) {
+  const phoneNumber = "919909026328";
+  const message = `Hello Ved Exim, I would like to inquire about *${product.name}* (${product.category}).\n\nPlease share more details, pricing, and availability.`;
+  return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+}
 
 function Products() {
   const sectionRef = useRef(null);
@@ -82,11 +85,18 @@ function Products() {
             FEATURED PRODUCTS
           </p>
 
-          <h2 className="products-title">
-            Designed for
-            <br />
-            <em>beautiful spaces.</em>
-          </h2>
+          <SplitHeading
+            tag="h2"
+            lines={[
+              { text: "Designed for" },
+              { text: "beautiful spaces.", italic: true },
+            ]}
+            className="products-title"
+            visibleClass="products-visible"
+            baseDelay={100}
+            charDelay={38}
+            lineGap={80}
+          />
 
         </div>
 
@@ -104,8 +114,8 @@ function Products() {
       <div className="products-grid">
 
         {products.map((product, index) => (
-          <a
-            href="#contact"
+          <Link
+            to="/products"
             className="product-card"
             key={product.number}
           >
@@ -116,6 +126,9 @@ function Products() {
                 src={product.image}
                 alt={`${product.name} ceramic surface`}
                 loading={index < 2 ? "eager" : "lazy"}
+                decoding="async"
+                fetchPriority={index === 0 ? "high" : "auto"}
+                draggable="false"
               />
 
               <div className="product-image-overlay"></div>
@@ -149,7 +162,6 @@ function Products() {
                   <p>
                     {product.description}
                   </p>
-
                 </div>
 
                 <span className="product-arrow">
@@ -160,7 +172,7 @@ function Products() {
 
             </div>
 
-          </a>
+          </Link>
         ))}
 
       </div>
@@ -178,9 +190,9 @@ function Products() {
           CURATED SURFACES
         </span>
 
-        <a href="/products" className="products-footer-link">
+        <Link to="/products" className="products-footer-link">
           VIEW ALL PRODUCTS ↗
-        </a>
+        </Link>
 
       </div>
 
