@@ -7,10 +7,10 @@ export default function SmoothScroll() {
   const location = useLocation();
 
   useEffect(() => {
-    // Initialize Lenis smooth scroll
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      easing: (t) =>
+        Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
@@ -21,15 +21,38 @@ export default function SmoothScroll() {
 
     window.lenis = lenis;
 
-    // Animation frame loop
+    /*
+     * Send Lenis scroll position to the rest of the site.
+     * Hero uses this event for its scroll animation.
+     */
+    const handleLenisScroll = (event) => {
+      window.dispatchEvent(
+        new CustomEvent("vedexim-lenis-scroll", {
+          detail: {
+            scroll: event.scroll,
+            animatedScroll: event.animatedScroll,
+            progress: event.progress,
+            velocity: event.velocity,
+            direction: event.direction,
+          },
+        })
+      );
+    };
+
+    lenis.on("scroll", handleLenisScroll);
+
     let rafId;
+
     function raf(time) {
       lenis.raf(time);
       rafId = requestAnimationFrame(raf);
     }
+
     rafId = requestAnimationFrame(raf);
 
-    // Stop/start smooth scrolling when mobile menu opens/closes
+    /*
+     * Stop/start Lenis when mobile menu opens/closes.
+     */
     const menuObserver = new MutationObserver(() => {
       if (document.body.classList.contains("menu-open")) {
         lenis.stop();
@@ -37,21 +60,33 @@ export default function SmoothScroll() {
         lenis.start();
       }
     });
+
     menuObserver.observe(document.body, {
       attributes: true,
       attributeFilter: ["class"],
     });
 
-    // Intercept in-page hash links (e.g. #collections, #about, #home)
+    /*
+     * Smooth hash navigation.
+     */
     const handleAnchorClick = (e) => {
       const anchor = e.target.closest("a");
+
       if (!anchor) return;
 
       const href = anchor.getAttribute("href");
-      if (href && href.startsWith("#") && href.length > 1) {
-        const targetEl = document.querySelector(href);
+
+      if (
+        href &&
+        href.startsWith("#") &&
+        href.length > 1
+      ) {
+        const targetEl =
+          document.querySelector(href);
+
         if (targetEl) {
           e.preventDefault();
+
           lenis.scrollTo(targetEl, {
             offset: -70,
             duration: 1.3,
@@ -60,33 +95,60 @@ export default function SmoothScroll() {
       }
     };
 
-    document.addEventListener("click", handleAnchorClick);
+    document.addEventListener(
+      "click",
+      handleAnchorClick
+    );
 
     return () => {
       cancelAnimationFrame(rafId);
+
+      lenis.off(
+        "scroll",
+        handleLenisScroll
+      );
+
       menuObserver.disconnect();
-      document.removeEventListener("click", handleAnchorClick);
+
+      document.removeEventListener(
+        "click",
+        handleAnchorClick
+      );
+
       lenis.destroy();
+
       window.lenis = null;
     };
   }, []);
 
-  // Handle route change / anchor navigation on URL change
+  /*
+   * Handle route changes.
+   */
   useEffect(() => {
     if (!window.lenis) return;
 
     if (location.hash) {
-      const targetEl = document.querySelector(location.hash);
+      const targetEl =
+        document.querySelector(location.hash);
+
       if (targetEl) {
         setTimeout(() => {
-          window.lenis?.scrollTo(targetEl, { offset: -70, duration: 1.2 });
+          window.lenis?.scrollTo(
+            targetEl,
+            {
+              offset: -70,
+              duration: 1.2,
+            }
+          );
         }, 80);
+
         return;
       }
     }
 
-    // Scroll to top immediately on new page load
-    window.lenis.scrollTo(0, { immediate: true });
+    window.lenis.scrollTo(0, {
+      immediate: true,
+    });
   }, [location.pathname, location.hash]);
 
   return null;

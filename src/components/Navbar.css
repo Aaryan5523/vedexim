@@ -1,3 +1,39 @@
+
+/* =====================================================
+   NAVBAR — HIDE ON SCROLL DOWN / SHOW ON SCROLL UP
+===================================================== */
+
+.navbar {
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.35s ease,
+    box-shadow 0.35s ease;
+  will-change: transform;
+}
+
+/* Scroll down */
+.navbar.navbar-hidden {
+  transform: translateY(-110%);
+}
+
+/* Menu must remain accessible */
+.navbar.navbar-hidden .menu-panel.menu-open {
+  transform: none;
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .navbar {
+    transition:
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.35s ease;
+  }
+
+  .navbar.navbar-hidden {
+    transform: translateY(-110%);
+  }
+}
+
 /* =========================================
    VED EXIM — PREMIUM NAVBAR
 ========================================= */
@@ -2253,3 +2289,4 @@ body.menu-open {
     font-weight: 400 !important;
   }
 }
+

@@ -8,30 +8,31 @@ function Footer() {
     });
   };
 
-  const closeMenuAndNavigate = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+  const address =
+    "Ground Floor, Shivam Chambers 1, Shop No. 10, Survey No. 93 Paiki 3, Plot No. 1 Paiki, Morbi-Halvad Road, Near LUXGRES CERAMICA LLP, Unchi Mandal, Nichi Mandal, Morbi, Gujarat 363330, India.";
+
+  const mapUrl =
+    "https://www.google.com/maps/search/?api=1&query=Ground+Floor,+Shivam+Chambers+1,+Shop+No.+10,+Survey+No.+93+Paiki+3,+Plot+No.+1+Paiki,+Morbi-Halvad+Road,+Near+LUXGRES+CERAMICA+LLP,+Unchi+Mandal,+Nichi+Mandal,+Morbi,+Gujarat+363330,+India";
 
   return (
     <footer className="footer">
+      {/* BACKGROUND GRID */}
+      <div className="footer-grid" aria-hidden="true" />
 
-      {/* =========================================
-          FOOTER TOP
-      ========================================= */}
+      {/* CTA */}
+      <div className="footer-cta">
+        <h2>
+          LET&apos;S BUILD SOMETHING
+          <br />
+          <em>AMAZING</em> TOGETHER
+        </h2>
+      </div>
 
-      <div className="footer-top">
-
+      {/* MAIN FOOTER */}
+      <div className="footer-main">
         {/* BRAND */}
-
         <div className="footer-brand">
-
-          <a
-            href="#home"
-            onClick={closeMenuAndNavigate}
-          >
+          <a href="/" className="footer-logo-link" aria-label="VED EXIM Home">
             <img
               src="/images/logo/vedexim.png"
               alt="VED EXIM"
@@ -39,158 +40,116 @@ function Footer() {
             />
           </a>
 
-          <p>
-            Premium ceramic surfaces
-            <br />
-            for contemporary spaces.
-          </p>
+          <div className="footer-social">
+            <a
+              href="https://facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+            >
+              f
+            </a>
 
+            <a
+              href="https://twitter.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+            >
+              𝕏
+            </a>
+
+            <a
+              href="https://linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              in
+            </a>
+
+            <a
+              href="https://instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              ◎
+            </a>
+          </div>
         </div>
 
+        {/* QUICK LINKS */}
+        <div className="footer-column">
+          <div className="footer-column-title">
+            <span>QUICK LINKS</span>
+            <i />
+          </div>
 
-        {/* NAVIGATION */}
-
-        <div className="footer-navigation">
-
-          <p className="footer-label">
-            NAVIGATION
-          </p>
-
-          <a href="/home">
-            Home
-          </a>
-
-          <a href="/about">
-            About
-          </a>
-
-          <a href="/collections">
-            Collections
-          </a>
-
-          <a href="/products">
-            Products
-          </a>
-
-          <a href="/process">
-            Our Process
-          </a>
-
-          <a href="/contact">
-            Contact
-          </a>
-
+          <nav className="footer-links">
+            <a href="/">HOME</a>
+            <a href="/about">ABOUT</a>
+            <a href="/collections">COLLECTIONS</a>
+            <a href="/products">PRODUCTS</a>
+            <a href="/process">OUR PROCESS</a>
+            <a href="/contact">CONTACT</a>
+          </nav>
         </div>
 
+        {/* QUICK SUPPORT */}
+        <div className="footer-column">
+          <div className="footer-column-title">
+            <span>QUICK SUPPORT</span>
+            <i />
+          </div>
 
-        {/* CONTACT */}
+          <div className="footer-support">
+            <a href="tel:+919909026328">
+              <strong>T :</strong> +91 99090 26328
+            </a>
 
-        <div className="footer-contact">
+            <a href="mailto:vedeximmorbi@gmail.com">
+              <strong>E :</strong> vedeximmorbi@gmail.com
+            </a>
 
-          <p className="footer-label">
-            GET IN TOUCH
-          </p>
-
-          <a href="mailto:vedeximmorbi@gmail.com">
-            vedeximmorbi@gmail.com
-          </a>
-
-          <a href="tel:+919909026328">
-            +91 99090 26328
-          </a>
-
-          <p className="footer-location">
-            India
-          </p>
-
-
-          {/* SOCIAL MEDIA */}
-
-<div className="footer-social">
-
-  <a
-    href="https://instagram.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Instagram"
-  >
-    <span className="social-icon">◎</span>
-    <span>Instagram</span>
-  </a>
-
-  <a
-    href="https://facebook.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Facebook"
-  >
-    <span className="social-icon">f</span>
-    <span>Facebook</span>
-  </a>
-
-  <a
-    href="https://youtube.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="YouTube"
-  >
-    <span className="social-icon">▶</span>
-    <span>YouTube</span>
-  </a>
-
-  <a
-    href="https://linkedin.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="LinkedIn"
-  >
-    <span className="social-icon">in</span>
-    <span>LinkedIn</span>
-  </a>
-
-  <a
-    href="https://twitter.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Twitter"
-  >
-    <span className="social-icon">𝕏</span>
-    <span>Twitter</span>
-  </a>
-
-</div>
-
-
-
+            <a href="https://wa.me/919909026328" target="_blank" rel="noopener noreferrer">
+              <strong>W :</strong> WhatsApp Us
+            </a>
+          </div>
         </div>
 
+        {/* ADDRESS */}
+        <div className="footer-column footer-address-column">
+          <div className="footer-column-title">
+            <span>ADDRESS</span>
+            <i />
+          </div>
+
+          <a
+            href={mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-address"
+          >
+            {address}
+          </a>
+        </div>
       </div>
 
-      {/* =========================================
-          BOTTOM
-      ========================================= */}
-
+      {/* BOTTOM */}
       <div className="footer-bottom">
+        <span>Copyright © 2026 VED EXIM</span>
 
-        <span>
-          © 2026 VED EXIM
-        </span>
-
-        <span>
-          CERAMICS · SURFACES · SANITARYWARE
-        </span>
+        <span>CERAMICS · SURFACES · SANITARYWARE</span>
 
         <button
           type="button"
           onClick={scrollToTop}
           className="footer-top-button"
         >
-          BACK TO TOP
-          <span>↑</span>
+          BACK TO TOP <span>↑</span>
         </button>
-
       </div>
-
     </footer>
   );
 }

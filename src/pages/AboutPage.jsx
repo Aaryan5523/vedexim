@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./AboutPage.css";
 
@@ -31,10 +31,11 @@ const strengths = [
 
 function AboutPage() {
   const pageRef = useRef(null);
+  const [revealProgress, setRevealProgress] = useState(0);
+  const rafRef = useRef(null);
 
   useEffect(() => {
     const page = pageRef.current;
-
     if (!page) return;
 
     const timer = setTimeout(() => {
@@ -44,10 +45,55 @@ function AboutPage() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const updateReveal = () => {
+      if (rafRef.current) return;
+
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+
+        const page = pageRef.current;
+        if (!page) return;
+
+        const rect = page.getBoundingClientRect();
+
+        // Start the transition when the About page begins to scroll.
+        const distance = Math.max(window.innerHeight * 0.9, 500);
+        const travelled = Math.max(0, -rect.top);
+
+        const value = Math.min(
+          Math.max(travelled / distance, 0),
+          1
+        );
+
+        setRevealProgress(value);
+      });
+    };
+
+    window.addEventListener("scroll", updateReveal, { passive: true });
+    window.addEventListener("resize", updateReveal);
+    updateReveal();
+
+    return () => {
+      window.removeEventListener("scroll", updateReveal);
+      window.removeEventListener("resize", updateReveal);
+
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, []);
+
+  const eased =
+    revealProgress * revealProgress * (3 - 2 * revealProgress);
+
+  const curtainX = 100 - eased * 100;
+
   return (
     <main
       className="about-page"
       ref={pageRef}
+      style={{ "--about-curtain-x": `${curtainX}%` }}
     >
 
       {/* =========================================
@@ -103,6 +149,17 @@ function AboutPage() {
         </div>
 
       </section>
+
+      <div
+        className="about-horizontal-curtain"
+        aria-hidden="true"
+        style={{
+          transform: `translate3d(${curtainX}%, 0, 0)`,
+        }}
+      >
+        <div className="about-horizontal-curtain-line" />
+        <span>VED EXIM · ABOUT</span>
+      </div>
 
 
       {/* =========================================

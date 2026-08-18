@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
@@ -6,26 +6,53 @@ function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuView, setMenuView] = useState("main");
+  const [navbarHidden, setNavbarHidden] = useState(false);
+
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      const currentScrollY = window.scrollY;
+
+      setScrolled(currentScrollY > 40);
+
+      // Keep navbar visible at the very top.
+      if (currentScrollY <= 40) {
+        setNavbarHidden(false);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      // Scrolling down → hide navbar.
+      if (currentScrollY > lastScrollY.current) {
+        setNavbarHidden(true);
+      }
+
+      // Scrolling up → show navbar.
+      else if (currentScrollY < lastScrollY.current) {
+        setNavbarHidden(false);
+      }
+
+      lastScrollY.current = currentScrollY;
     };
 
-    window.addEventListener(
-      "scroll",
-      handleScroll
-    );
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
     handleScroll();
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // Keep the navbar visible while the menu/submenu is open.
+  useEffect(() => {
+    if (menuOpen) {
+      setNavbarHidden(false);
+    }
+  }, [menuOpen]);
 
   useEffect(() => {
     document.body.classList.toggle(
@@ -70,6 +97,8 @@ function Navbar() {
     <header
       className={`navbar ${
         scrolled ? "navbar-scrolled" : ""
+      } ${
+        navbarHidden && !menuOpen ? "navbar-hidden" : ""
       }`}
     >
 

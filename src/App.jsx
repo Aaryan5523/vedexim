@@ -27,7 +27,6 @@ function App() {
           element={<Home />}
         />
 
-
         <Route
           path="/about"
           element={<AboutPage />}

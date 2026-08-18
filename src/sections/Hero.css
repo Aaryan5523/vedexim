@@ -1,0 +1,470 @@
+/* =========================================
+   VED EXIM — HERO
+   LENIS SCROLL HORIZONTAL REVEAL
+========================================= */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 200vh;
+  background: #171614;
+  color: #f4f1eb;
+  overflow: visible;
+}
+
+.hero-stage {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 620px;
+  overflow: hidden;
+  background: #171614;
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.hero-background img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity 1s ease,
+    transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-background img.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(23, 22, 20, 0.78) 0%,
+      rgba(23, 22, 20, 0.32) 55%,
+      rgba(23, 22, 20, 0.12) 100%
+    );
+}
+
+.hero-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(23, 22, 20, 0.20) 0%,
+      transparent 38%,
+      rgba(23, 22, 20, 0.58) 100%
+    );
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.hero-content {
+  position: absolute;
+  z-index: 5;
+
+  top: 50%;
+  left: 9vw;
+
+  width: min(850px, 80vw);
+
+  transform: translateY(-50%);
+
+  will-change: transform, opacity;
+}
+
+
+/* =========================================
+   EYEBROW
+========================================= */
+
+.hero-eyebrow {
+  margin: 0 0 28px;
+
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 4px;
+
+  color: rgba(244, 241, 235, 0.68);
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.hero-title {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(52px, 7vw, 105px);
+  font-weight: 400;
+
+  line-height: 0.92;
+  letter-spacing: -4px;
+}
+
+.hero-title > span {
+  display: inline-block;
+}
+
+.hero-italic {
+  font-style: italic;
+}
+
+
+/* =========================================
+   LETTER ENTRANCE
+========================================= */
+
+.hero-char {
+  display: inline-block;
+
+  opacity: 0;
+
+  transform: translateY(35px);
+
+  animation:
+    heroLetter
+    0.9s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+}
+
+@keyframes heroLetter {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.hero-description {
+  max-width: 440px;
+
+  margin: 38px 0 34px;
+
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.8;
+
+  color: rgba(244, 241, 235, 0.72);
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+
+  min-height: 52px;
+  padding: 0 22px;
+
+  border: 1px solid rgba(244, 241, 235, 0.45);
+
+  color: #f4f1eb;
+  text-decoration: none;
+
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+
+  transition:
+    background 0.4s ease,
+    color 0.4s ease,
+    transform 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.hero-button span {
+  font-size: 15px;
+  transition: transform 0.4s ease;
+}
+
+.hero-button:hover {
+  background: #f4f1eb;
+  border-color: #f4f1eb;
+  color: #171614;
+  transform: translateY(-3px);
+}
+
+.hero-button:hover span {
+  transform: translateX(5px);
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.hero-footer {
+  position: absolute;
+
+  left: 9vw;
+  right: 9vw;
+  bottom: 32px;
+
+  z-index: 6;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 20px;
+
+  border-top:
+    1px solid
+    rgba(244, 241, 235, 0.22);
+
+  font-family: Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: 3px;
+
+  color:
+    rgba(244, 241, 235, 0.55);
+
+  will-change: transform, opacity;
+}
+
+.hero-scroll {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.scroll-line {
+  width: 70px;
+  height: 1px;
+  background: rgba(244, 241, 235, 0.45);
+}
+
+
+/* =========================================
+   HORIZONTAL CURTAIN
+========================================= */
+
+.hero-curtain {
+  position: absolute;
+  inset: 0;
+
+  z-index: 20;
+
+  width: 100%;
+  height: 100%;
+
+  background: #f3f0ea;
+  color: #171614;
+
+  will-change: transform;
+
+  pointer-events: none;
+
+  box-shadow:
+    -35px 0 90px
+    rgba(23, 22, 20, 0.10);
+
+  display: flex;
+  align-items: center;
+
+  transform: translate3d(100%, 0, 0);
+}
+
+
+/* Moving edge */
+
+.hero-curtain-line {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 2px;
+
+  background:
+    rgba(23, 22, 20, 0.18);
+
+  box-shadow:
+    8px 0 30px
+    rgba(23, 22, 20, 0.12);
+}
+
+
+/* Label */
+
+.hero-curtain > span {
+  position: absolute;
+
+  left: 25px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  writing-mode: vertical-rl;
+
+  font-family: Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: 3px;
+
+  color: #817a71;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+  .hero {
+    height: 175vh;
+  }
+
+  .hero-stage {
+    height: 100svh;
+    min-height: 600px;
+  }
+
+  .hero-content {
+    left: 24px;
+    width: calc(100% - 48px);
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 22px;
+    font-size: 8px;
+    letter-spacing: 3px;
+  }
+
+  .hero-title {
+    font-size: clamp(48px, 14vw, 72px);
+    line-height: 0.92;
+    letter-spacing: -2px;
+  }
+
+  .hero-description {
+    max-width: 340px;
+    margin-top: 28px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .hero-button {
+    min-height: 48px;
+    gap: 20px;
+    padding: 0 18px;
+    font-size: 8px;
+  }
+
+  .hero-footer {
+    left: 24px;
+    right: 24px;
+    bottom: 22px;
+    font-size: 6px;
+    letter-spacing: 2px;
+  }
+
+  .hero-footer > span:last-child {
+    display: none;
+  }
+
+  .hero-scroll {
+    gap: 10px;
+  }
+
+  .scroll-line {
+    width: 45px;
+  }
+
+  .hero-curtain > span {
+    left: 12px;
+    font-size: 6px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-content {
+    left: 18px;
+    width: calc(100% - 36px);
+  }
+
+  .hero-title {
+    font-size: 45px;
+  }
+
+  .hero-description {
+    font-size: 11px;
+  }
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-background,
+  .hero-content,
+  .hero-footer,
+  .hero-curtain,
+  .hero-char {
+    transition: none !important;
+    animation: none !important;
+  }
+}

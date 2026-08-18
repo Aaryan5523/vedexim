@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import "./Hero.css";
 
 const heroSlides = [
   {
@@ -59,113 +60,418 @@ const heroSlides = [
   },
 ];
 
-/* ─── Split text into animated letter spans ─────────────────────────── */
-function SplitText({ text, className, baseDelay = 0, tag: Tag = "span" }) {
+function SplitText({ text, baseDelay = 0 }) {
   return (
-    <Tag className={className}>
-      {[...text].map((char, i) => (
+    <>
+      {[...text].map((char, index) => (
         <span
-          key={i}
+          key={index}
           className="hero-char"
-          style={{ animationDelay: `${baseDelay + i * 40}ms` }}
-          aria-hidden={char === " " ? undefined : "true"}
+          style={{
+            animationDelay: `${baseDelay + index * 35}ms`,
+          }}
+          aria-hidden="true"
         >
           {char === " " ? "\u00A0" : char}
         </span>
       ))}
-    </Tag>
+    </>
   );
 }
 
 function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  const heroRef = useRef(null);
+  const progressRef = useRef(0);
+  const rafRef = useRef(null);
+
+  /* =========================================
+     AUTO SLIDER
+  ========================================= */
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((previous) => (previous + 1) % heroSlides.length);
+    const timer = setInterval(() => {
+      setCurrentSlide(
+        (previous) => (previous + 1) % heroSlides.length
+      );
     }, 5000);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
+  }, []);
+
+  /* =========================================
+     LENIS SCROLL
+  ========================================= */
+
+  useEffect(() => {
+    const updateFromScroll = (scrollValue) => {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+
+      rafRef.current = requestAnimationFrame(() => {
+        const hero = heroRef.current;
+
+        if (!hero) return;
+
+        /*
+         * Use the actual document position instead of relying
+         * on the browser scroll event. This works with Lenis.
+         */
+
+        const heroTop =
+          hero.getBoundingClientRect().top +
+          scrollValue;
+
+        const distance = Math.max(
+          hero.offsetHeight - window.innerHeight,
+          window.innerHeight
+        );
+
+        const travelled = Math.max(
+          0,
+          scrollValue - heroTop
+        );
+
+        const nextProgress = Math.min(
+          Math.max(travelled / distance, 0),
+          1
+        );
+
+        /*
+         * Avoid unnecessary React renders.
+         */
+
+        if (
+          Math.abs(
+            nextProgress - progressRef.current
+          ) > 0.001
+        ) {
+          progressRef.current = nextProgress;
+          setProgress(nextProgress);
+        }
+      });
+    };
+
+    const handleLenisScroll = (event) => {
+      updateFromScroll(event.scroll);
+    };
+
+    /*
+     * Lenis is created by SmoothScroll.
+     * If it is already available, subscribe immediately.
+     * Otherwise wait briefly until SmoothScroll mounts.
+     */
+
+    let subscribed = false;
+    let retryTimer = null;
+
+    const subscribe = () => {
+      if (
+        subscribed ||
+        !window.lenis
+      ) {
+        return;
+      }
+
+      window.lenis.on(
+        "scroll",
+        handleLenisScroll
+      );
+
+      subscribed = true;
+
+      updateFromScroll(
+        window.lenis.scroll || 0
+      );
+    };
+
+    subscribe();
+
+    if (!subscribed) {
+      retryTimer = setInterval(() => {
+        subscribe();
+
+        if (subscribed) {
+          clearInterval(retryTimer);
+          retryTimer = null;
+        }
+      }, 50);
+    }
+
+    /*
+     * Native fallback.
+     * This also makes the animation work if Lenis
+     * is temporarily unavailable.
+     */
+
+    const nativeScroll = () => {
+      if (window.lenis) return;
+
+      updateFromScroll(
+        window.scrollY || 0
+      );
+    };
+
+    window.addEventListener(
+      "scroll",
+      nativeScroll,
+      { passive: true }
+    );
+
+    const resize = () => {
+      updateFromScroll(
+        window.lenis?.scroll ||
+        window.scrollY ||
+        0
+      );
+    };
+
+    window.addEventListener(
+      "resize",
+      resize
+    );
+
+    resize();
+
+    return () => {
+      if (retryTimer) {
+        clearInterval(retryTimer);
+      }
+
+      if (
+        subscribed &&
+        window.lenis
+      ) {
+        window.lenis.off(
+          "scroll",
+          handleLenisScroll
+        );
+      }
+
+      window.removeEventListener(
+        "scroll",
+        nativeScroll
+      );
+
+      window.removeEventListener(
+        "resize",
+        resize
+      );
+
+      if (rafRef.current) {
+        cancelAnimationFrame(
+          rafRef.current
+        );
+      }
+    };
   }, []);
 
   const slide = heroSlides[currentSlide];
 
+  /* =========================================
+     PREMIUM EASING
+  ========================================= */
+
+  const eased =
+    progress * progress * (3 - 2 * progress);
+
+  /*
+   * Background depth.
+   */
+
+  const backgroundX = eased * -4;
+  const backgroundScale = 1 + eased * 0.035;
+
+  /*
+   * Content exits toward the LEFT.
+   */
+
+  const contentX = eased * -110;
+  const contentOpacity = Math.max(
+    0,
+    1 - eased * 1.15
+  );
+
+  /*
+   * Curtain enters from RIGHT -> LEFT.
+   */
+
+  const curtainX = 100 - eased * 100;
+
+  /*
+   * Footer exits subtly.
+   */
+
+  const footerY = eased * 24;
+  const footerOpacity = Math.max(
+    0,
+    1 - eased * 1.2
+  );
+
   return (
-    <section className="hero" id="home">
+    <section
+      ref={heroRef}
+      className="hero"
+      id="home"
+    >
+      <div className="hero-stage">
 
-      {/* ── AUTO CHANGING PHOTO BACKGROUND ── */}
-      <div className="hero-background">
-        {heroSlides.map((item, index) => (
-          <img
-            key={index}
-            src={item.image}
-            alt={`VED EXIM Ceramic Surface ${index + 1}`}
-            className={index === currentSlide ? "active" : ""}
-            loading={index === 0 ? "eager" : "lazy"}
-          />
-        ))}
-      </div>
+        {/* =========================================
+            BACKGROUND
+        ========================================= */}
 
-      {/* ── OVERLAY ── */}
-      <div className="hero-overlay" />
-
-      {/* ── HERO CONTENT (Syncs and re-animates with each photo change) ── */}
-      <div className="hero-content" key={currentSlide}>
-
-        {/* Eyebrow — slides in from left */}
-        <p className="hero-eyebrow hero-anim-eyebrow">
-          {slide.eyebrow}
-        </p>
-
-        {/* Heading — each letter pops up with stagger */}
-        <h1
-          className="hero-anim-h1"
-          aria-label={`${slide.titleLine1} ${slide.titleLine2}`}
+        <div
+          className="hero-background"
+          style={{
+            transform: `
+              translate3d(${backgroundX}%, 0, 0)
+              scale(${backgroundScale})
+            `,
+          }}
         >
-          <span className="hero-h1-line">
-            <SplitText text={slide.titleLine1} baseDelay={120} />
-          </span>
-          <br />
-          <span className="hero-h1-line hero-h1-italic">
-            <SplitText text={slide.titleLine2} baseDelay={380} />
-          </span>
-        </h1>
-
-        {/* Description — fades up */}
-        <p className="hero-description hero-anim-desc">
-          {slide.description}
-        </p>
-
-        {/* Button — fades in */}
-        {slide.buttonLink.startsWith("#") ? (
-          <a href={slide.buttonLink} className="hero-button hero-anim-btn">
-            {slide.buttonText}
-            <span>↗</span>
-          </a>
-        ) : (
-          <Link to={slide.buttonLink} className="hero-button hero-anim-btn">
-            {slide.buttonText}
-            <span>↗</span>
-          </Link>
-        )}
-
-      </div>
-
-      {/* ── HERO FOOTER ── */}
-      <div className="hero-footer">
-        <span>VED EXIM</span>
-
-        <div className="hero-scroll">
-          <span>0{currentSlide + 1} / 0{heroSlides.length}</span>
-          <div className="scroll-line" />
+          {heroSlides.map((item, index) => (
+            <img
+              key={index}
+              src={item.image}
+              alt={`VED EXIM Ceramic Surface ${index + 1}`}
+              className={
+                index === currentSlide
+                  ? "active"
+                  : ""
+              }
+              loading={
+                index === 0
+                  ? "eager"
+                  : "lazy"
+              }
+            />
+          ))}
         </div>
 
-        <span>EST. 1998</span>
-      </div>
+        {/* OVERLAY */}
 
+        <div className="hero-overlay" />
+
+        {/* =========================================
+            CONTENT
+        ========================================= */}
+
+        <div
+          className="hero-content"
+          key={currentSlide}
+          style={{
+            transform: `
+              translate3d(
+                ${contentX}px,
+                -50%,
+                0
+              )
+            `,
+            opacity: contentOpacity,
+          }}
+        >
+          <p className="hero-eyebrow">
+            {slide.eyebrow}
+          </p>
+
+          <h1 className="hero-title">
+            <span>
+              <SplitText
+                text={slide.titleLine1}
+                baseDelay={100}
+              />
+            </span>
+
+            <br />
+
+            <span className="hero-italic">
+              <SplitText
+                text={slide.titleLine2}
+                baseDelay={300}
+              />
+            </span>
+          </h1>
+
+          <p className="hero-description">
+            {slide.description}
+          </p>
+
+          {slide.buttonLink.startsWith("#") ? (
+            <a
+              href={slide.buttonLink}
+              className="hero-button"
+            >
+              {slide.buttonText}
+              <span>↗</span>
+            </a>
+          ) : (
+            <Link
+              to={slide.buttonLink}
+              className="hero-button"
+            >
+              {slide.buttonText}
+              <span>↗</span>
+            </Link>
+          )}
+        </div>
+
+        {/* =========================================
+            FOOTER
+        ========================================= */}
+
+        <div
+          className="hero-footer"
+          style={{
+            opacity: footerOpacity,
+            transform: `
+              translate3d(0, ${footerY}px, 0)
+            `,
+          }}
+        >
+          <span>VED EXIM</span>
+
+          <div className="hero-scroll">
+            <span>
+              0{currentSlide + 1} / 0
+              {heroSlides.length}
+            </span>
+
+            <div className="scroll-line" />
+          </div>
+
+          <span>EST. 1998</span>
+        </div>
+
+        {/* =========================================
+            HORIZONTAL CURTAIN
+        ========================================= */}
+
+        <div
+          className="hero-curtain"
+          style={{
+            transform: `
+              translate3d(
+                ${curtainX}%,
+                0,
+                0
+              )
+            `,
+          }}
+          aria-hidden="true"
+        >
+          <div className="hero-curtain-line" />
+
+          <span>
+            VED EXIM · SURFACES
+          </span>
+        </div>
+
+      </div>
     </section>
   );
 }
 
 export default Hero;
-

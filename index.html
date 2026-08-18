@@ -2,12 +2,361 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/images/logo/vedexim.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/images/logo/vedexim.svg"
+    />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
     <title>VED EXIM</title>
+
+    <style>
+      #intro-loader {
+        position: fixed;
+        inset: 0;
+
+        width: 100vw;
+        height: 100vh;
+        height: 100svh;
+
+        z-index: 999999;
+
+        background: #171614;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+
+        opacity: 1;
+        visibility: visible;
+
+        transition:
+          opacity 0.7s ease,
+          visibility 0.7s ease;
+      }
+
+      #intro-loader.intro-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+
+      /* =========================================
+         INTRO VIDEO
+      ========================================= */
+
+      #intro-video {
+        width: 100%;
+        height: 100%;
+
+        display: block;
+
+        object-fit: cover;
+        object-position: center;
+
+        background: #171614;
+      }
+
+
+      /* =========================================
+         SKIP BUTTON
+      ========================================= */
+
+      #skip-intro {
+        position: absolute;
+
+        right: 35px;
+        bottom: 35px;
+
+        z-index: 10;
+
+        display: flex;
+        align-items: center;
+        gap: 18px;
+
+        min-height: 45px;
+
+        padding: 0 18px;
+
+        border: 1px solid
+          rgba(255, 255, 255, 0.45);
+
+        background: rgba(20, 19, 17, 0.25);
+
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+
+        color: #f4f1eb;
+
+        font-family: Arial, sans-serif;
+
+        font-size: 8px;
+
+        letter-spacing: 2.5px;
+
+        cursor: pointer;
+
+        transition:
+          background 0.35s ease,
+          border-color 0.35s ease,
+          transform 0.35s ease;
+      }
+
+      #skip-intro span {
+        font-size: 14px;
+
+        transition:
+          transform 0.35s ease;
+      }
+
+      #skip-intro:hover {
+        background: #f4f1eb;
+
+        border-color: #f4f1eb;
+
+        color: #171614;
+
+        transform:
+          translateY(-3px);
+      }
+
+      #skip-intro:hover span {
+        transform:
+          translateX(4px);
+      }
+
+
+      /* =========================================
+         MOBILE
+      ========================================= */
+
+      @media (max-width: 650px) {
+
+        #intro-video {
+          object-fit: cover;
+          object-position: center;
+        }
+
+        #skip-intro {
+          right: 20px;
+          bottom: 20px;
+
+          min-height: 42px;
+
+          padding: 0 15px;
+
+          font-size: 7px;
+
+          letter-spacing: 2px;
+
+          gap: 12px;
+        }
+
+      }
+    </style>
   </head>
+
+
   <body>
+
+    <!-- =========================================
+         VED EXIM INTRO VIDEO
+    ========================================== -->
+
+    <div id="intro-loader">
+
+      <video
+        id="intro-video"
+        autoplay
+        muted
+        playsinline
+        preload="auto"
+      >
+
+        <source
+          src="/videos/logo-intro.mp4"
+          type="video/mp4"
+        />
+
+        Your browser does not support
+        the intro video.
+
+      </video>
+
+
+      <!-- SKIP -->
+
+      <button
+        id="skip-intro"
+        type="button"
+      >
+        SKIP INTRO
+
+        <span>↗</span>
+      </button>
+
+    </div>
+
+
+    <!-- =========================================
+         REACT WEBSITE
+    ========================================== -->
+
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+
+
+    <script
+      type="module"
+      src="/src/main.jsx"
+    ></script>
+
+
+    <!-- =========================================
+         INTRO CONTROL
+    ========================================== -->
+
+    <script>
+
+      (function () {
+
+        const loader =
+          document.getElementById(
+            "intro-loader"
+          );
+
+        const video =
+          document.getElementById(
+            "intro-video"
+          );
+
+        const skipButton =
+          document.getElementById(
+            "skip-intro"
+          );
+
+
+        if (
+          !loader ||
+          !video ||
+          !skipButton
+        ) {
+          return;
+        }
+
+
+        let removed = false;
+
+
+        /* =========================================
+           REMOVE INTRO
+        ========================================= */
+
+        function removeIntro() {
+
+          if (removed) {
+            return;
+          }
+
+          removed = true;
+
+
+          /*
+           * Stop video immediately
+           */
+
+          video.pause();
+
+          video.currentTime = 0;
+
+
+          /*
+           * Fade out intro
+           */
+
+          loader.classList.add(
+            "intro-hidden"
+          );
+
+
+          /*
+           * Remove after fade
+           */
+
+          setTimeout(function () {
+
+            if (loader) {
+              loader.remove();
+            }
+
+          }, 750);
+
+        }
+
+
+        /* =========================================
+           VIDEO FINISHED
+        ========================================= */
+
+        video.addEventListener(
+          "ended",
+          removeIntro
+        );
+
+
+        /* =========================================
+           SKIP BUTTON
+        ========================================= */
+
+        skipButton.addEventListener(
+          "click",
+          removeIntro
+        );
+
+
+        /* =========================================
+           VIDEO ERROR
+        ========================================= */
+
+        video.addEventListener(
+          "error",
+          removeIntro
+        );
+
+
+        /* =========================================
+           AUTOPLAY
+        ========================================= */
+
+        const playPromise =
+          video.play();
+
+        if (
+          playPromise !== undefined
+        ) {
+
+          playPromise.catch(
+            function () {
+              /*
+               * Video remains visible.
+               * User can use SKIP INTRO.
+               */
+            }
+          );
+
+        }
+
+      })();
+
+    </script>
+
   </body>
 </html>
