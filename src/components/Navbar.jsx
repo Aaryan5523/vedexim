@@ -148,7 +148,7 @@ function Navbar() {
                 to="/"
                 onClick={closeMenu}
               >
-                <span>01</span>
+                <span></span>
                 Home
               </Link>
 
@@ -159,7 +159,7 @@ function Navbar() {
                 to="/about"
                 onClick={closeMenu}
               >
-                <span>02</span>
+                <span></span>
                 About
               </Link>
 
@@ -170,7 +170,7 @@ function Navbar() {
                 to="/collections"
                 onClick={closeMenu}
               >
-                <span>03</span>
+                <span></span>
                 Collections
               </Link>
 
@@ -182,7 +182,7 @@ function Navbar() {
                 className="menu-nav-product"
                 onClick={openProductsMenu}
               >
-                <span>04</span>
+                <span></span>
                 Products
               </button>
 
@@ -193,7 +193,7 @@ function Navbar() {
                 to="/process"
                 onClick={closeMenu}
               >
-                <span>05</span>
+                <span></span>
                 Our Process
               </Link>
 
@@ -204,7 +204,7 @@ function Navbar() {
                 to="/contact"
                 onClick={closeMenu}
               >
-                <span>06</span>
+                <span></span>
                 Contact
               </Link>
 
@@ -216,7 +216,7 @@ function Navbar() {
                 className="menu-catalogue-link"
                 onClick={closeMenu}
               >
-                <span>07</span>
+                <span></span>
 
                 <div className="menu-catalogue-content">
                   <strong>Download Catalogue</strong>
@@ -279,7 +279,7 @@ function Navbar() {
                 onClick={openWallTiles}
               >
                 <span className="menu-item-number">
-                  01.
+
                 </span>
 
                 <span className="menu-item-name">
@@ -294,7 +294,6 @@ function Navbar() {
                 onClick={openFloorTiles}
               >
                 <span className="menu-item-number">
-                  02.
                 </span>
 
                 <span className="menu-item-name">
@@ -309,7 +308,6 @@ function Navbar() {
                 onClick={closeMenu}
               >
                 <span className="menu-item-number">
-                  03.
                 </span>
 
                 <span className="menu-item-name">
@@ -324,7 +322,6 @@ function Navbar() {
                 onClick={closeMenu}
               >
                 <span className="menu-item-number">
-                  04.
                 </span>
 
                 <span className="menu-item-name">
@@ -387,7 +384,6 @@ function Navbar() {
                 onClick={closeMenu}
               >
                 <span className="menu-item-number">
-                  01.
                 </span>
 
                 <span className="menu-item-name">
@@ -402,7 +398,6 @@ function Navbar() {
                 onClick={closeMenu}
               >
                 <span className="menu-item-number">
-                  02.
                 </span>
 
                 <span className="menu-item-name">
@@ -417,7 +412,6 @@ function Navbar() {
                 onClick={closeMenu}
               >
                 <span className="menu-item-number">
-                  03.
                 </span>
 
                 <span className="menu-item-name">
@@ -480,7 +474,6 @@ function Navbar() {
                 onClick={closeMenu}
               >
                 <span className="menu-item-number">
-                  01.
                 </span>
 
                 <span className="menu-item-name">
@@ -495,7 +488,6 @@ function Navbar() {
                 onClick={closeMenu}
               >
                 <span className="menu-item-number">
-                  02.
                 </span>
 
                 <span className="menu-item-name">
@@ -510,7 +502,6 @@ function Navbar() {
                 onClick={closeMenu}
               >
                 <span className="menu-item-number">
-                  03.
                 </span>
 
                 <span className="menu-item-name">
