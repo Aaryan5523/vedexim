@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
+  const location = useLocation();
+
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuView, setMenuView] = useState("main");
@@ -97,6 +99,10 @@ function Navbar() {
     <header
       className={`navbar ${
         scrolled ? "navbar-scrolled" : ""
+      } ${
+        location.pathname === "/products"
+          ? "navbar-light-page"
+          : ""
       } ${
         navbarHidden && !menuOpen ? "navbar-hidden" : ""
       }`}

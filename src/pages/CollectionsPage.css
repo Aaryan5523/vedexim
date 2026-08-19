@@ -2559,3 +2559,833 @@
   }
 
 }
+
+/* =====================================================
+   VED EXIM — COLLECTIONS HORIZONTAL TRANSITION
+   Same visual language as Home Hero / About
+===================================================== */
+
+.collections-page {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.collections-page-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Keep the video transform smooth without changing its layout. */
+.collections-hero-video {
+  will-change: transform;
+}
+
+/* Moving panel: right -> left while scrolling down. */
+.collections-horizontal-curtain {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 30;
+
+  display: flex;
+  align-items: center;
+
+  background: #f3f0ea;
+
+  color: #171614;
+
+  pointer-events: none;
+
+  will-change: transform;
+
+  box-shadow:
+    -35px 0 90px
+    rgba(23, 22, 20, 0.10);
+}
+
+.collections-horizontal-curtain-line {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 2px;
+
+  background:
+    rgba(23, 22, 20, 0.18);
+
+  box-shadow:
+    8px 0 30px
+    rgba(23, 22, 20, 0.12);
+}
+
+.collections-horizontal-curtain > span {
+  position: absolute;
+
+  left: 25px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  writing-mode: vertical-rl;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 7px;
+
+  letter-spacing: 3px;
+
+  color: #817a71;
+
+  white-space: nowrap;
+}
+
+/* Smooth content movement */
+.collections-page-hero-content,
+.collections-page-hero-meta {
+  will-change: transform, opacity;
+}
+
+@media (max-width: 650px) {
+  .collections-horizontal-curtain > span {
+    left: 12px;
+    font-size: 6px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collections-horizontal-curtain,
+  .collections-page-hero-content,
+  .collections-page-hero-meta,
+  .collections-hero-video {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+
+/* =====================================================
+   VED EXIM — CURTAIN LABEL
+   Bottom-left horizontal position
+   ===================================================== */
+
+.collections-horizontal-curtain > span {
+  position: absolute;
+
+  left: 28px;
+  bottom: 28px;
+
+  top: auto;
+  right: auto;
+
+  transform: none;
+
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 1;
+
+  letter-spacing: 3px;
+
+  color: #817a71;
+
+  white-space: nowrap;
+
+  text-transform: uppercase;
+}
+
+@media (max-width: 650px) {
+  .collections-horizontal-curtain > span {
+    left: 18px;
+    bottom: 20px;
+
+    font-size: 7px;
+    letter-spacing: 2px;
+  }
+}
+
+
+/* =====================================================
+   VED EXIM — FINAL HERO FONT / TYPE FIX
+   Prevents the logo/nav from overlapping the hero label.
+   Keeps the luxury editorial typography clean.
+   ===================================================== */
+
+.collections-page-hero .collections-page-label {
+  display: block;
+
+  margin: 0 0 26px;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.2;
+
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  color: rgba(244, 241, 235, 0.78);
+
+  white-space: nowrap;
+
+  position: relative;
+  z-index: 6;
+}
+
+/* Main hero heading — cleaner premium serif sizing */
+.collections-page-hero h1 {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(56px, 6.1vw, 88px);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -3.2px;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.collections-page-hero h1 em {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -3.5px;
+}
+
+/* Make the hero text block sit cleanly below the navbar/logo */
+.collections-page-hero .collections-page-hero-content {
+  padding-top: 18px;
+}
+
+/* Mobile typography */
+@media (max-width: 650px) {
+  .collections-page-hero .collections-page-label {
+    margin-bottom: 16px;
+
+    font-size: 7px;
+    font-weight: 500;
+    line-height: 1.35;
+
+    letter-spacing: 2.4px;
+  }
+
+  .collections-page-hero h1 {
+    font-size: clamp(45px, 12.8vw, 62px);
+    line-height: 0.94;
+    letter-spacing: -2px;
+  }
+
+  .collections-page-hero h1 em {
+    letter-spacing: -2.2px;
+  }
+
+  .collections-page-hero .collections-page-hero-content {
+    padding-top: 0;
+  }
+}
+
+
+/* =====================================================
+   FINAL COLLECTIONS TYPOGRAPHY FIX
+   IMPORTANT:
+   The text visible at the TOP-LEFT in the screenshot is
+   .collections-page-label (hero label), NOT the curtain label.
+   Both are styled separately below.
+===================================================== */
+
+/* ---------- HERO LABEL ---------- */
+
+.collections-page-hero .collections-page-hero-content
+.collections-page-label,
+.collections-page-hero .collections-page-label {
+  display: block !important;
+
+  position: relative !important;
+
+  margin: 0 0 24px !important;
+  padding: 0 !important;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif !important;
+
+  font-size: 9px !important;
+  font-weight: 500 !important;
+
+  line-height: 1.2 !important;
+
+  letter-spacing: 4px !important;
+
+  text-transform: uppercase !important;
+
+  color: rgba(244, 241, 235, 0.82) !important;
+
+  white-space: nowrap !important;
+
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- HERO MAIN TITLE ---------- */
+
+.collections-page-hero h1 {
+  margin: 0 !important;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif !important;
+
+  font-size: clamp(58px, 6.6vw, 96px) !important;
+
+  font-weight: 400 !important;
+
+  line-height: 0.91 !important;
+
+  letter-spacing: -3.5px !important;
+
+  color: #f4f1eb !important;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.collections-page-hero h1 em {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif !important;
+
+  font-style: italic !important;
+  font-weight: 400 !important;
+
+  letter-spacing: -3.5px !important;
+
+  color: rgba(244, 241, 235, 0.82) !important;
+}
+
+/* ---------- HERO CONTENT POSITION ----------
+   Keeps the label below the navbar/logo instead
+   of appearing directly underneath/over it.
+------------------------------------------------ */
+
+.collections-page-hero .collections-page-hero-content {
+  position: relative !important;
+
+  z-index: 5 !important;
+
+  margin-top: clamp(190px, 25vh, 250px) !important;
+
+  margin-left: clamp(48px, 8vw, 145px) !important;
+
+  padding: 0 !important;
+}
+
+/* ---------- CURTAIN LABEL ----------
+   This is a DIFFERENT element from the hero label.
+   It stays bottom-left on the moving cream curtain.
+------------------------------------------------ */
+
+.collections-horizontal-curtain > span {
+  position: absolute !important;
+
+  left: 28px !important;
+  bottom: 28px !important;
+
+  top: auto !important;
+  right: auto !important;
+
+  transform: none !important;
+
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif !important;
+
+  font-size: 8px !important;
+  font-weight: 500 !important;
+
+  line-height: 1 !important;
+
+  letter-spacing: 3px !important;
+
+  text-transform: uppercase !important;
+
+  color: #817a71 !important;
+
+  white-space: nowrap !important;
+
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 650px) {
+
+  .collections-page-hero .collections-page-hero-content {
+    margin-top: 0 !important;
+    margin-left: 18px !important;
+    margin-right: 18px !important;
+    margin-bottom: 0 !important;
+
+    padding: 0 0 104px !important;
+  }
+
+  .collections-page-hero .collections-page-label {
+    margin-bottom: 16px !important;
+
+    font-size: 7px !important;
+
+    letter-spacing: 2.5px !important;
+  }
+
+  .collections-page-hero h1 {
+    font-size: clamp(45px, 13vw, 62px) !important;
+
+    line-height: 0.94 !important;
+
+    letter-spacing: -2px !important;
+  }
+
+  .collections-page-hero h1 em {
+    letter-spacing: -2px !important;
+  }
+
+  .collections-horizontal-curtain > span {
+    left: 18px !important;
+    bottom: 20px !important;
+
+    font-size: 7px !important;
+
+    letter-spacing: 2px !important;
+  }
+}
+
+
+/* =====================================================
+   VED EXIM — FINAL HERO FONT POSITION
+   COMPLETE HERO CONTENT: LEFT + BOTTOM
+   Put this block at the very end of CollectionsPage.css
+===================================================== */
+
+.collections-page .collections-page-hero {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Desktop: complete hero typography at bottom-left */
+.collections-page .collections-page-hero .collections-page-hero-content {
+  position: absolute !important;
+
+  left: clamp(48px, 8vw, 145px) !important;
+  right: auto !important;
+
+  top: auto !important;
+  bottom: 120px !important;
+
+  width: min(760px, 82vw) !important;
+  max-width: 760px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  z-index: 5 !important;
+
+  transform: none !important;
+}
+
+/* Small eyebrow */
+.collections-page .collections-page-hero .collections-page-label {
+  margin: 0 0 22px !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 9px !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 4px !important;
+
+  color: rgba(244, 241, 235, 0.78) !important;
+}
+
+/* Main heading */
+.collections-page .collections-page-hero h1 {
+  margin: 0 !important;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif !important;
+
+  font-size: clamp(58px, 6.6vw, 96px) !important;
+  font-weight: 400 !important;
+  line-height: 0.91 !important;
+  letter-spacing: -3.5px !important;
+
+  color: #f4f1eb !important;
+}
+
+/* Italic second line */
+.collections-page .collections-page-hero h1 em {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif !important;
+
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: rgba(244, 241, 235, 0.82) !important;
+}
+
+/* Description */
+.collections-page .collections-page-hero .collections-page-description {
+  max-width: 510px !important;
+
+  margin: 28px 0 0 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+
+  color: rgba(244, 241, 235, 0.80) !important;
+}
+
+/* Button */
+.collections-page .collections-page-hero .collections-hero-button {
+  margin-top: 26px !important;
+}
+
+/* Bottom metadata stays below the hero content */
+.collections-page .collections-page-hero .collections-page-hero-meta {
+  position: absolute !important;
+
+  left: clamp(48px, 8vw, 145px) !important;
+  right: clamp(48px, 8vw, 145px) !important;
+
+  bottom: 27px !important;
+
+  z-index: 6 !important;
+}
+
+/* =====================================================
+   LARGE DESKTOP
+===================================================== */
+
+@media (min-width: 1200px) {
+
+  .collections-page .collections-page-hero
+  .collections-page-hero-content {
+    left: 8vw !important;
+    bottom: 125px !important;
+    width: 760px !important;
+  }
+
+  .collections-page .collections-page-hero h1 {
+    font-size: 88px !important;
+  }
+
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .collections-page .collections-page-hero
+  .collections-page-hero-content {
+    left: 6vw !important;
+    bottom: 105px !important;
+    width: 82vw !important;
+    max-width: 650px !important;
+  }
+
+  .collections-page .collections-page-hero h1 {
+    font-size: clamp(52px, 8vw, 78px) !important;
+  }
+
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+
+  .collections-page .collections-page-hero {
+    height: 100svh !important;
+    min-height: 650px !important;
+  }
+
+  .collections-page .collections-page-hero
+  .collections-page-hero-content {
+    position: absolute !important;
+
+    left: 20px !important;
+    right: 20px !important;
+
+    top: auto !important;
+    bottom: 105px !important;
+
+    width: auto !important;
+    max-width: 330px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .collections-page .collections-page-hero .collections-page-label {
+    margin-bottom: 14px !important;
+    font-size: 7px !important;
+    letter-spacing: 2.8px !important;
+  }
+
+  .collections-page .collections-page-hero h1 {
+    font-size: clamp(46px, 13vw, 62px) !important;
+    line-height: 0.9 !important;
+    letter-spacing: -2px !important;
+  }
+
+  .collections-page .collections-page-hero
+  .collections-page-description {
+    max-width: 305px !important;
+    margin-top: 18px !important;
+    font-size: 9px !important;
+    line-height: 1.6 !important;
+  }
+
+  .collections-page .collections-page-hero
+  .collections-hero-button {
+    margin-top: 17px !important;
+    min-height: 43px !important;
+    font-size: 7.5px !important;
+  }
+
+  .collections-page .collections-page-hero
+  .collections-page-hero-meta {
+    left: 20px !important;
+    right: 20px !important;
+    bottom: 18px !important;
+    padding-top: 12px !important;
+    font-size: 5px !important;
+  }
+
+}
+
+/* =====================================================
+   EXTRA SMALL PHONE
+===================================================== */
+
+@media (max-width: 380px) {
+
+  .collections-page .collections-page-hero
+  .collections-page-hero-content {
+    left: 18px !important;
+    right: 18px !important;
+    bottom: 96px !important;
+    max-width: 300px !important;
+  }
+
+  .collections-page .collections-page-hero h1 {
+    font-size: 45px !important;
+    line-height: 0.92 !important;
+    letter-spacing: -1.7px !important;
+  }
+
+}
+
+
+/* =====================================================
+   COLLECTIONS HERO — NORMAL / BALANCED POSITION
+   Final override
+===================================================== */
+
+.collections-page .collections-page-hero .collections-page-hero-content {
+  position: absolute !important;
+
+  left: 8vw !important;
+  right: auto !important;
+
+  top: 50% !important;
+  bottom: auto !important;
+
+  width: min(760px, 80vw) !important;
+  max-width: 760px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: translateY(-50%) !important;
+
+  z-index: 5 !important;
+}
+
+.collections-page .collections-page-hero .collections-page-label {
+  margin: 0 0 24px !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 9px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+
+  color: rgba(244, 241, 235, 0.80) !important;
+}
+
+.collections-page .collections-page-hero h1 {
+  margin: 0 !important;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif !important;
+
+  font-size: clamp(56px, 6.2vw, 90px) !important;
+  font-weight: 400 !important;
+
+  line-height: 0.92 !important;
+  letter-spacing: -3.5px !important;
+
+  color: #f4f1eb !important;
+}
+
+.collections-page .collections-page-hero h1 em {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif !important;
+
+  font-style: italic !important;
+  font-weight: 400 !important;
+
+  letter-spacing: -3.5px !important;
+}
+
+.collections-page .collections-page-hero .collections-page-description {
+  max-width: 470px !important;
+
+  margin: 30px 0 0 !important;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 12px !important;
+  line-height: 1.75 !important;
+
+  color: rgba(244, 241, 235, 0.76) !important;
+}
+
+.collections-page .collections-page-hero .collections-hero-button {
+  margin-top: 28px !important;
+}
+
+/* Keep metadata at the bottom */
+.collections-page .collections-page-hero .collections-page-hero-meta {
+  position: absolute !important;
+
+  left: 8vw !important;
+  right: 8vw !important;
+
+  top: auto !important;
+  bottom: 28px !important;
+
+  z-index: 6 !important;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .collections-page .collections-page-hero .collections-page-hero-content {
+    left: 6vw !important;
+    width: 84vw !important;
+  }
+
+  .collections-page .collections-page-hero h1 {
+    font-size: clamp(52px, 8vw, 76px) !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .collections-page .collections-page-hero .collections-page-hero-content {
+    left: 20px !important;
+    right: 20px !important;
+
+    top: 50% !important;
+    bottom: auto !important;
+
+    width: auto !important;
+    max-width: 340px !important;
+
+    transform: translateY(-50%) !important;
+  }
+
+  .collections-page .collections-page-hero .collections-page-label {
+    margin-bottom: 16px !important;
+
+    font-size: 7px !important;
+    letter-spacing: 2.5px !important;
+  }
+
+  .collections-page .collections-page-hero h1 {
+    font-size: clamp(45px, 12.5vw, 62px) !important;
+
+    line-height: 0.93 !important;
+    letter-spacing: -2px !important;
+  }
+
+  .collections-page .collections-page-hero h1 em {
+    letter-spacing: -2px !important;
+  }
+
+  .collections-page .collections-page-hero .collections-page-description {
+    max-width: 320px !important;
+
+    margin-top: 20px !important;
+
+    font-size: 10px !important;
+    line-height: 1.7 !important;
+  }
+
+  .collections-page .collections-page-hero .collections-hero-button {
+    margin-top: 22px !important;
+  }
+
+  .collections-page .collections-page-hero .collections-page-hero-meta {
+    left: 20px !important;
+    right: 20px !important;
+    bottom: 18px !important;
+  }
+}

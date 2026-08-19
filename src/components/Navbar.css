@@ -2290,3 +2290,67 @@ body.menu-open {
   }
 }
 
+
+/* =====================================================
+   LIGHT PAGE NAVBAR
+   Products page has a white background, so the
+   hamburger button must use a dark treatment.
+===================================================== */
+
+.navbar.navbar-light-page {
+  background: transparent;
+  color: #171614;
+}
+
+.navbar.navbar-light-page .menu-button {
+  background: rgba(23, 22, 20, 0.035);
+  border-color: rgba(23, 22, 20, 0.35);
+}
+
+.navbar.navbar-light-page .menu-button span {
+  background: #171614;
+}
+
+.navbar.navbar-light-page.navbar-scrolled {
+  background: rgba(243, 240, 234, 0.97);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.navbar.navbar-light-page.navbar-scrolled .menu-button {
+  background: #171614;
+  border-color: #171614;
+}
+
+.navbar.navbar-light-page.navbar-scrolled .menu-button span {
+  background: #f4f1eb;
+}
+
+/* When the menu is open, keep the close X treatment unchanged. */
+.navbar.navbar-light-page .menu-button.menu-active {
+  background: #f4f1eb;
+  border-color: #f4f1eb;
+}
+
+.navbar.navbar-light-page .menu-button.menu-active span {
+  background: #171614;
+}
+
+@media (max-width: 650px) {
+  .navbar.navbar-light-page .menu-button {
+    background: rgba(23, 22, 20, 0.035);
+    border-color: rgba(23, 22, 20, 0.35);
+  }
+
+  .navbar.navbar-light-page .menu-button span {
+    background: #171614;
+  }
+
+  .navbar.navbar-light-page.navbar-scrolled .menu-button {
+    background: #171614;
+    border-color: #171614;
+  }
+
+  .navbar.navbar-light-page.navbar-scrolled .menu-button span {
+    background: #f4f1eb;
+  }
+}
