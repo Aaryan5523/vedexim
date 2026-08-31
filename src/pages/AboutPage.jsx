@@ -103,10 +103,17 @@ function AboutPage() {
       <section className="about-hero">
 
         <div className="about-hero-image">
-          <img
-            src="/images/products/marble/marble-02.png"
-            alt="VED EXIM premium ceramic surfaces"
-          />
+          <video
+            className="about-hero-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label="Premium ceramic surfaces"
+          >
+            <source src="/videos/ceramic-hero.mp4" type="video/mp4" />
+          </video>
 
           <div className="about-hero-overlay" />
         </div>

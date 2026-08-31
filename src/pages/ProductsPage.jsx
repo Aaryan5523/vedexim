@@ -1,6 +1,7 @@
 import {
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import {
@@ -207,6 +208,8 @@ const surfaces = [
 ===================================================== */
 
 function ProductsPage() {
+  const pageRef = useRef(null);
+  const curtainRafRef = useRef(null);
   const [searchParams] = useSearchParams();
 
   const categoryFromUrl =
@@ -234,6 +237,41 @@ function ProductsPage() {
 
   const [selectedProduct, setSelectedProduct] =
     useState(null);
+  const [revealProgress, setRevealProgress] = useState(0);
+
+  useEffect(() => {
+    const updateReveal = () => {
+      if (curtainRafRef.current) {
+        cancelAnimationFrame(curtainRafRef.current);
+      }
+
+      curtainRafRef.current = requestAnimationFrame(() => {
+        curtainRafRef.current = null;
+
+        const page = pageRef.current;
+        if (!page) return;
+
+        const distance = Math.max(window.innerHeight * 0.9, 500);
+        const travelled = Math.max(0, -page.getBoundingClientRect().top);
+
+        setRevealProgress(Math.min(Math.max(travelled / distance, 0), 1));
+      });
+    };
+
+    window.addEventListener("scroll", updateReveal, { passive: true });
+    window.addEventListener("resize", updateReveal);
+    updateReveal();
+
+    return () => {
+      window.removeEventListener("scroll", updateReveal);
+      window.removeEventListener("resize", updateReveal);
+
+      if (curtainRafRef.current) {
+        cancelAnimationFrame(curtainRafRef.current);
+        curtainRafRef.current = null;
+      }
+    };
+  }, []);
 
 
   /* ===================================================
@@ -477,8 +515,58 @@ function ProductsPage() {
      RENDER
   =================================================== */
 
+  const eased =
+    revealProgress * revealProgress * (3 - 2 * revealProgress);
+  const curtainX = 100 - eased * 100;
+
   return (
-    <main className="products-catalogue-page">
+    <main className="products-catalogue-page" ref={pageRef}>
+
+      <section className="products-video-hero">
+        <video
+          className="products-video-background"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-label="Ceramic tile product collection"
+        >
+          <source src="/videos/ceramic-hero-02.mp4" type="video/mp4" />
+        </video>
+
+        <div className="products-video-overlay" />
+
+        <div className="products-video-content">
+          <p className="products-video-label">VED EXIM · PRODUCTS</p>
+          <h1>
+            Crafted for
+            <br />
+            <em>every surface.</em>
+          </h1>
+          <p className="products-video-description">
+            Explore ceramic surfaces made for enduring performance,
+            refined detail and contemporary spaces.
+          </p>
+          <a href="#product-catalogue" className="products-video-button">
+            EXPLORE PRODUCTS <span>↓</span>
+          </a>
+        </div>
+
+        <div className="products-video-bottom">
+          <span>CERAMICS · SURFACES · SANITARYWARE</span>
+          <span>SCROLL TO EXPLORE ↓</span>
+        </div>
+
+        <div
+          className="products-horizontal-curtain"
+          aria-hidden="true"
+          style={{ transform: `translate3d(${curtainX}%, 0, 0)` }}
+        >
+          <div className="products-horizontal-curtain-line" />
+          <span>VED EXIM · PRODUCTS</span>
+        </div>
+      </section>
 
 
       {/* =================================================

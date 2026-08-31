@@ -5,10 +5,12 @@ import "./ContactPage.css";
 
 function ContactPage() {
   const pageRef = useRef(null);
+  const curtainRafRef = useRef(null);
 
   const [showInquiryPopup, setShowInquiryPopup] = useState(false);
   const [sendingInquiry, setSendingInquiry] = useState(false);
   const [inquirySent, setInquirySent] = useState(false);
+  const [revealProgress, setRevealProgress] = useState(0);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -32,6 +34,44 @@ function ContactPage() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const updateReveal = () => {
+      if (curtainRafRef.current) {
+        cancelAnimationFrame(curtainRafRef.current);
+      }
+
+      curtainRafRef.current = requestAnimationFrame(() => {
+        curtainRafRef.current = null;
+
+        const page = pageRef.current;
+        if (!page) return;
+
+        const distance = Math.max(window.innerHeight * 0.9, 500);
+        const travelled = Math.max(0, -page.getBoundingClientRect().top);
+
+        setRevealProgress(Math.min(Math.max(travelled / distance, 0), 1));
+      });
+    };
+
+    window.addEventListener("scroll", updateReveal, { passive: true });
+    window.addEventListener("resize", updateReveal);
+    updateReveal();
+
+    return () => {
+      window.removeEventListener("scroll", updateReveal);
+      window.removeEventListener("resize", updateReveal);
+
+      if (curtainRafRef.current) {
+        cancelAnimationFrame(curtainRafRef.current);
+        curtainRafRef.current = null;
+      }
+    };
+  }, []);
+
+  const eased =
+    revealProgress * revealProgress * (3 - 2 * revealProgress);
+  const curtainX = 100 - eased * 100;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -155,6 +195,21 @@ function ContactPage() {
 
         <div className="contact-page-hero-background">
 
+          <video
+            className="contact-hero-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label="Business partnership meeting"
+          >
+            <source
+              src="https://videos.pexels.com/video-files/8426047/8426047-uhd_2560_1440_25fps.mp4"
+              type="video/mp4"
+            />
+          </video>
+
           <div className="contact-hero-orb contact-orb-one" />
           <div className="contact-hero-orb contact-orb-two" />
 
@@ -202,6 +257,15 @@ function ContactPage() {
         </div>
 
       </section>
+
+      <div
+        className="contact-horizontal-curtain"
+        aria-hidden="true"
+        style={{ transform: `translate3d(${curtainX}%, 0, 0)` }}
+      >
+        <div className="contact-horizontal-curtain-line" />
+        <span>VED EXIM · CONTACT</span>
+      </div>
 
 
       {/* =================================================

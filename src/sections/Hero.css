@@ -468,3 +468,39 @@
     animation: none !important;
   }
 }
+
+/* Keep the home hero readable on the narrowest phone screens. */
+@media (max-width: 650px) {
+  .hero-title {
+    font-size: clamp(46px, 13.5vw, 64px);
+    line-height: 0.94;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .hero-description {
+    font-size: clamp(11px, 3.15vw, 12px);
+    line-height: 1.7;
+  }
+}
+
+/* Final mobile hero typography: keep every slide legible on narrow screens. */
+@media (max-width: 650px) {
+  .hero-content {
+    max-width: min(100%, 34rem);
+  }
+
+  .hero-title {
+    max-width: 100%;
+    font-size: clamp(44px, 12.8vw, 60px);
+    line-height: 0.94;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .hero-description {
+    max-width: 31rem;
+    font-size: 10px;
+    line-height: 1.75;
+  }
+}

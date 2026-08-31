@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./OurProcessPage.css";
 
+const processHeroVideo = "/videos/ceramic-hero.mp4";
+
 const processSteps = [
   {
     number: "01",
@@ -127,8 +129,10 @@ const processSteps = [
 
 function OurProcessPage() {
   const pageRef = useRef(null);
+  const curtainRafRef = useRef(null);
 
   const [activeStep, setActiveStep] = useState(0);
+  const [revealProgress, setRevealProgress] = useState(0);
 
   useEffect(() => {
     const page = pageRef.current;
@@ -141,6 +145,44 @@ function OurProcessPage() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const updateReveal = () => {
+      if (curtainRafRef.current) {
+        cancelAnimationFrame(curtainRafRef.current);
+      }
+
+      curtainRafRef.current = requestAnimationFrame(() => {
+        curtainRafRef.current = null;
+
+        const page = pageRef.current;
+        if (!page) return;
+
+        const distance = Math.max(window.innerHeight * 0.9, 500);
+        const travelled = Math.max(0, -page.getBoundingClientRect().top);
+
+        setRevealProgress(Math.min(Math.max(travelled / distance, 0), 1));
+      });
+    };
+
+    window.addEventListener("scroll", updateReveal, { passive: true });
+    window.addEventListener("resize", updateReveal);
+    updateReveal();
+
+    return () => {
+      window.removeEventListener("scroll", updateReveal);
+      window.removeEventListener("resize", updateReveal);
+
+      if (curtainRafRef.current) {
+        cancelAnimationFrame(curtainRafRef.current);
+        curtainRafRef.current = null;
+      }
+    };
+  }, []);
+
+  const eased =
+    revealProgress * revealProgress * (3 - 2 * revealProgress);
+  const curtainX = 100 - eased * 100;
 
 
   useEffect(() => {
@@ -187,9 +229,26 @@ function OurProcessPage() {
 
       <section className="process-hero">
 
-        <div className="process-hero-image">
+        <div className="process-hero-image process-hero-video-wrap">
+
+          <video
+            className="process-hero-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster={processSteps[0].image}
+            aria-label="Ceramic tile manufacturing process"
+          >
+            <source
+              src={processHeroVideo}
+              type="video/mp4"
+            />
+          </video>
 
           <img
+            className="process-hero-video-fallback"
             src={processSteps[0].image}
             alt="Morbi Gujarat ceramic manufacturing"
           />
@@ -238,6 +297,15 @@ function OurProcessPage() {
         </div>
 
       </section>
+
+      <div
+        className="process-horizontal-curtain"
+        aria-hidden="true"
+        style={{ transform: `translate3d(${curtainX}%, 0, 0)` }}
+      >
+        <div className="process-horizontal-curtain-line" />
+        <span>VED EXIM · OUR PROCESS</span>
+      </div>
 
 
       {/* =========================================
