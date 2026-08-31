@@ -6,6 +6,7 @@ import "./ContactPage.css";
 function ContactPage() {
   const pageRef = useRef(null);
   const curtainRafRef = useRef(null);
+  const heroRef = useRef(null);
 
   const [showInquiryPopup, setShowInquiryPopup] = useState(false);
   const [sendingInquiry, setSendingInquiry] = useState(false);
@@ -44,13 +45,16 @@ function ContactPage() {
       curtainRafRef.current = requestAnimationFrame(() => {
         curtainRafRef.current = null;
 
-        const page = pageRef.current;
-        if (!page) return;
+        const hero = heroRef.current;
+        if (!hero) return;
 
-        const distance = Math.max(window.innerHeight * 0.9, 500);
-        const travelled = Math.max(0, -page.getBoundingClientRect().top);
+        const rect = hero.getBoundingClientRect();
+        const distance = Math.max(window.innerHeight * 0.9, 520);
+        const travelled = Math.max(0, -rect.top);
 
-        setRevealProgress(Math.min(Math.max(travelled / distance, 0), 1));
+        setRevealProgress(
+          Math.min(Math.max(travelled / distance, 0), 1)
+        );
       });
     };
 
@@ -71,7 +75,7 @@ function ContactPage() {
 
   const eased =
     revealProgress * revealProgress * (3 - 2 * revealProgress);
-  const curtainX = 100 - eased * 100;
+  const curtainX = Math.max(0, Math.min(100, 100 - eased * 100));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -191,24 +195,16 @@ function ContactPage() {
           HERO
       ================================================= */}
 
-      <section className="contact-page-hero">
+      <section className="contact-page-hero" ref={heroRef}>
 
         <div className="contact-page-hero-background">
 
-          <video
-            className="contact-hero-video"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-label="Business partnership meeting"
-          >
-            <source
-              src="https://videos.pexels.com/video-files/8426047/8426047-uhd_2560_1440_25fps.mp4"
-              type="video/mp4"
-            />
-          </video>
+          <img
+            className="contact-hero-image"
+            src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=2200&q=88"
+            alt="Premium business meeting and partnership"
+            loading="eager"
+          />
 
           <div className="contact-hero-orb contact-orb-one" />
           <div className="contact-hero-orb contact-orb-two" />
@@ -256,16 +252,20 @@ function ContactPage() {
 
         </div>
 
+        <div
+          className="contact-hero-transition"
+          aria-hidden="true"
+          style={{
+            transform: `translate3d(calc(${curtainX}% + 2px), 0, 0)`,
+            opacity: revealProgress > 0.001 ? 1 : 0,
+          }}
+        >
+          <div className="contact-hero-transition-line" />
+          <span>VED EXIM · CONTACT</span>
+        </div>
       </section>
 
-      <div
-        className="contact-horizontal-curtain"
-        aria-hidden="true"
-        style={{ transform: `translate3d(${curtainX}%, 0, 0)` }}
-      >
-        <div className="contact-horizontal-curtain-line" />
-        <span>VED EXIM · CONTACT</span>
-      </div>
+
 
 
       {/* =================================================

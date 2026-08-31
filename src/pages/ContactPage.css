@@ -1708,3 +1708,553 @@ summary span {
     line-height: 1.78;
   }
 }
+
+
+/* =========================================================
+   CONTACT — HERO ONLY / CLEAN HORIZONTAL REVEAL
+========================================================= */
+
+.contact-page {
+  position: relative !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+  background: #f3f0ea !important;
+}
+
+.contact-page-hero {
+  position: relative !important;
+  width: 100% !important;
+  height: 155vh !important;
+  min-height: 155vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  background: #171614 !important;
+  isolation: isolate !important;
+}
+
+.contact-page-hero-background {
+  position: sticky !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  overflow: hidden !important;
+  z-index: 0 !important;
+}
+
+.contact-page-hero-content {
+  position: absolute !important;
+  left: 8vw !important;
+  right: 8vw !important;
+  bottom: 18% !important;
+  z-index: 5 !important;
+  margin: 0 !important;
+}
+
+.contact-page-hero-bottom {
+  position: absolute !important;
+  left: 8vw !important;
+  right: 8vw !important;
+  bottom: 30px !important;
+  z-index: 6 !important;
+  margin: 0 !important;
+}
+
+/* Disable every older curtain rule. */
+.contact-horizontal-curtain {
+  display: none !important;
+}
+
+/* New curtain is physically inside the Hero only. */
+.contact-hero-transition {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+
+  width: 100% !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+
+  z-index: 30 !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  background: #f3f0ea !important;
+  color: #171614 !important;
+
+  pointer-events: none !important;
+
+  will-change: transform, opacity !important;
+
+  box-shadow:
+    -30px 0 80px rgba(23,22,20,.10) !important;
+}
+
+.contact-hero-transition-line {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 2px !important;
+
+  background: rgba(23,22,20,.18) !important;
+}
+
+.contact-hero-transition > span {
+  position: absolute !important;
+  top: 50% !important;
+  left: 25px !important;
+
+  transform: translateY(-50%) !important;
+
+  writing-mode: vertical-rl !important;
+
+  font-family: Arial, sans-serif !important;
+  font-size: 7px !important;
+  letter-spacing: 3px !important;
+  line-height: 1 !important;
+
+  color: #817a71 !important;
+  white-space: nowrap !important;
+}
+
+.contact-page-hero + .contact-connect {
+  position: relative !important;
+  z-index: 40 !important;
+  margin-top: 0 !important;
+  background: #f3f0ea !important;
+}
+
+@media (max-width: 650px) {
+  .contact-page-hero {
+    height: 150svh !important;
+    min-height: 150svh !important;
+  }
+
+  .contact-page-hero-background {
+    height: 100svh !important;
+    min-height: 100svh !important;
+  }
+
+  .contact-page-hero-content {
+    left: 22px !important;
+    right: 22px !important;
+    bottom: 19% !important;
+  }
+
+  .contact-page-hero-bottom {
+    left: 22px !important;
+    right: 22px !important;
+    bottom: 25px !important;
+  }
+
+  .contact-hero-transition {
+    height: 100svh !important;
+    min-height: 100svh !important;
+  }
+
+  .contact-hero-transition > span {
+    left: 12px !important;
+    font-size: 6px !important;
+    letter-spacing: 2px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-hero-transition {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   CONTACT HERO — STATIC CONTACT IMAGE
+   Video removed. Premium business/partnership image only.
+========================================================= */
+
+.contact-hero-video {
+  display: none !important;
+}
+
+.contact-hero-image {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+
+  object-fit: cover !important;
+  object-position: center center !important;
+
+  z-index: 0 !important;
+
+  transform: scale(1.025) !important;
+  filter: saturate(.88) contrast(1.02) !important;
+
+  transition:
+    transform 1.4s cubic-bezier(.16,1,.3,1) !important;
+}
+
+.contact-page-hero:hover .contact-hero-image {
+  transform: scale(1) !important;
+}
+
+/* Keep the cinematic readability over the contact image. */
+.contact-page-hero-background::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(17,16,14,.78) 0%,
+      rgba(17,16,14,.46) 42%,
+      rgba(17,16,14,.18) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(17,16,14,.58) 0%,
+      rgba(17,16,14,.08) 62%,
+      rgba(17,16,14,.18) 100%
+    ) !important;
+}
+
+@media (max-width: 650px) {
+  .contact-hero-image {
+    object-position: 55% center !important;
+  }
+}
+
+
+
+/* =========================================================
+   CONTACT — FINAL BLACK-GAP FIX
+   Hero image fills the ENTIRE hero track.
+   Transition exists ONLY inside the hero.
+========================================================= */
+
+.contact-page {
+  position: relative !important;
+  width: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+  background: #f3f0ea !important;
+}
+
+.contact-page-hero {
+  position: relative !important;
+  width: 100% !important;
+  height: 155vh !important;
+  min-height: 155vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #171614 !important;
+  isolation: isolate !important;
+}
+
+/* IMPORTANT: do NOT use sticky here. */
+.contact-page-hero-background {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  overflow: hidden !important;
+  z-index: 0 !important;
+}
+
+.contact-hero-image {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  z-index: 0 !important;
+  transform: scale(1.02) !important;
+}
+
+.contact-page-hero-background::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(17,16,14,.78) 0%,
+      rgba(17,16,14,.46) 42%,
+      rgba(17,16,14,.18) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(17,16,14,.58) 0%,
+      rgba(17,16,14,.08) 62%,
+      rgba(17,16,14,.18) 100%
+    ) !important;
+}
+
+.contact-page-hero-content {
+  position: absolute !important;
+  left: 8vw !important;
+  right: 8vw !important;
+  bottom: 17% !important;
+  z-index: 5 !important;
+  margin: 0 !important;
+}
+
+.contact-page-hero-bottom {
+  position: absolute !important;
+  left: 8vw !important;
+  right: 8vw !important;
+  bottom: 30px !important;
+  z-index: 6 !important;
+  margin: 0 !important;
+}
+
+/* Hero-only curtain. */
+.contact-horizontal-curtain {
+  display: none !important;
+}
+
+.contact-hero-transition {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  z-index: 30 !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  background: #f3f0ea !important;
+  color: #171614 !important;
+
+  pointer-events: none !important;
+  will-change: transform !important;
+
+  box-shadow: -30px 0 80px rgba(23,22,20,.10) !important;
+}
+
+.contact-hero-transition-line {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 2px !important;
+  background: rgba(23,22,20,.18) !important;
+}
+
+.contact-hero-transition > span {
+  position: absolute !important;
+  top: 50% !important;
+  left: 25px !important;
+  transform: translateY(-50%) !important;
+  writing-mode: vertical-rl !important;
+  font: 500 7px/1 Arial, sans-serif !important;
+  letter-spacing: 3px !important;
+  color: #817a71 !important;
+  white-space: nowrap !important;
+}
+
+.contact-page-hero + .contact-connect {
+  position: relative !important;
+  z-index: 40 !important;
+  margin: 0 !important;
+  background: #f3f0ea !important;
+}
+
+@media (max-width: 650px) {
+  .contact-page-hero {
+    height: 150svh !important;
+    min-height: 150svh !important;
+  }
+
+  .contact-page-hero-background {
+    height: 100% !important;
+  }
+
+  .contact-hero-image {
+    height: 100% !important;
+    object-position: 55% center !important;
+  }
+
+  .contact-hero-transition {
+    height: 100svh !important;
+    min-height: 100svh !important;
+  }
+
+  .contact-page-hero-content {
+    left: 22px !important;
+    right: 22px !important;
+    bottom: 19% !important;
+  }
+
+  .contact-page-hero-bottom {
+    left: 22px !important;
+    right: 22px !important;
+    bottom: 25px !important;
+  }
+}
+
+
+/* =========================================================
+   FINAL: TRANSITION ONLY — DO NOT CHANGE HERO SIZE
+========================================================= */
+
+.contact-page-hero {
+  height: 155vh !important;
+  min-height: 155vh !important;
+  overflow: hidden !important;
+}
+
+.contact-page-hero-background {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.contact-page-hero-content {
+  position: absolute !important;
+  top: auto !important;
+  left: 8vw !important;
+  right: 8vw !important;
+  bottom: 17% !important;
+  transform: none !important;
+}
+
+.contact-page-hero-bottom {
+  position: absolute !important;
+  left: 8vw !important;
+  right: 8vw !important;
+  bottom: 30px !important;
+}
+
+.contact-hero-transition {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: auto !important;
+  bottom: auto !important;
+
+  width: 100% !important;
+  height: 100vh !important;
+
+  z-index: 30 !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  background: #f3f0ea !important;
+
+  pointer-events: none !important;
+
+  will-change: transform !important;
+
+  box-shadow:
+    -30px 0 80px rgba(23,22,20,.12) !important;
+}
+
+.contact-hero-transition-line {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 2px !important;
+  background: rgba(23,22,20,.18) !important;
+}
+
+.contact-hero-transition > span {
+  position: absolute !important;
+  left: 25px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+
+  writing-mode: vertical-rl !important;
+
+  font-family: Arial, sans-serif !important;
+  font-size: 7px !important;
+  letter-spacing: 3px !important;
+  line-height: 1 !important;
+
+  color: #817a71 !important;
+  white-space: nowrap !important;
+}
+
+/* The transition ends with the hero. It does not affect
+   the contact content below. */
+.contact-page-hero + .contact-connect {
+  margin-top: 0 !important;
+  position: relative !important;
+  z-index: 40 !important;
+  background: #f3f0ea !important;
+}
+
+@media (max-width: 650px) {
+  .contact-page-hero {
+    height: 150svh !important;
+    min-height: 150svh !important;
+  }
+
+  .contact-page-hero-content {
+    left: 22px !important;
+    right: 22px !important;
+    bottom: 19% !important;
+  }
+
+  .contact-page-hero-bottom {
+    left: 22px !important;
+    right: 22px !important;
+    bottom: 25px !important;
+  }
+
+  .contact-hero-transition {
+    height: 100svh !important;
+  }
+}
+
+
+/* =========================================================
+   FINAL HERO SIZE — COMPACT / NORMAL
+========================================================= */
+
+.contact-page-hero {
+  height: 100vh !important;
+  min-height: 100vh !important;
+  max-height: 100vh !important;
+}
+
+.contact-page-hero-background {
+  height: 100vh !important;
+  min-height: 100vh !important;
+}
+
+.contact-hero-transition {
+  height: 100vh !important;
+  min-height: 100vh !important;
+}
+
+@media (max-width: 650px) {
+  .contact-page-hero {
+    height: 100svh !important;
+    min-height: 100svh !important;
+    max-height: 100svh !important;
+  }
+
+  .contact-page-hero-background,
+  .contact-hero-transition {
+    height: 100svh !important;
+    min-height: 100svh !important;
+  }
+}

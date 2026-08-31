@@ -16,7 +16,6 @@ const processSteps = [
     image:
       "https://www.marbizsurfaces.com/public/images/blog/17691677500_Tile-manufacturing-plant-in-Morbi.jpg",
   },
-
   {
     number: "02",
     title: "Batching & Grinding",
@@ -28,7 +27,6 @@ const processSteps = [
     image:
       "https://www.platinumtiles.in/uploads/infrastructure/o_1bo1pcmav1jnraui19b5ok712lui.jpg",
   },
-
   {
     number: "03",
     title: "Spray Drying",
@@ -40,7 +38,6 @@ const processSteps = [
     image:
       "https://www.marbizsurfaces.com/public/images/blog/17691677500_Tile-manufacturing-plant-in-Morbi.jpg",
   },
-
   {
     number: "04",
     title: "Pressing",
@@ -52,7 +49,6 @@ const processSteps = [
     image:
       "https://storico.b-cdn.net/image/manufacturing-hub.webp",
   },
-
   {
     number: "05",
     title: "Drying",
@@ -64,7 +60,6 @@ const processSteps = [
     image:
       "https://www.thehawk.in/_next/image?q=75&url=https%3A%2F%2Fd2py10ayqu2jji.cloudfront.net%2Fd873dcff-2349-4af5-98c4-03aace2a1452-202601053628759-b54fd020-b014-4827-ad07-4b653d573e7f.jpeg&w=3840",
   },
-
   {
     number: "06",
     title: "Glazing & Digital Decoration",
@@ -76,7 +71,6 @@ const processSteps = [
     image:
       "https://m.economictimes.com/thumb/height-450%2Cwidth-600%2Cimgsize-115796%2Cmsid-130903398/employees-work-at-a-ceramic-tile-production-line-at-a-factory-in-morbi.jpg",
   },
-
   {
     number: "07",
     title: "Kiln Firing",
@@ -88,7 +82,6 @@ const processSteps = [
     image:
       "https://awsimages.detik.net.id/community/media/visual/2026/03/06/dari-tanah-mentah-hingga-jadi-ubin-aktivitas-pabrik-keramik-di-gujarat-1772799482166_169.jpeg?q=90&w=700",
   },
-
   {
     number: "08",
     title: "Quality Inspection",
@@ -98,9 +91,8 @@ const processSteps = [
     detail:
       "Inspection ensures that only products meeting the required specifications move forward.",
     image:
-      "https://www.thehawk.in/_next/image?q=75&url=https%3A%2F%2Fd2py10ayqu2jji.cloudfront.net%2Fd873dcff-2349-4af5-98c4-03aace2a1452%2F202601053628759-b54fd020-b014-4827-ad07-4b653d573e7f.jpeg&w=3840",
+      "https://www.thehawk.in/_next/image?q=75&url=https%3A%2F%2Fd2py10ayqu2jji.cloudfront.net%2Fd873dcff-2349-4af5-98c4-03aace2a1452-202601053628759-b54fd020-b014-4827-ad07-4b653d573e7f.jpeg&w=3840",
   },
-
   {
     number: "09",
     title: "Sorting & Packing",
@@ -112,7 +104,6 @@ const processSteps = [
     image:
       "https://storico.b-cdn.net/image/manufacturing-hub.webp",
   },
-
   {
     number: "10",
     title: "Dispatch & Logistics",
@@ -126,111 +117,93 @@ const processSteps = [
   },
 ];
 
-
 function OurProcessPage() {
   const pageRef = useRef(null);
-  const curtainRafRef = useRef(null);
-
+  const heroRef = useRef(null);
+  const [heroProgress, setHeroProgress] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
-  const [revealProgress, setRevealProgress] = useState(0);
 
   useEffect(() => {
     const page = pageRef.current;
-
     if (!page) return;
 
-    const timer = setTimeout(() => {
-      page.classList.add("process-page-visible");
-    }, 80);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const updateReveal = () => {
-      if (curtainRafRef.current) {
-        cancelAnimationFrame(curtainRafRef.current);
-      }
-
-      curtainRafRef.current = requestAnimationFrame(() => {
-        curtainRafRef.current = null;
-
-        const page = pageRef.current;
-        if (!page) return;
-
-        const distance = Math.max(window.innerHeight * 0.9, 500);
-        const travelled = Math.max(0, -page.getBoundingClientRect().top);
-
-        setRevealProgress(Math.min(Math.max(travelled / distance, 0), 1));
-      });
-    };
-
-    window.addEventListener("scroll", updateReveal, { passive: true });
-    window.addEventListener("resize", updateReveal);
-    updateReveal();
-
-    return () => {
-      window.removeEventListener("scroll", updateReveal);
-      window.removeEventListener("resize", updateReveal);
-
-      if (curtainRafRef.current) {
-        cancelAnimationFrame(curtainRafRef.current);
-        curtainRafRef.current = null;
-      }
-    };
-  }, []);
-
-  const eased =
-    revealProgress * revealProgress * (3 - 2 * revealProgress);
-  const curtainX = 100 - eased * 100;
-
-
-  useEffect(() => {
+    const revealTargets = page.querySelectorAll("[data-reveal]");
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (
-            entry.isIntersecting &&
-            entry.target.dataset.step
-          ) {
-            setActiveStep(
-              Number(entry.target.dataset.step)
-            );
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
           }
         });
       },
-      {
-        threshold: 0.55,
-      }
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
     );
 
-    const sections =
-      document.querySelectorAll(
-        ".process-step"
-      );
-
-    sections.forEach((section) =>
-      observer.observe(section)
-    );
+    revealTargets.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const updateHero = () => {
+      const hero = heroRef.current;
+      if (!hero) return;
+
+      const rect = hero.getBoundingClientRect();
+      const distance = Math.max(window.innerHeight * 0.82, 520);
+      const travelled = Math.max(0, -rect.top);
+      setHeroProgress(Math.min(travelled / distance, 1));
+    };
+
+    updateHero();
+    window.addEventListener("scroll", updateHero, { passive: true });
+    window.addEventListener("resize", updateHero);
+
+    return () => {
+      window.removeEventListener("scroll", updateHero);
+      window.removeEventListener("resize", updateHero);
+    };
+  }, []);
+
+  useEffect(() => {
+    const steps = document.querySelectorAll(".process-stage-card");
+    if (!steps.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.dataset.step);
+            setActiveStep(index);
+          }
+        });
+      },
+      { threshold: 0.55 }
+    );
+
+    steps.forEach((step) => observer.observe(step));
+    return () => observer.disconnect();
+  }, []);
+
+  const eased = 1 - Math.pow(1 - heroProgress, 3);
+  const heroImageY = eased * -5;
+  const heroImageScale = 1 + eased * 0.035;
+  const heroContentY = eased * -42;
+  const heroContentOpacity = 1 - eased * 1.15;
 
   return (
-    <main
-      className="process-page"
-      ref={pageRef}
-    >
-
-      {/* =========================================
-          HERO
-      ========================================= */}
-
-      <section className="process-hero">
-
-        <div className="process-hero-image process-hero-video-wrap">
-
+    <main className="process-page" ref={pageRef}>
+      {/* =================================================
+          CINEMATIC HERO
+      ================================================= */}
+      <section className="process-hero" ref={heroRef}>
+        <div className="process-hero-viewport">
+        <div
+          className="process-hero-media process-hero-video-wrap"
+          style={{
+            transform: `translate3d(0, ${heroImageY}px, 0) scale(${heroImageScale})`,
+          }}
+        >
           <video
             className="process-hero-video"
             autoPlay
@@ -241,467 +214,284 @@ function OurProcessPage() {
             poster={processSteps[0].image}
             aria-label="Ceramic tile manufacturing process"
           >
-            <source
-              src={processHeroVideo}
-              type="video/mp4"
-            />
+            <source src={processHeroVideo} type="video/mp4" />
           </video>
 
           <img
-            className="process-hero-video-fallback"
+            className="process-hero-fallback"
             src={processSteps[0].image}
-            alt="Morbi Gujarat ceramic manufacturing"
+            alt="Ceramic manufacturing process"
           />
-
-          <div className="process-hero-overlay" />
-
         </div>
 
+        <div className="process-hero-overlay" />
 
-        <div className="process-hero-content">
-
-          <p className="process-eyebrow">
-            VED EXIM · OUR PROCESS
-          </p>
+        <div
+          className="process-hero-content"
+          style={{
+            transform: `translate3d(0, ${heroContentY}px, 0)`,
+            opacity: heroContentOpacity,
+          }}
+        >
+          <div className="process-hero-kicker">
+            <span>OUR PROCESS</span>
+            <i />
+          </div>
 
           <h1>
-            From earth
+            From Raw Earth
             <br />
-            <em>to surface.</em>
+            To <em>Refined Surfaces</em>
           </h1>
 
           <p>
-            A closer look at the journey behind
-            contemporary ceramic surfaces —
-            from raw material preparation in
-            Morbi, Gujarat to the finished product.
+            A journey of precision, technology and craftsmanship.
+            Discover how we create premium ceramic tiles that define
+            spaces and stand the test of time.
           </p>
 
+          <a className="process-scroll-cue" href="#process-stages">
+            <span>SCROLL</span>
+            <strong>DOWN</strong>
+            <i>↓</i>
+          </a>
         </div>
-
 
         <div className="process-hero-meta">
-
-          <span>
-            MORBI · GUJARAT · INDIA
-          </span>
-
-          <span>
-            10 STAGES
-          </span>
-
-          <span>
-            SCROLL TO EXPLORE ↓
-          </span>
-
+          <span>VED EXIM · MORBI · GUJARAT</span>
+          <span>10 STAGES</span>
+          <span>CRAFT · TECHNOLOGY · PRECISION</span>
         </div>
 
+        <div className="process-hero-progress">
+          <span style={{ transform: `scaleX(${Math.max(0.08, heroProgress)})` }} />
+        </div>
+
+        {/* SAME HORIZONTAL TRANSITION AS HOME */}
+        <div
+          className="process-horizontal-curtain"
+          aria-hidden="true"
+          style={{
+            transform: `translate3d(${Math.max(0, 100 - eased * 100)}%, 0, 0)`,
+          }}
+        >
+          <div className="process-horizontal-curtain-line" />
+          <span>VED EXIM · OUR PROCESS</span>
+        </div>
+        </div>
       </section>
 
-      <div
-        className="process-horizontal-curtain"
-        aria-hidden="true"
-        style={{ transform: `translate3d(${curtainX}%, 0, 0)` }}
-      >
-        <div className="process-horizontal-curtain-line" />
-        <span>VED EXIM · OUR PROCESS</span>
-      </div>
-
-
-      {/* =========================================
-          MORBI INTRO
-      ========================================= */}
-
-      <section className="process-intro">
-
+      {/* =================================================
+          INTRO
+      ================================================= */}
+      <section className="process-intro process-scroll-section" data-reveal>
         <div className="process-section-label">
           <span>01</span>
-          THE MORBI ECOSYSTEM
+          <p>THE MORBI ECOSYSTEM</p>
         </div>
 
-
         <div className="process-intro-grid">
-
           <h2>
             Where ceramic
             <br />
             <em>becomes an industry.</em>
           </h2>
 
-
           <div className="process-intro-copy">
-
             <p>
-              Morbi, Gujarat has evolved into one
-              of India's most important ceramic
-              manufacturing clusters.
+              Morbi, Gujarat has evolved into one of India's most important
+              ceramic manufacturing clusters.
             </p>
-
             <p>
-              The region brings together raw
-              material suppliers, manufacturers,
-              technology providers, designers,
-              skilled workers, packaging and
-              logistics into a highly connected
-              production ecosystem.
+              The region brings together raw material suppliers, manufacturers,
+              technology providers, designers, skilled workers, packaging and
+              logistics into a highly connected production ecosystem.
             </p>
-
             <p>
-              For VED EXIM, this ecosystem means
-              access to a broad world of ceramic
-              surfaces and manufacturing
-              capabilities — from everyday tiles
-              to sophisticated large-format
-              surfaces.
+              For VED EXIM, this ecosystem means access to a broad world of
+              ceramic surfaces and manufacturing capabilities — from everyday
+              tiles to sophisticated large-format surfaces.
             </p>
-
           </div>
-
         </div>
-
 
         <div className="process-stat-grid">
-
           <div>
             <strong>90%</strong>
-            <span>
-              OF INDIA'S CERAMIC TILE
-              PRODUCTION — INDUSTRY ESTIMATE
-            </span>
+            <span>OF INDIA'S CERAMIC TILE PRODUCTION — INDUSTRY ESTIMATE</span>
           </div>
-
           <div>
             <strong>1,800+</strong>
-            <span>
-              MANUFACTURING FACILITIES
-              IN THE MORBI CLUSTER
-            </span>
+            <span>MANUFACTURING FACILITIES IN THE MORBI CLUSTER</span>
           </div>
-
           <div>
             <strong>24/7</strong>
-            <span>
-              CONTINUOUS INDUSTRIAL
-              PRODUCTION ENVIRONMENT
-            </span>
+            <span>CONTINUOUS INDUSTRIAL PRODUCTION ENVIRONMENT</span>
           </div>
-
         </div>
-
       </section>
 
-
-      {/* =========================================
-          PROCESS TIMELINE
-      ========================================= */}
-
-      <section className="process-timeline">
-
-        <div className="process-timeline-header">
-
+      {/* =================================================
+          PROCESS STAGES
+      ================================================= */}
+      <section className="process-stages process-scroll-section" id="process-stages">
+        <div className="process-stages-heading" data-reveal>
           <div>
-
-            <p className="process-eyebrow">
-              THE JOURNEY
-            </p>
-
+            <div className="process-section-label process-section-label-dark">
+              <span>02</span>
+              <p>THE JOURNEY</p>
+            </div>
             <h2>
               Ten stages.
               <br />
               <em>One surface.</em>
             </h2>
-
           </div>
 
           <p>
-            Every finished ceramic surface is
-            the result of a sequence of controlled
-            processes. Explore each stage below.
+            Every finished ceramic surface is the result of a sequence of
+            controlled processes. Explore each stage below.
           </p>
-
         </div>
 
-
-        {/* PROGRESS */}
-
-        <div className="process-progress">
-
-          <div
-            className="process-progress-line"
-            style={{
-              transform:
-                `scaleX(${(activeStep + 1) / processSteps.length})`,
-            }}
-          />
-
-          {processSteps.map((step, index) => (
-
-            <button
-              type="button"
-              key={step.number}
-              className={
-                index === activeStep
-                  ? "process-progress-dot active"
-                  : "process-progress-dot"
-              }
-              onClick={() => {
-                document
-                  .querySelector(
-                    `[data-step="${index}"]`
-                  )
-                  ?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center",
-                  });
-              }}
-              aria-label={`Go to ${step.title}`}
-            >
-              {step.number}
-            </button>
-
-          ))}
-
+        <div className="process-stage-line">
+          <span style={{ width: `${((activeStep + 1) / processSteps.length) * 100}%` }} />
         </div>
 
-
-        {/* PROCESS STEPS */}
-
-        <div className="process-steps">
-
+        <div className="process-stage-grid">
           {processSteps.map((step, index) => (
-
             <article
-              className="process-step"
+              className={`process-stage-card process-scroll-card ${index === activeStep ? "is-active" : ""}`}
               data-step={index}
+              data-reveal
               key={step.number}
             >
+              <div className="process-stage-card-top">
+                <span className="process-stage-number">{step.number}</span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.subtitle}</p>
+                </div>
+              </div>
 
-              <div className="process-step-image">
-
+              <div className="process-stage-image">
                 <img
                   src={step.image}
                   alt={`${step.title} in ceramic manufacturing`}
-                  loading={
-                    index < 2
-                      ? "eager"
-                      : "lazy"
-                  }
+                  loading={index < 4 ? "eager" : "lazy"}
                 />
-
-                <div className="process-step-image-number">
-                  {step.number}
-                </div>
-
+                <span className="process-image-arrow">↗</span>
               </div>
 
+              <p className="process-stage-description">{step.description}</p>
 
-              <div className="process-step-content">
-
-                <p className="process-step-subtitle">
-                  {step.subtitle}
-                </p>
-
-                <h3>
-                  {step.title}
-                </h3>
-
-                <p className="process-step-description">
-                  {step.description}
-                </p>
-
-                <div className="process-step-detail">
-
-                  <span>
-                    DETAIL
-                  </span>
-
-                  <p>
-                    {step.detail}
-                  </p>
-
-                </div>
-
-                <div className="process-step-bottom">
-
-                  <span>
-                    STAGE {step.number}
-                  </span>
-
-                  <span>
-                    VED EXIM · MORBI
-                  </span>
-
-                </div>
-
+              <div className="process-stage-detail">
+                <span>DETAIL</span>
+                <p>{step.detail}</p>
               </div>
 
+              <div className="process-stage-footer">
+                <span>STAGE {step.number}</span>
+                <span>VED EXIM · MORBI</span>
+              </div>
             </article>
-
           ))}
-
         </div>
-
       </section>
 
-
-      {/* =========================================
+      {/* =================================================
           TECHNOLOGY
-      ========================================= */}
-
-      <section className="process-technology">
-
+      ================================================= */}
+      <section className="process-technology process-scroll-section" data-reveal>
         <div className="process-technology-image">
-
           <img
             src="https://www.marbizsurfaces.com/public/images/blog/17691677500_Tile-manufacturing-plant-in-Morbi.jpg"
             alt="Modern ceramic production line in Morbi"
+            loading="lazy"
           />
-
         </div>
 
-
         <div className="process-technology-content">
-
-          <p className="process-eyebrow">
-            TECHNOLOGY & PRECISION
-          </p>
-
+          <div className="process-section-label">
+            <span>03</span>
+            <p>TECHNOLOGY & PRECISION</p>
+          </div>
           <h2>
             Craftsmanship,
             <br />
             <em>scaled by technology.</em>
           </h2>
-
           <p>
-            Modern Morbi manufacturing combines
-            industrial automation with highly
-            controlled ceramic processes. Digital
-            decoration, advanced pressing,
-            automated handling and sophisticated
-            glazing systems allow manufacturers
-            to create increasingly detailed and
-            large-format surfaces.
+            Modern Morbi manufacturing combines industrial automation with
+            highly controlled ceramic processes. Digital decoration, advanced
+            pressing, automated handling and sophisticated glazing systems
+            allow manufacturers to create increasingly detailed and large-format
+            surfaces.
           </p>
-
           <p>
-            The result is a production environment
-            where consistency, design flexibility
-            and scale can work together.
+            The result is a production environment where consistency, design
+            flexibility and scale can work together.
           </p>
-
         </div>
-
       </section>
 
-
-      {/* =========================================
+      {/* =================================================
           QUALITY
-      ========================================= */}
-
-      <section className="process-quality">
-
+      ================================================= */}
+      <section className="process-quality process-scroll-section" data-reveal>
         <div className="process-section-label">
-          <span>03</span>
-          QUALITY AT EVERY STAGE
+          <span>04</span>
+          <p>QUALITY AT EVERY STAGE</p>
         </div>
-
 
         <div className="process-quality-grid">
-
-          <div>
-
-            <h2>
-              Detail is not
-              <br />
-              <em>the final step.</em>
-            </h2>
-
-          </div>
-
+          <h2>
+            Detail is not
+            <br />
+            <em>the final step.</em>
+          </h2>
 
           <div className="process-quality-list">
-
-            <div>
-              <span>01</span>
-              <strong>Material consistency</strong>
-              <p>
-                Controlled raw material composition
-                supports repeatable production.
-              </p>
-            </div>
-
-            <div>
-              <span>02</span>
-              <strong>Dimensional accuracy</strong>
-              <p>
-                Pressing, drying and firing are
-                carefully controlled to maintain
-                product consistency.
-              </p>
-            </div>
-
-            <div>
-              <span>03</span>
-              <strong>Surface quality</strong>
-              <p>
-                Decoration, glaze and finishing
-                stages define the visual character.
-              </p>
-            </div>
-
-            <div>
-              <span>04</span>
-              <strong>Final inspection</strong>
-              <p>
-                Finished products are checked before
-                sorting, packing and dispatch.
-              </p>
-            </div>
-
+            {[
+              ["01", "Material consistency", "Controlled raw material composition supports repeatable production."],
+              ["02", "Dimensional accuracy", "Pressing, drying and firing are carefully controlled to maintain product consistency."],
+              ["03", "Surface quality", "Decoration, glaze and finishing stages define the visual character."],
+              ["04", "Final inspection", "Finished products are checked before sorting, packing and dispatch."],
+            ].map(([number, title, text]) => (
+              <div key={number}>
+                <span>{number}</span>
+                <strong>{title}</strong>
+                <p>{text}</p>
+              </div>
+            ))}
           </div>
-
         </div>
-
       </section>
 
-
-      {/* =========================================
+      {/* =================================================
           CTA
-      ========================================= */}
-
-      <section className="process-cta">
-
-        <p className="process-eyebrow">
-          VED EXIM
-        </p>
-
+      ================================================= */}
+      <section className="process-cta process-scroll-section" data-reveal>
+        <p className="process-eyebrow">VED EXIM</p>
         <h2>
           Know the process.
           <br />
           <em>Choose with confidence.</em>
         </h2>
-
         <p>
-          Explore our collections or speak with
-          the VED EXIM team about your next project.
+          Explore our collections or speak with the VED EXIM team about your
+          next project.
         </p>
 
         <div className="process-cta-links">
-
           <Link to="/collections">
-            EXPLORE COLLECTIONS
-            <span>↗</span>
+            EXPLORE COLLECTIONS <span>↗</span>
           </Link>
-
           <Link to="/contact">
-            START AN ENQUIRY
-            <span>↗</span>
+            START AN ENQUIRY <span>↗</span>
           </Link>
-
         </div>
-
       </section>
-
     </main>
   );
 }

@@ -12,7 +12,7 @@ const heroSlides = [
     description:
       "Premium ceramic surfaces and timeless forms, created with precision and designed for contemporary spaces.",
     buttonText: "Explore Collection",
-    buttonLink: "#collections",
+    buttonLink: "/collections",
   },
   {
     image:
